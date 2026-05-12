@@ -5,6 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Hurmuz | 6 Straits</title>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 	</head>
 	<body>
 		<div class="page">
@@ -25,10 +27,169 @@
 			</header>
 			<main class="stage">
 				<section class="globe-wrap">
-					<div class="panel-title">Placeholder</div>
-					<p class="site-subtitle">Content coming soon.</p>
-				</section>
-			</main>
-		</div>
-	</body>
+					<div class="container">
+    <div class="status-banner">
+        Current Operational Alert: High Security Posture - Project Freedom Monitor
+    </div>
+    
+    <div class="map-section">
+        <div id="map" style="flex: 3; min-height: 400px; border-radius: 8px; border: 1px solid #334155; z-index: 1;"></div>
+        <div class="map-sidebar">
+            <h3>Strategic Vectors</h3>
+            <div class="landmark-item" onclick="flyToLocation([26.56, 56.44], 10)">
+                <strong>The Chokepoint</strong>
+                <span>26.56° N / 56.44° E</span>
+            </div>
+            <div class="landmark-item" onclick="flyToLocation([27.14, 56.23], 11)">
+                <strong>Bandar Abbas (Iran)</strong>
+                <span>27.14° N / 56.23° E</span>
+            </div>
+            <div class="landmark-item" onclick="flyToLocation([26.35, 56.38], 11)">
+                <strong>Khasab (Oman)</strong>
+                <span>26.35° N / 56.38° E</span>
+            </div>
+            <div class="landmark-item" onclick="flyToLocation([25.18, 56.36], 11)">
+                <strong>Fujairah (UAE)</strong>
+                <span>25.18° N / 56.36° E</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><span class="dot" style="background: #38bdf8;"></span> Shipping Lanes</div>
+        <div class="legend-item"><span class="dot" style="background: #10b981;"></span> GCC Littoral State</div>
+        <div class="legend-item"><span class="dot" style="background: #f97316;"></span> Islamic Republic of Iran</div>
+    </div>
+
+    <div class="content-grid">
+        <div class="main-column">
+            <section class="card">
+                <h2>Geographic Context</h2>
+                <p>The Strait of Hormuz is the world's most sensitive maritime "choke point," connecting the <b>Persian Gulf</b> with the <b>Gulf of Oman</b> and the Arabian Sea. While it spans roughly 21 to 60 miles in width, the actual navigable shipping lanes are extremely narrow, consisting of two <b>two-mile-wide channels</b> for inbound and outbound traffic, separated by a two-mile buffer zone. This proximity of the <b>Omani Musandam Peninsula</b> and the <b>Iranian coastline</b> creates a natural bottleneck that governs the flow of the global energy market and requires precise naval accessibility management.</p>
+            </section>
+
+            <section class="card">
+                <h2>Historic Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>1515:</strong> The <b>Portuguese Empire</b> occupies Hormuz, building massive fortifications to control the trade routes to India.
+                    </div>
+                    <div class="timeline-item">
+                        <strong>1984–1988:</strong> The <b>Tanker War</b> phase of the Iran-Iraq War involves attacks on over 500 commercial vessels, necessitating international naval escorts.
+                    </div>
+                    <div class="timeline-item:">
+                        <strong>Feb 28, 2026:</strong> Launch of <b>Operation Epic Fury</b>; major commercial routes are disrupted as regional tensions reach an apex.
+                    </div>
+                    <div class="timeline-item">
+                        <strong>May 4, 2026:</strong> <b>Project Freedom</b> begins, utilizing international naval task forces to secure "Freedom of Navigation" for neutral tankers.
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Impact on Daily Life</h2>
+                <p>Volatility in the Strait of Hormuz is the primary driver of <b>global energy price fluctuations</b>. Because roughly <b>20% of the world's liquid petroleum</b> passes through this channel daily, any threat to naval accessibility results in an immediate spike in fuel costs. This creates a ripple effect throughout the global economy, increasing the <b>cost of shipping</b> and contributing to <b>inflation</b> on consumer goods. In essence, the stability of this 21-mile-wide gap directly influences the <b>purchasing power</b> of households across every continent.</p>
+            </section>
+        </div>
+
+        <div class="sidebar-column">
+            <section class="card">
+                <h3>Technical Stats</h3>
+                <p><b>Length:</b> 96 miles (154 km)<br>
+                <b>Lane Width:</b> 2 miles each<br>
+                <b>Daily Flow:</b> ~21M Barrels<br>
+                <b>Vessel Count:</b> ~30,000/yr</p>
+            </section>
+
+            <section class="card">
+                <h3>Strategic Importance</h3>
+                <p>The Strait is the sole maritime exit for the world's largest oil producers, including <b>Saudi Arabia, Iraq, and Kuwait</b>. It is also the primary route for <b>Qatari LNG</b>. Most Gulf nations lack alternative pipelines, making the accessibility of these waters a <b>national security priority</b> for energy-dependent nations like China, Japan, and India.</p>
+            </section>
+        </div>
+    </div>
+
+    <h3>Strategic Coordinates Reference <span>WGS 84 datum</span></h3>
+    <table class="reference-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Vector / Landmark</th>
+                <th>Sovereignty</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01</td>
+                <td>Bandar Abbas Base</td>
+                <td><span class="side-badge littoral-s">IRAN</span></td>
+                <td>27.1481° N</td>
+                <td>56.2303° E</td>
+                <td>Naval Command</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Musandam Peninsula</td>
+                <td><span class="side-badge littoral-n">OMAN</span></td>
+                <td>26.3571° N</td>
+                <td>56.3881° E</td>
+                <td>Southern Flank</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>Little Tunb Island</td>
+                <td><span class="side-badge littoral-s">IRAN</span></td>
+                <td>26.2421° N</td>
+                <td>55.1691° E</td>
+                <td>Strategic Outpost</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>Port of Fujairah</td>
+                <td><span class="side-badge littoral-n">UAE</span></td>
+                <td>25.1841° N</td>
+                <td>56.3631° E</td>
+                <td>Bunkering Hub</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    var map = L.map('map').setView([26.6, 56.4], 8);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; CARTO'
+    }).addTo(map);
+
+    // Strategic Markers
+    const locations = [
+        {coords: [26.56, 56.44], title: "The Chokepoint (Shipping Lanes)"},
+        {coords: [27.1481, 56.2303], title: "Bandar Abbas Naval Base"},
+        {coords: [26.3571, 56.3881], title: "Musandam Peninsula (Oman)"},
+        {coords: [25.1841, 56.3631], title: "Port of Fujairah (UAE)"}
+    ];
+
+    locations.forEach(loc => {
+        L.marker(loc.coords).addTo(map).bindPopup(`<b>${loc.title}</b>`);
+    });
+
+    // Fly-to function
+    function flyToLocation(coords, zoom) {
+        map.flyTo(coords, zoom, { animate: true, duration: 2.0 });
+    }
+
+    // Shipping Route Visualization (Approximation)
+    var routeLine = [
+        [26.0, 54.5], [26.3, 55.5], [26.5, 56.2], 
+        [26.6, 56.5], [26.0, 57.5], [25.0, 58.0]
+    ];
+    L.polyline(routeLine, {color: '#38bdf8', weight: 4, dashArray: '10, 15', opacity: 0.7}).addTo(map);
+</script>
+
+</body>
 </html>

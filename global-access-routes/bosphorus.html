@@ -5,6 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Bosphorus | 6 Straits</title>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 	</head>
 	<body>
 		<div class="page">
@@ -25,10 +27,177 @@
 			</header>
 			<main class="stage">
 				<section class="globe-wrap">
+					<div class="container">
+						<div class="status-banner">
+							Current Operational Level: Transit Restrictions Active (May 2026)
+						</div>
+						
+						<div class="map-section">
+							<div id="map" style="flex: 3; min-height: 400px; border-radius: 8px; border: 1px solid #334155; z-index: 1;"></div>
+							<div class="map-sidebar">
+								<h3>Key Ports & Points</h3>
+								<div class="landmark-item" onclick="flyToLocation([41.2227, 29.1158], 13)">
+									<strong>Poyrazköy (North Entry)</strong>
+									<span>41.2227° N / 29.1158° E</span>
+								</div>
+								<div class="landmark-item" onclick="flyToLocation([41.0841, 29.0566], 14)">
+									<strong>Rumeli Hisarı (Chokepoint)</strong>
+									<span>41.0841° N / 29.0566° E</span>
+								</div>
+								<div class="landmark-item" onclick="flyToLocation([41.0033, 28.9818], 13)">
+									<strong>Ahırkapı (South Exit)</strong>
+									<span>41.0033° N / 28.9818° E</span>
+								</div>
+								<div class="landmark-item" onclick="flyToLocation([41.0256, 28.9958], 14)">
+									<strong>Port of Istanbul</strong>
+									<span>41.0256° N / 28.9958° E</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="legend">
+							<div class="legend-item"><span class="dot" style="background: #fbbf24;"></span> Shipping Channel</div>
+							<div class="legend-item"><span class="dot" style="background: #3b82f6;"></span> European Shore</div>
+							<div class="legend-item"><span class="dot" style="background: #ef4444;"></span> Asian Shore</div>
+							<div class="legend-item"><span class="dot" style="background: #ffffff; border: 1px solid #000;"></span> VTS Station</div>
+						</div>
+
+						<div class="content-grid">
+							<div class="main-column">
+								<section class="card">
+									<h2>Geographic Context</h2>
+									<p>The Bosphorus Strait, also known as the <b>Strait of Istanbul</b>, is a 19-mile corridor that serves as the world’s narrowest strait used for international navigation. It serves as a natural boundary between <b>Europe and Asia</b>, cutting directly through the heart of Istanbul. Because of its treacherous "S" shape and <b>conflicting currents</b>, naval accessibility is a massive maritime safety operation, with ships navigating within 700 meters of historical landmarks and dense residential zones. It connects the <b>Black Sea</b> to the <b>Sea of Marmara</b>, forming a vital link to the Mediterranean.</p>
+								</section>
+
+								<section class="card">
+									<h2>Historic Timeline</h2>
+									<div class="timeline">
+										<div class="timeline-item">
+											<strong>667 BC:</strong> Foundation of <b>Byzantium</b>, establishing the strait as the primary trade hub between the Mediterranean and the Steppes.
+										</div>
+										<div class="timeline-item">
+											<strong>1453:</strong> <b>Fall of Constantinople</b> to the Ottoman Empire, granting the Sultans total sovereign control over Black Sea access.
+										</div>
+										<div class="timeline-item:">
+											<strong>1936:</strong> Signing of the <b>Montreux Convention</b>, a landmark treaty that regulates naval passage and ensures civilian freedom.
+										</div>
+										<div class="timeline-item:">
+											<strong>2022–2026:</strong> Consistent enforcement of the Montreux Convention during <b>Black Sea conflicts</b>, restricting warship passage to prevent regional escalation.
+										</div>
+									</div>
+								</section>
+
+								<section class="card">
+									<h2>Impact on Daily Life</h2>
+									<p>Disruptions in the Bosphorus are felt at every dinner table worldwide. As the primary exit for <b>grain and fertilizer</b> from the Black Sea region, any bottleneck here leads to immediate spikes in <b>global food prices</b>. Locally, the strait is a vital artery for Istanbul's <b>15 million residents</b>, with thousands of daily commuters relying on public ferries. An accident involving a large tanker would not only halt global trade but pose a catastrophic <b>environmental and safety risk</b> to one of the world's most populated urban centers.</p>
+								</section>
+							</div>
+
+							<div class="sidebar-column">
+								<section class="card">
+									<h3>Quick Data</h3>
+									<p><b>Length:</b> 19 miles (31 km)<br>
+									<b>Narrowest:</b> ~700 meters<br>
+									<b>Annual Transits:</b> ~40,000 ships<br>
+									<b>Max Depth:</b> 110 meters</p>
+								</section>
+
+								<section class="card">
+									<h3>Strategic Importance</h3>
+									<p>The Bosphorus is the anchor of the <b>Black Sea Grain Corridor</b>. Ships exiting the strait move through the <b>Dardanelles</b> to reach the Mediterranean. Primary destination ports include those in <b>Egypt, Italy, and China</b>, carrying essential agricultural and mineral exports. For the Russian Federation, it remains the only warm-water access for the <b>Black Sea Fleet</b> to the open ocean.</p>
+								</section>
+							</div>
+						</div>
+
+						<h3>Landmark Coordinates Reference <span>WGS 84 datum</span></h3>
+						<table class="reference-table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Location / Landmark</th>
+									<th>Coastline</th>
+									<th>Latitude</th>
+									<th>Longitude</th>
+									<th>Function</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>01</td>
+									<td>Poyrazköy Entry</td>
+									<td><span class="side-badge asia">ASIA</span></td>
+									<td>41.2227° N</td>
+									<td>29.1158° E</td>
+									<td>Black Sea Entrance</td>
+								</tr>
+								<tr>
+									<td>02</td>
+									<td>Rumeli Hisarı</td>
+									<td><span class="side-badge europe">EUROPE</span></td>
+									<td>41.0841° N</td>
+									<td>29.0566° E</td>
+									<td>Critical Chokepoint</td>
+								</tr>
+								<tr>
+									<td>03</td>
+									<td>Kız Kulesi (Maiden's Tower)</td>
+									<td><span class="side-badge asia">ASIA</span></td>
+									<td>41.0211° N</td>
+									<td>29.0041° E</td>
+									<td>Navigation Marker</td>
+								</tr>
+								<tr>
+									<td>04</td>
+									<td>Ahırkapı Terminal</td>
+									<td><span class="side-badge europe">EUROPE</span></td>
+									<td>41.0033° N</td>
+									<td>28.9818° E</td>
+									<td>Marmara Exit</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 					<div class="panel-title">Placeholder</div>
 					<p class="site-subtitle">Content coming soon.</p>
 				</section>
 			</main>
 		</div>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+		<script>
+			var map = L.map('map').setView([41.10, 29.05], 11);
+
+			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+				attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+			}).addTo(map);
+
+			// Markers with Popups
+			const locations = [
+				{coords: [41.2227, 29.1158], title: "Poyrazköy (North Entry)"},
+				{coords: [41.0841, 29.0566], title: "Rumeli Hisarı (Chokepoint)"},
+				{coords: [41.0033, 28.9818], title: "Ahırkapı (South Exit)"},
+				{coords: [41.0256, 28.9958], title: "Port of Istanbul"}
+			];
+
+			locations.forEach(loc => {
+				L.marker(loc.coords).addTo(map).bindPopup(`<b>${loc.title}</b>`);
+			});
+
+			// Sidebar interaction
+			function flyToLocation(coords, zoom) {
+				map.flyTo(coords, zoom, {
+					animate: true,
+					duration: 1.5
+				});
+			}
+
+			// Strait Shipping Route (Polyline)
+			var routePoints = [
+				[41.24, 29.13], [41.20, 29.11], [41.15, 29.07], 
+				[41.10, 29.05], [41.05, 29.02], [41.01, 28.99]
+			];
+			L.polyline(routePoints, {color: '#fbbf24', weight: 4, dashArray: '8, 12', opacity: 0.6}).addTo(map);
+		</script>
+
 	</body>
 </html>
