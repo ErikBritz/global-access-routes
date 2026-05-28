@@ -1,34 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Panama | 6 Straits</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="page">
-			<header class="site-header">
-				<div class="site-heading">
-					<h1 class="site-title">Panama</h1>
-					<p class="site-subtitle">Explore some of the worlds most important straits.</p>
-				</div>
-				<nav class="site-nav">
-					<a href="index.html">Home</a>
-					<a href="hurmuz.html">Hurmuz</a>
-					<a href="bosphorus.html">Bosphorus</a>
-					<a href="bering.html">Bering</a>
-					<a href="suez.html">Suez</a>
-					<a href="panama.html" class="is-active">Panama</a>
-					<a href="malacca.html">Malacca</a>
-				</nav>
-			</header>
-			<main class="stage">
-				<section class="globe-wrap">
-					<div class="panel-title">Placeholder</div>
-					<p class="site-subtitle">Content coming soon.</p>
-				</section>
-			</main>
-		</div>
-	</body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panama Canal — Port Atlas</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400&display=swap"
+    rel="stylesheet">
+
+  <!-- Leaflet CSS (cdnjs — widely allowed CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="panamastyle.css">
+</head>
+
+<body>
+
+  <header>
+    <div>
+      <p class="header-tag">Reference Map · Republic of Panamá</p>
+      <h1>The<span> Panama</span> Canal</h1>
+    </div>
+    <div class="header-meta">
+      <p>9°00′ N · 79°30′ W</p>
+      <p>Atlantic ↔ Pacific Transit Route</p>
+      <p>Length: 82 km (51 mi)</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Map -->
+    <div id="map-wrap">
+      <div id="map"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside>
+      <div class="card">
+        <p class="card-label">About the Canal</p>
+        <h2>Connecting Two Oceans</h2>
+        <p>The Panama Canal is one of the world's most strategically important waterways, enabling ships to pass between
+          the Atlantic and Pacific without rounding Cape Horn. Opened in 1914 and expanded in 2016, it handles over
+          14,000 vessel transits annually.</p>
+      </div>
+
+      <div class="card">
+        <p class="card-label">Key Ports — click to focus</p>
+        <div class="port-list" id="port-list"></div>
+      </div>
+    </aside>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <div class="legend">
+        <span class="legend-title">Legend</span>
+        <span class="legend-item"><span class="legend-line" style="background:#e74c3c;"></span> Canal Route</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#36b295;border:2px solid white;box-shadow:0 0 0 2px #36b295;"></span> Taboguilla /
+          Pacific</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#c9a84c;border:2px solid white;box-shadow:0 0 0 2px #c9a84c;"></span> Balboa /
+          Pacific</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#b85c38;border:2px solid white;box-shadow:0 0 0 2px #b85c38;"></span> Colón /
+          Atlantic</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#2980b9;border:2px solid white;box-shadow:0 0 0 2px #2980b9;"></span> Manzanillo / 
+          Atlantic</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#a40e7e;border:2px solid white;box-shadow:0 0 0 2px #a40e7e;"></span> Cristóbal / 
+          Atlantic</span>
+      </div>
+      <div class="table-header">
+        <h3>Port Coordinates Reference</h3>
+        <span>WGS 84 datum</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Port / Location</th>
+            <th>Ocean Side</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Elevation</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Leaflet JS must load before script.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <!-- Map logic -->
+  <script src="panamascript.js"></script>
+
+</body>
+
 </html>
