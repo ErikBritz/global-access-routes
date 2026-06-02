@@ -1,34 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Malacca | 6 Straits</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="page">
-			<header class="site-header">
-				<div class="site-heading">
-					<h1 class="site-title">Malacca</h1>
-					<p class="site-subtitle">Explore some of the worlds most important straits.</p>
-				</div>
-				<nav class="site-nav">
-					<a href="index.html">Home</a>
-					<a href="hurmuz.html">Hurmuz</a>
-					<a href="bosphorus.html">Bosphorus</a>
-					<a href="bering.html">Bering</a>
-					<a href="suez.html">Suez</a>
-					<a href="panama.html">Panama</a>
-					<a href="malacca.html" class="is-active">Malacca</a>
-				</nav>
-			</header>
-			<main class="stage">
-				<section class="globe-wrap">
-					<div class="panel-title">Placeholder</div>
-					<p class="site-subtitle">Content coming soon.</p>
-				</section>
-			</main>
-		</div>
-	</body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malacca Strait — Port Atlas</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+  <link rel="stylesheet" href="malaccastyle.css">
+</head>
+
+<body>
+
+  <header>
+    <div>
+      <p class="header-tag">Reference Map · Southeast Asia</p>
+      <h1>The<span> Malacca</span> Strait</h1>
+    </div>
+    <div class="header-meta">
+      <p>4°00′ N · 100°00′ E</p>
+      <p>Indian ↔ Pacific Transit Route</p>
+      <p>Length: ~930 km (580 mi)</p>
+    </div>
+  </header>
+
+  <main>
+    <div id="map-wrap">
+      <div id="map"></div>
+    </div>
+
+    <aside>
+      <div class="card">
+        <p class="card-label">About the Strait</p>
+        <h2>Connecting Two Oceans</h2>
+        <p>The Strait of Malacca is one of the world's most strategically important shipping waterways, linking the
+          Indian and Pacific Oceans. Handling roughly 25% of all global traded goods, it is a critical maritime gateway
+          for international commerce.</p>
+      </div>
+
+      <div class="card">
+        <p class="card-label">Key Ports — click to focus</p>
+        <div class="port-list" id="port-list"></div>
+      </div>
+    </aside>
+
+    <div class="table-wrap">
+      <div class="legend">
+        <span class="legend-title">Legend</span>
+        <span class="legend-item"><span class="legend-line"
+            style="background:transparent; border-top: 2px dashed #2c3e50;"></span> Strait Boundary</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#1f77b4;border:2px solid white;box-shadow:0 0 0 2px #1f77b4;"></span> Port Klang</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#ff7f0e;border:2px solid white;box-shadow:0 0 0 2px #ff7f0e;"></span> Port Dickson</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#2ca02c;border:2px solid white;box-shadow:0 0 0 2px #2ca02c;"></span> Penang</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#d62728;border:2px solid white;box-shadow:0 0 0 2px #d62728;"></span> Sg. Udang</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#9467bd;border:2px solid white;box-shadow:0 0 0 2px #9467bd;"></span> Lumut</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#8c564b;border:2px solid white;box-shadow:0 0 0 2px #8c564b;"></span> Uleelheue</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#e377c2;border:2px solid white;box-shadow:0 0 0 2px #e377c2;"></span> Sg. Pakning</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#7f7f7f;border:2px solid white;box-shadow:0 0 0 2px #7f7f7f;"></span> Kuala Tanjung</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#bcbd22;border:2px solid white;box-shadow:0 0 0 2px #bcbd22;"></span> Dumai</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#17becf;border:2px solid white;box-shadow:0 0 0 2px #17becf;"></span> Blanglancang</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#08306b;border:2px solid white;box-shadow:0 0 0 2px #08306b;"></span> Belawan</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#fd8d3c;border:2px solid white;box-shadow:0 0 0 2px #fd8d3c;"></span> Serangoon</span>
+        <span class="legend-item"><span class="legend-dot"
+            style="background:#006d2c;border:2px solid white;box-shadow:0 0 0 2px #006d2c;"></span> Singapore</span>
+      </div>
+      <div class="table-header">
+        <h3>Port Coordinates Reference</h3>
+        <span>WGS 84 datum</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Port / Location</th>
+            <th>Ocean Side</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="malaccascript.js"></script>
+
+</body>
+
 </html>
