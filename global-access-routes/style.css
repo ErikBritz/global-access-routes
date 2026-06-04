@@ -31,6 +31,21 @@ body::before {
 	pointer-events: none;
 }
 
+.strait-bg{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	min-height: 100vh;
+
+	z-index: -1;
+
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size:cover;
+	background-attachment: fixed;
+}
+
 .page {
 	max-width: 1200px;
 	margin: 0 auto;
