@@ -1,105 +1,611 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Panama | 6 Straits</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+		<style>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panama Canal — Port Atlas</title>
+			/* Status banner */
+			.status-banner {
+				background: rgba(143, 211, 255, 0.06);
+				border: 1px solid rgba(143, 211, 255, 0.18);
+				border-radius: 6px;
+				padding: 8px 16px;
+				font-size: 11px;
+				letter-spacing: 1.6px;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 18px;
+			}
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400&display=swap"
-    rel="stylesheet">
+			/* Map + sidebar row */
+			.map-section {
+				display: flex;
+				gap: 16px;
+				margin-bottom: 16px;
+			}
 
-  <!-- Leaflet CSS (cdnjs — widely allowed CDN) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+			#map {
+				flex: 3;
+				min-height: 460px;
+				border-radius: 8px;
+				border: 1px solid rgba(255,255,255,0.12);
+				z-index: 1;
+			}
 
-  <!-- App styles -->
-  <link rel="stylesheet" href="panamastyle.css">
-</head>
+			.map-sidebar {
+				flex: 1;
+				min-width: 180px;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
 
-<body>
+			.map-sidebar h3 {
+				font-family: "Cinzel", serif;
+				font-size: 11px;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				color: var(--ink-soft);
+				margin-bottom: 4px;
+			}
 
-  <header>
-    <div>
-      <p class="header-tag">Reference Map · Republic of Panamá</p>
-      <h1>The<span> Panama</span> Canal</h1>
-    </div>
-    <div class="header-meta">
-      <p>9°00′ N · 79°30′ W</p>
-      <p>Atlantic ↔ Pacific Transit Route</p>
-      <p>Length: 82 km (51 mi)</p>
-    </div>
-  </header>
+			.landmark-item {
+				background: rgba(255,255,255,0.03);
+				border: 1px solid rgba(255,255,255,0.09);
+				border-radius: 6px;
+				padding: 10px 12px;
+				cursor: pointer;
+				transition: border-color 0.2s, background 0.2s;
+				display: flex;
+				flex-direction: column;
+				gap: 3px;
+			}
 
-  <main>
-    <!-- Map -->
-    <div id="map-wrap">
-      <div id="map"></div>
-    </div>
+			.landmark-item:hover {
+				border-color: rgba(143, 211, 255, 0.35);
+				background: rgba(143, 211, 255, 0.06);
+			}
 
-    <!-- Sidebar -->
-    <aside>
-      <div class="card">
-        <p class="card-label">About the Canal</p>
-        <h2>Connecting Two Oceans</h2>
-        <p>The Panama Canal is one of the world's most strategically important waterways, enabling ships to pass between
-          the Atlantic and Pacific without rounding Cape Horn. Opened in 1914 and expanded in 2016, it handles over
-          14,000 vessel transits annually.</p>
-      </div>
+			.landmark-item strong {
+				font-size: 12px;
+				color: var(--ink);
+			}
 
-      <div class="card">
-        <p class="card-label">Key Ports — click to focus</p>
-        <div class="port-list" id="port-list"></div>
-      </div>
-    </aside>
+			.landmark-item span {
+				font-size: 10px;
+				color: var(--ink-soft);
+				letter-spacing: 0.5px;
+				font-family: "IBM Plex Mono", monospace;
+			}
 
-    <!-- Table -->
-    <div class="table-wrap">
-      <div class="legend">
-        <span class="legend-title">Legend</span>
-        <span class="legend-item"><span class="legend-line" style="background:#e74c3c;"></span> Canal Route</span>
-        <span class="legend-item"><span class="legend-dot"
-            style="background:#36b295;border:2px solid white;box-shadow:0 0 0 2px #36b295;"></span> Taboguilla /
-          Pacific</span>
-        <span class="legend-item"><span class="legend-dot"
-            style="background:#c9a84c;border:2px solid white;box-shadow:0 0 0 2px #c9a84c;"></span> Balboa /
-          Pacific</span>
-        <span class="legend-item"><span class="legend-dot"
-            style="background:#b85c38;border:2px solid white;box-shadow:0 0 0 2px #b85c38;"></span> Colón /
-          Atlantic</span>
-        <span class="legend-item"><span class="legend-dot"
-            style="background:#2980b9;border:2px solid white;box-shadow:0 0 0 2px #2980b9;"></span> Manzanillo / 
-          Atlantic</span>
-        <span class="legend-item"><span class="legend-dot"
-            style="background:#a40e7e;border:2px solid white;box-shadow:0 0 0 2px #a40e7e;"></span> Cristóbal / 
-          Atlantic</span>
-      </div>
-      <div class="table-header">
-        <h3>Port Coordinates Reference</h3>
-        <span>WGS 84 datum</span>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Port / Location</th>
-            <th>Ocean Side</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Elevation</th>
-          </tr>
-        </thead>
-        <tbody id="table-body"></tbody>
-      </table>
-    </div>
-  </main>
+			/* Legend */
+			.legend {
+				display: flex;
+				gap: 20px;
+				flex-wrap: wrap;
+				align-items: center;
+				margin-bottom: 20px;
+				padding: 10px 14px;
+				background: rgba(255,255,255,0.02);
+				border: 1px solid rgba(255,255,255,0.08);
+				border-radius: 6px;
+				font-size: 11px;
+				color: var(--ink-soft);
+			}
 
-  <!-- Leaflet JS must load before script.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <!-- Map logic -->
-  <script src="panamascript.js"></script>
+			.legend-item { display: flex; align-items: center; gap: 7px; }
 
-</body>
+			.dot {
+				width: 9px;
+				height: 9px;
+				border-radius: 50%;
+				display: inline-block;
+				flex-shrink: 0;
+			}
 
+			.legend-line {
+				display: inline-block;
+				width: 24px;
+				height: 2px;
+				border-radius: 2px;
+				flex-shrink: 0;
+			}
+
+			/* Content grid */
+			.content-grid {
+				display: grid;
+				grid-template-columns: 1fr 300px;
+				gap: 16px;
+				margin-bottom: 24px;
+			}
+
+			.main-column,
+			.sidebar-column {
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+			}
+
+			/* Cards */
+			.card {
+				background: rgba(255,255,255,0.03);
+				border: 1px solid rgba(255,255,255,0.09);
+				border-radius: 10px;
+				padding: 20px 22px;
+			}
+
+			.card h2 {
+				font-family: "Cinzel", serif;
+				font-size: 14px;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 12px;
+			}
+
+			.card h3 {
+				font-family: "Cinzel", serif;
+				font-size: 12px;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 10px;
+			}
+
+			.card p {
+				font-size: 13.5px;
+				line-height: 1.75;
+				color: var(--ink-soft);
+			}
+
+			/* Timeline */
+			.timeline {
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+			}
+
+			.timeline-item {
+				font-size: 13px;
+				line-height: 1.65;
+				color: var(--ink-soft);
+				padding-left: 14px;
+				border-left: 2px solid rgba(143,211,255,0.25);
+			}
+
+			.timeline-item strong {
+				color: var(--ink);
+			}
+
+			/* Port list (sidebar card) */
+			.port-list-wrap {
+				display: flex;
+				flex-direction: column;
+				gap: 6px;
+			}
+
+			.port-item {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 9px 12px;
+				border: 1px solid rgba(255,255,255,0.08);
+				border-radius: 6px;
+				background: rgba(255,255,255,0.02);
+				cursor: pointer;
+				transition: border-color 0.2s, background 0.2s;
+			}
+
+			.port-item:hover {
+				border-color: rgba(143,211,255,0.3);
+				background: rgba(143,211,255,0.05);
+			}
+
+			.port-item.active {
+				border-color: rgba(143,211,255,0.55);
+				background: rgba(143,211,255,0.08);
+			}
+
+			.port-dot {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				flex-shrink: 0;
+				border: 2px solid rgba(0,0,0,0.4);
+			}
+
+			.port-info { flex: 1; min-width: 0; }
+
+			.port-name {
+				font-size: 12px;
+				font-weight: 500;
+				color: var(--ink);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			.port-coords {
+				font-size: 10px;
+				color: var(--ink-soft);
+				letter-spacing: 0.4px;
+				margin-top: 2px;
+			}
+
+			/* Reference table */
+			.reference-table {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 12.5px;
+			}
+
+			.table-section-header {
+				display: flex;
+				align-items: baseline;
+				gap: 12px;
+				margin-bottom: 12px;
+			}
+
+			.table-section-header h3 {
+				font-family: "Cinzel", serif;
+				font-size: 13px;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				color: var(--ink);
+			}
+
+			.table-section-header span {
+				font-size: 10px;
+				color: var(--ink-soft);
+				letter-spacing: 1px;
+			}
+
+			.reference-table thead th {
+				background: rgba(255,255,255,0.04);
+				color: var(--ink-soft);
+				font-size: 10px;
+				letter-spacing: 1.4px;
+				text-transform: uppercase;
+				padding: 10px 14px;
+				text-align: left;
+				border-bottom: 1px solid rgba(255,255,255,0.1);
+				font-weight: 400;
+			}
+
+			.reference-table tbody tr {
+				border-bottom: 1px solid rgba(255,255,255,0.05);
+				cursor: pointer;
+				transition: background 0.15s;
+			}
+
+			.reference-table tbody tr:hover {
+				background: rgba(143,211,255,0.05);
+			}
+
+			.reference-table tbody tr.active {
+				background: rgba(143,211,255,0.08);
+			}
+
+			.reference-table tbody td {
+				padding: 10px 14px;
+				color: var(--ink-soft);
+			}
+
+			.reference-table tbody td:first-child {
+				color: var(--ink);
+				font-family: "IBM Plex Mono", monospace;
+				font-size: 11px;
+			}
+
+			.reference-table td.mono {
+				font-family: "IBM Plex Mono", monospace;
+				font-size: 11px;
+			}
+
+			/* Ocean badges */
+			.side-badge {
+				display: inline-block;
+				font-size: 9.5px;
+				letter-spacing: 0.8px;
+				padding: 2px 7px;
+				border-radius: 3px;
+				text-transform: uppercase;
+			}
+
+			.badge-atlantic {
+				background: rgba(41, 128, 185, 0.18);
+				color: #7ec8e3;
+				border: 1px solid rgba(41,128,185,0.3);
+			}
+
+			.badge-pacific {
+				background: rgba(201,168,76,0.15);
+				color: #d4aa50;
+				border: 1px solid rgba(201,168,76,0.3);
+			}
+
+			/* Leaflet popup overrides */
+			.leaflet-popup-content-wrapper {
+				background: #0d1420;
+				border: 1px solid rgba(143,211,255,0.25);
+				border-radius: 8px;
+				box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+				color: var(--ink);
+				padding: 0;
+				overflow: hidden;
+			}
+
+			.leaflet-popup-content { margin: 0; min-width: 240px; }
+
+			.popup-inner { padding: 12px 14px; }
+
+			.popup-tag {
+				font-size: 9.5px;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 4px;
+			}
+
+			.popup-name {
+				font-family: "Cinzel", serif;
+				font-size: 13px;
+				color: var(--ink);
+				margin-bottom: 6px;
+			}
+
+			.popup-coord {
+				font-size: 10.5px;
+				color: var(--ink-soft);
+				display: flex;
+				flex-direction: column;
+				gap: 2px;
+			}
+
+			.popup-footer {
+				background: rgba(143,211,255,0.06);
+				border-top: 1px solid rgba(143,211,255,0.12);
+				padding: 8px 14px;
+				font-size: 11.5px;
+				color: var(--ink-soft);
+				line-height: 1.55;
+			}
+
+			.leaflet-popup-tip-container { display: none; }
+
+			.leaflet-popup-close-button {
+				color: var(--ink-soft) !important;
+				font-size: 16px !important;
+			}
+
+			@media (max-width: 900px) {
+				.map-section { flex-direction: column; }
+				.content-grid { grid-template-columns: 1fr; }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="strait-bg"
+			 style="background-image: url('svg/panama.svg');
+			 		filter: brightness(2) opacity(0.1);"></div>
+		<div class="page">
+			<header class="site-header">
+				<div class="site-heading">
+					<h1 class="site-title">Panama</h1>
+					<p class="site-subtitle">Explore some of the worlds most important straits.</p>
+				</div>
+				<nav class="site-nav">
+					<a href="index.html">Home</a>
+					<a href="hurmuz.html">Hurmuz</a>
+					<a href="bosphorus.html">Bosphorus</a>
+					<a href="bering.html">Bering</a>
+					<a href="suez.html">Suez</a>
+					<a href="panama.html" class="is-active">Panama</a>
+					<a href="malacca.html">Malacca</a>
+				</nav>
+			</header>
+
+			<main class="stage">
+				<section class="globe-wrap">
+					<div class="container">
+
+						<div class="status-banner">
+							Transit Status: Operational — Atlantic ↔ Pacific Route Active
+						</div>
+
+						<div class="map-section">
+							<div id="map"></div>
+							<div class="map-sidebar">
+								<h3>Key Ports</h3>
+								<div class="port-list-wrap" id="port-list"></div>
+							</div>
+						</div>
+
+						<div class="legend">
+							<div class="legend-item"><span class="legend-line" style="background:#e74c3c;"></span> Canal Route</div>
+							<div class="legend-item"><span class="dot" style="background:#36b295;"></span> Taboguilla / Pacific</div>
+							<div class="legend-item"><span class="dot" style="background:#c9a84c;"></span> Balboa / Pacific</div>
+							<div class="legend-item"><span class="dot" style="background:#b85c38;"></span> Colón / Atlantic</div>
+							<div class="legend-item"><span class="dot" style="background:#2980b9;"></span> Manzanillo / Atlantic</div>
+							<div class="legend-item"><span class="dot" style="background:#a40e7e;"></span> Cristóbal / Atlantic</div>
+						</div>
+
+						<div class="content-grid">
+							<div class="main-column">
+								<section class="card">
+									<h2>Geographic Context</h2>
+									<p>The Panama Canal is one of the world's most strategically vital waterways, cutting through the <b>Isthmus of Panama</b> to connect the <b>Atlantic Ocean</b> (via the Caribbean Sea) with the <b>Pacific Ocean</b>. Stretching <b>82 kilometres (51 miles)</b>, it eliminates the need for vessels to circumnavigate South America's Cape Horn — saving up to 12,000 kilometres per voyage. The canal operates through a <b>lock-based elevation system</b>, raising and lowering ships up to 26 metres to traverse the continental divide via <b>Gatun Lake</b>.</p>
+								</section>
+
+								<section class="card">
+									<h2>Historic Timeline</h2>
+									<div class="timeline">
+										<div class="timeline-item">
+											<strong>1881–1889:</strong> France, under Ferdinand de Lesseps, begins construction but abandons the project after catastrophic losses to disease and financial collapse.
+										</div>
+										<div class="timeline-item">
+											<strong>1904–1914:</strong> The <b>United States</b> takes over construction. The canal officially opens on <b>August 15, 1914</b>, with the SS Ancon making the first official transit.
+										</div>
+										<div class="timeline-item">
+											<strong>1999:</strong> Full sovereignty is transferred to the <b>Republic of Panama</b> under the Torrijos–Carter Treaties, ending nearly a century of US control.
+										</div>
+										<div class="timeline-item">
+											<strong>2016:</strong> The <b>Panama Canal Expansion</b> (Third Set of Locks) opens, doubling capacity and allowing <i>New Panamax</i> vessels to transit for the first time.
+										</div>
+									</div>
+								</section>
+
+								<section class="card">
+									<h2>Impact on Global Trade</h2>
+									<p>The Panama Canal handles approximately <b>5% of all world trade</b> and over <b>14,000 vessel transits annually</b>. It is the primary route connecting the US East Coast to Asian markets and is critical to the export chains of <b>grain, petroleum, coal, and containerized goods</b>. Any disruption — whether from drought affecting Gatun Lake's water levels or geopolitical pressure — has immediate and measurable consequences for global supply chains and commodity prices.</p>
+								</section>
+							</div>
+
+							<div class="sidebar-column">
+								<section class="card">
+									<h3>Technical Stats</h3>
+									<p>
+										<b>Length:</b> 82 km (51 mi)<br>
+										<b>Lock Sets:</b> 3 (Gatun, Pedro Miguel, Miraflores)<br>
+										<b>Max Lift:</b> ~26 m above sea level<br>
+										<b>Daily Transits:</b> ~35–40 vessels<br>
+										<b>Annual Flow:</b> ~14,000 vessels/yr
+									</p>
+								</section>
+
+								<section class="card">
+									<h3>Strategic Importance</h3>
+									<p>Panama serves as the <b>pivot point of trans-oceanic logistics</b> for the Americas. Its expansion in 2016 reshaped US Gulf Coast petrochemical exports, East Asian container routing, and LNG trade flows. Nations like <b>China, the United States, and Japan</b> rank among its largest users, making the canal's operational stability a shared geopolitical interest.</p>
+								</section>
+							</div>
+						</div>
+
+						<div class="table-section-header">
+							<h3>Port Coordinates Reference</h3>
+							<span>WGS 84 datum</span>
+						</div>
+						<table class="reference-table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Port / Location</th>
+									<th>Ocean Side</th>
+									<th>Latitude</th>
+									<th>Longitude</th>
+									<th>Elevation</th>
+								</tr>
+							</thead>
+							<tbody id="table-body"></tbody>
+						</table>
+
+					</div>
+				</section>
+			</main>
+		</div>
+
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+		<script>
+		document.addEventListener('DOMContentLoaded', function () {
+
+		  const ports = [
+		    { name: "Taboguilla Port",          short: "Taboguilla", lat: 8.808837462,  lng: -79.55760682, ocean: "Pacific",  elev: "0 m",  color: "#36b295", desc: "Anchorage area and navigation reference point near the Pacific entrance of the canal." },
+		    { name: "Balboa Port",               short: "Balboa",     lat: 8.95532195,   lng: -79.56547193, ocean: "Pacific",  elev: "0 m",  color: "#c9a84c", desc: "The Pacific terminus of the canal and the country's principal commercial port." },
+		    { name: "Colón Free Trade Zone Port", short: "Colón",      lat: 9.373324629,  lng: -79.87879174, ocean: "Atlantic", elev: "0 m",  color: "#b85c38", desc: "The largest free trade zone in the Western Hemisphere and the Atlantic gateway to the canal." },
+		    { name: "Manzanillo Port",           short: "Manzanillo", lat: 9.367894427,  lng: -79.88215481, ocean: "Atlantic", elev: "~26 m", color: "#2980b9", desc: "Major container terminal on the Atlantic side, one of the busiest ports in Latin America." },
+		    { name: "Cristóbal Port",            short: "Cristóbal",  lat: 9.345538334,  lng: -79.90654356, ocean: "Atlantic", elev: "~26 m", color: "#a40e7e", desc: "Historic port serving as the Atlantic entrance hub for the canal since its opening in 1914." }
+		  ];
+
+		  const canalRoute = [
+		    [9.3871, -79.9523],[9.3335, -79.9274],[9.2750, -79.9213],
+		    [9.2630, -79.9205],[9.2311, -79.9142],[9.1915, -79.8789],
+		    [9.1250, -79.8200],[9.1150, -79.7900],[9.1121, -79.7002],
+		    [9.0965, -79.6840],[9.0545, -79.6550],[9.0270, -79.6290],
+		    [9.0165, -79.6123],[9.0030, -79.6005],[8.9965, -79.5915],
+		    [8.9660, -79.5750],[8.9442, -79.5651],[8.9055, -79.5350],
+		  ];
+
+		  const map = L.map('map', { center: [9.10, -79.73], zoom: 10, zoomControl: true });
+
+		  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+		    attribution: '&copy; CARTO',
+		    subdomains: 'abcd',
+		    maxZoom: 15,
+		  }).addTo(map);
+
+		  L.polyline(canalRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+
+		  function makeIcon(color) {
+		    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
+		      <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
+		      <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
+		    </svg>`;
+		    return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
+		  }
+
+		  const markers = [];
+
+		  ports.forEach(function (port, i) {
+		    const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.color) }).addTo(map);
+		    marker.bindPopup(
+		      `<div class="popup-inner">
+		        <p class="popup-tag">Port ${String(i + 1).padStart(2, '0')}</p>
+		        <p class="popup-name">${port.name}</p>
+		        <div class="popup-coord">
+		          <span>Lat: <strong>${port.lat.toFixed(4)}° N</strong></span>
+		          <span>Lng: <strong>${Math.abs(port.lng).toFixed(4)}° W</strong></span>
+		        </div>
+		      </div>
+		      <div class="popup-footer">${port.desc}</div>`,
+		      { maxWidth: 280 }
+		    );
+		    markers.push(marker);
+
+		    // Sidebar port item
+		    const item = document.createElement('div');
+		    item.className = 'port-item';
+		    item.innerHTML = `
+		      <span class="port-dot" style="background:${port.color};"></span>
+		      <div class="port-info">
+		        <div class="port-name">${port.short}</div>
+		        <div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° W</div>
+		      </div>`;
+		    item.addEventListener('click', function () { focusPort(i); });
+		    document.getElementById('port-list').appendChild(item);
+
+		    // Table row
+		    const badgeHtml = port.ocean === 'Atlantic'
+		      ? '<span class="side-badge badge-atlantic">Atlantic</span>'
+		      : '<span class="side-badge badge-pacific">Pacific</span>';
+
+		    const row = document.createElement('tr');
+		    row.innerHTML = `
+		      <td class="mono">${String(i + 1).padStart(2, '0')}</td>
+		      <td>${port.name}</td>
+		      <td>${badgeHtml}</td>
+		      <td class="mono">${port.lat.toFixed(4)}° N</td>
+		      <td class="mono">${Math.abs(port.lng).toFixed(4)}° W</td>
+		      <td class="mono">${port.elev}</td>`;
+		    row.addEventListener('click', function () { focusPort(i); });
+		    document.getElementById('table-body').appendChild(row);
+		  });
+
+		  function focusPort(i) {
+		    document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+		    document.querySelectorAll('#table-body tr').forEach(el => el.classList.remove('active'));
+		    document.querySelectorAll('.port-item')[i].classList.add('active');
+		    document.querySelectorAll('#table-body tr')[i].classList.add('active');
+		    map.flyTo([ports[i].lat, ports[i].lng], 13, { duration: 1.2 });
+		    setTimeout(() => markers[i].openPopup(), 1300);
+		  }
+
+		  window.flyToLocation = function(coords, zoom) {
+		    map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
+		  };
+		});
+		</script>
+	</body>
 </html>
