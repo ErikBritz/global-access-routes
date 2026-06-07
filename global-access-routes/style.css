@@ -31,29 +31,27 @@ body::before {
 	pointer-events: none;
 }
 
-.strait-bg{
-	position:fixed;
-	top:0;
-	left:0;
-	width:100%;
+/* 3. CORE LAYOUT COMPONENTS */
+.strait-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 	min-height: 100vh;
-
 	z-index: -1;
-
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-size:cover;
+	background-size: cover;
 	background-attachment: fixed;
 }
 
 .page {
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 32px 32px 56px;
+	padding: 32px 32px 80px; /* Enhanced bottom spacing for scroll flow footer compatibility */
 	position: relative;
 	z-index: 1;
 }
-
 
 .site-header {
 	display: flex;
@@ -191,7 +189,7 @@ body::before {
 	z-index: 1;
 }
 
-/* strait pages styling */
+/* 4. INNER STRAIT SPECIFIC WORKSPACES */
 .status-banner {
 	background: rgba(143, 211, 255, 0.06);
 	border: 1px solid rgba(143, 211, 255, 0.18);
@@ -204,7 +202,6 @@ body::before {
 	margin-bottom: 18px;
 }
 
-/* Map + sidebar row */
 .map-section {
 	display: flex;
 	gap: 16px;
@@ -265,7 +262,6 @@ body::before {
 	font-family: "IBM Plex Mono", monospace;
 }
 
-/* Legend */
 .legend {
 	display: flex;
 	gap: 20px;
@@ -298,7 +294,6 @@ body::before {
 	flex-shrink: 0;
 }
 
-/* Content grid */
 .content-grid {
 	display: grid;
 	grid-template-columns: 1fr 300px;
@@ -313,7 +308,6 @@ body::before {
 	gap: 16px;
 }
 
-/* Cards */
 .card {
 	background: rgba(255,255,255,0.03);
 	border: 1px solid rgba(255,255,255,0.09);
@@ -345,7 +339,6 @@ body::before {
 	color: var(--ink-soft);
 }
 
-/* Timeline */
 .timeline {
 	display: flex;
 	flex-direction: column;
@@ -364,7 +357,6 @@ body::before {
 	color: var(--ink);
 }
 
-/* Port list (sidebar card) */
 .port-list-wrap {
 	display: flex;
 	flex-direction: column;
@@ -419,7 +411,6 @@ body::before {
 	margin-top: 2px;
 }
 
-/* Reference table */
 .reference-table {
 	width: 100%;
 	border-collapse: collapse;
@@ -489,7 +480,6 @@ body::before {
 	font-size: 11px;
 }
 
-/* Ocean badges */
 .side-badge {
 	display: inline-block;
 	font-size: 9.5px;
@@ -511,18 +501,21 @@ body::before {
 	border: 1px solid rgba(201,168,76,0.3);
 }
 
-/* Leaflet popup overrides */
+/* 5. LEAFLET POPUP OVERRIDES (SAFE FROM STRUCTURAL INTERFERENCES) */
 .leaflet-popup-content-wrapper {
-	background: #0d1420;
-	border: 1px solid rgba(143,211,255,0.25);
-	border-radius: 8px;
-	box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-	color: var(--ink);
-	padding: 0;
-	overflow: hidden;
+	background: #0d1420 !important;
+	border: 1px solid rgba(143, 211, 255, 0.25) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important;
+	color: var(--ink) !important;
+	padding: 0 !important;
+	overflow: hidden !important;
 }
 
-.leaflet-popup-content { margin: 0; min-width: 240px; }
+.leaflet-popup-content { 
+	margin: 0 !important; 
+	min-width: 240px !important; 
+}
 
 .popup-inner { padding: 12px 14px; }
 
@@ -550,52 +543,48 @@ body::before {
 }
 
 .popup-footer {
-	background: rgba(143,211,255,0.06);
-	border-top: 1px solid rgba(143,211,255,0.12);
+	background: rgba(143, 211, 255, 0.06);
+	border-top: 1px solid rgba(143, 211, 255, 0.12);
 	padding: 8px 14px;
 	font-size: 11.5px;
 	color: var(--ink-soft);
 	line-height: 1.55;
 }
 
-.leaflet-popup-tip-container { display: none; }
+.leaflet-popup-tip-container { display: none !important; }
 
 .leaflet-popup-close-button {
 	color: var(--ink-soft) !important;
 	font-size: 16px !important;
 }
 
+/* 6. SYSTEM FOOTER (FLOW RENDERING AT BOTTOM OF PAGE AREA) */
 .site-footer {
-	position: fixed;
-	bottom: 0;
-	left:0;
-	right:0;
-	padding: 20px 32px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-	z-index: 10;
+	width: 100%;
+	padding: 24px 0;
+	margin-top: 48px;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	clear: both;
 }
 
 .site-footer p {
 	max-width: 1200px;
 	margin: 0 auto;
-    font-size: 12px;
+	font-size: 12px;
 	text-align: right;
-    color: var(--ink-soft);
-    letter-spacing: 0.5px;
-    font-family: "IBM Plex Mono", monospace;
+	color: var(--ink-soft);
+	letter-spacing: 0.5px;
+	font-family: "IBM Plex Mono", monospace;
 }
 
+/* 7. ALL RESPONSIVE QUERIES TOGETHER AT THE VERY BOTTOM */
 @media (max-width: 900px) {
 	.map-section { flex-direction: column; }
 	.content-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 900px) {
 	.site-header {
 		flex-direction: column;
 		align-items: flex-start;
 	}
-
 	.globe {
 		height: 64vh;
 	}
@@ -607,13 +596,9 @@ body::before {
 		right: 10px;
 		bottom: 10px;
 	}
-}
-
-@media (max-width: 600px) {
 	.page {
 		padding: 24px 18px 40px;
 	}
-
 	.site-nav {
 		flex-wrap: wrap;
 	}
