@@ -1,198 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Hurmuz | 6 Straits</title>
-		<link rel="stylesheet" href="style.css" />
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-	</head>
-	<body>
-        <div class="strait-bg"
-			 style="background-image: url('svg/hurmus.svg');
-			 		filter: brightness(2) opacity(0.1);"></div>
-		<div class="page">
-			<header class="site-header">
-				<div class="site-heading">
-					<h1 class="site-title">Hurmuz</h1>
-					<p class="site-subtitle">Explore some of the worlds most important straits.</p>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Hurmuz | 6 Straits</title>
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+	<div class="strait-bg" style="background-image: url('svg/hurmus.svg');
+			filter: brightness(2) opacity(0.1);"></div>
+	<div class="page">
+		<header class="site-header">
+			<div class="site-heading">
+				<h1 class="site-title">Hurmuz</h1>
+				<p class="site-subtitle">Explore some of the worlds most important straits.</p>
+			</div>
+			<nav class="site-nav">
+				<a href="index.html">Home</a>
+				<a href="hurmuz.html" class="is-active">Hurmuz</a>
+				<a href="bosphorus.html">Bosphorus</a>
+				<a href="bering.html">Bering</a>
+				<a href="suez.html">Suez</a>
+				<a href="panama.html">Panama</a>
+				<a href="malacca.html">Malacca</a>
+			</nav>
+		</header>
+
+		<main class="stage">
+			<section class="globe-wrap">
+				<div class="container">
+
+					<div class="status-banner">
+						Transit Status: High Security Posture — Project Freedom Monitor
+					</div>
+
+					<div class="map-section">
+						<div id="map"></div>
+						<div class="map-sidebar">
+							<h3>Strategic Vectors</h3>
+							<div class="port-list-wrap" id="port-list"></div>
+						</div>
+					</div>
+
+					<div class="legend">
+						<span class="legend-item"><span class="legend-line" style="background:transparent; border-top: 2px dashed #38bdf8;"></span> Shipping Lanes</span>
+						<span class="legend-item"><span class="dot" style="background:#10b981; border:2px solid white; box-shadow:0 0 0 2px #10b981;"></span> GCC Littoral State</span>
+						<span class="legend-item"><span class="dot" style="background:#f97316; border:2px solid white; box-shadow:0 0 0 2px #f97316;"></span> Islamic Republic of Iran</span>
+					</div>
+
+					<div class="content-grid">
+						<div class="main-column">
+							<section class="card">
+								<h2>Geographic Context</h2>
+								<p>The Strait of Hormuz is the world's most sensitive maritime "choke point," connecting the <b>Persian Gulf</b> with the <b>Gulf of Oman</b> and the Arabian Sea. While it spans roughly 21 to 60 miles in width, the actual navigable shipping lanes are extremely narrow, consisting of two <b>two-mile-wide channels</b> for inbound and outbound traffic, separated by a two-mile buffer zone. This proximity of the <b>Omani Musandam Peninsula</b> and the <b>Iranian coastline</b> creates a natural bottleneck that governs the flow of the global energy market and requires precise naval accessibility management.</p>
+							</section>
+
+							<section class="card">
+								<h2>Historic Timeline</h2>
+								<div class="timeline">
+									<div class="timeline-item">
+										<strong>1515:</strong> The <b>Portuguese Empire</b> occupies Hormuz, building massive fortifications to control the trade routes to India.
+									</div>
+									<div class="timeline-item">
+										<strong>1984–1988:</strong> The <b>Tanker War</b> phase of the Iran-Iraq War involves attacks on over 500 commercial vessels, necessitating international naval escorts.
+									</div>
+									<div class="timeline-item">
+										<strong>Feb 28, 2026:</strong> Launch of <b>Operation Epic Fury</b>; major commercial routes are disrupted as regional tensions reach an apex.
+									</div>
+									<div class="timeline-item">
+										<strong>May 4, 2026:</strong> <b>Project Freedom</b> begins, utilizing international naval task forces to secure "Freedom of Navigation" for neutral tankers.
+									</div>
+								</div>
+							</section>
+
+							<section class="card">
+								<h2>Impact on Daily Life</h2>
+								<p>Volatility in the Strait of Hormuz is the primary driver of <b>global energy price fluctuations</b>. Because roughly <b>20% of the world's liquid petroleum</b> passes through this channel daily, any threat to naval accessibility results in an immediate spike in fuel costs. This creates a ripple effect throughout the global economy, increasing the <b>cost of shipping</b> and contributing to <b>inflation</b> on consumer goods. In essence, the stability of this 21-mile-wide gap directly influences the <b>purchasing power</b> of households across every continent.</p>
+							</section>
+						</div>
+
+						<div class="sidebar-column">
+							<section class="card">
+								<h3>Technical Stats</h3>
+								<p>
+									<b>Length:</b> 96 miles (154 km)<br>
+									<b>Lane Width:</b> 2 miles each<br>
+									<b>Daily Flow:</b> ~21M Barrels<br>
+									<b>Vessel Count:</b> ~30,000/yr
+								</p>
+							</section>
+
+							<section class="card">
+								<h3>Strategic Importance</h3>
+								<p>The Strait is the sole maritime exit for the world's largest oil producers, including <b>Saudi Arabia, Iraq, and Kuwait</b>. It is also the primary route for <b>Qatari LNG</b>. Most Gulf nations lack alternative pipelines, making the accessibility of these waters a <b>national security priority</b> for energy-dependent nations like China, Japan, and India.</p>
+							</section>
+						</div>
+					</div>
+
+					<div class="table-section-header">
+						<h3>Strategic Coordinates Reference</h3>
+						<span>WGS 84 datum</span>
+					</div>
+					<table class="reference-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Vector / Landmark</th>
+								<th>Sovereignty</th>
+								<th>Latitude</th>
+								<th>Longitude</th>
+								<th>Role</th>
+							</tr>
+						</thead>
+						<tbody id="table-body"></tbody>
+					</table>
+
 				</div>
-				<nav class="site-nav">
-					<a href="index.html">Home</a>
-					<a href="hurmuz.html" class="is-active">Hurmuz</a>
-					<a href="bosphorus.html">Bosphorus</a>
-					<a href="bering.html">Bering</a>
-					<a href="suez.html">Suez</a>
-					<a href="panama.html">Panama</a>
-					<a href="malacca.html">Malacca</a>
-				</nav>
-			</header>
-			<main class="stage">
-				<section class="globe-wrap">
-					<div class="container">
-    <div class="status-banner">
-        Current Operational Alert: High Security Posture - Project Freedom Monitor
-    </div>
-    
-    <div class="map-section">
-        <div id="map" style="flex: 3; min-height: 400px; border-radius: 8px; border: 1px solid #334155; z-index: 1;"></div>
-        <div class="map-sidebar">
-            <h3>Strategic Vectors</h3>
-            <div class="landmark-item" onclick="flyToLocation([26.56, 56.44], 10)">
-                <strong>The Chokepoint</strong>
-                <span>26.56° N / 56.44° E</span>
-            </div>
-            <div class="landmark-item" onclick="flyToLocation([27.14, 56.23], 11)">
-                <strong>Bandar Abbas (Iran)</strong>
-                <span>27.14° N / 56.23° E</span>
-            </div>
-            <div class="landmark-item" onclick="flyToLocation([26.35, 56.38], 11)">
-                <strong>Khasab (Oman)</strong>
-                <span>26.35° N / 56.38° E</span>
-            </div>
-            <div class="landmark-item" onclick="flyToLocation([25.18, 56.36], 11)">
-                <strong>Fujairah (UAE)</strong>
-                <span>25.18° N / 56.36° E</span>
-            </div>
-        </div>
-    </div>
+			</section>
+		</main>
+	</div>
 
-    <div class="legend">
-        <div class="legend-item"><span class="dot" style="background: #38bdf8;"></span> Shipping Lanes</div>
-        <div class="legend-item"><span class="dot" style="background: #10b981;"></span> GCC Littoral State</div>
-        <div class="legend-item"><span class="dot" style="background: #f97316;"></span> Islamic Republic of Iran</div>
-    </div>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
 
-    <div class="content-grid">
-        <div class="main-column">
-            <section class="card">
-                <h2>Geographic Context</h2>
-                <p>The Strait of Hormuz is the world's most sensitive maritime "choke point," connecting the <b>Persian Gulf</b> with the <b>Gulf of Oman</b> and the Arabian Sea. While it spans roughly 21 to 60 miles in width, the actual navigable shipping lanes are extremely narrow, consisting of two <b>two-mile-wide channels</b> for inbound and outbound traffic, separated by a two-mile buffer zone. This proximity of the <b>Omani Musandam Peninsula</b> and the <b>Iranian coastline</b> creates a natural bottleneck that governs the flow of the global energy market and requires precise naval accessibility management.</p>
-            </section>
+			const vectors = [
+				{
+					name: "The Chokepoint",
+					short: "The Chokepoint",
+					lat: 26.56,
+					lng: 56.44,
+					sovereignty: "International",
+					color: "#38bdf8",
+					desc: "Central focus vector of shipping corridors handling massive daily maritime energy carrier assignments."
+				},
+				{
+					name: "Bandar Abbas Base",
+					short: "Bandar Abbas (Iran)",
+					lat: 27.1481,
+					lng: 56.2303,
+					sovereignty: "Iran",
+					color: "#f97316",
+					desc: "Primary regional Iranian naval base commanding surveillance systems along the northern coastline lines."
+				},
+				{
+					name: "Musandam Peninsula",
+					short: "Khasab (Oman)",
+					lat: 26.3571,
+					lng: 56.3881,
+					sovereignty: "Oman",
+					color: "#10b981",
+					desc: "Strategic lookouts and territorial outposts monitoring the southern approaches of the navigation route."
+				},
+				{
+					name: "Little Tunb Island",
+					short: "Little Tunb Island",
+					lat: 26.2421,
+					lng: 55.1691,
+					sovereignty: "Iran",
+					color: "#f97316",
+					desc: "Highly contested island outpost providing advanced tactical positioning platforms inside the Gulf."
+				},
+				{
+					name: "Port of Fujairah",
+					short: "Fujairah (UAE)",
+					lat: 25.1841,
+					lng: 56.3631,
+					sovereignty: "UAE",
+					color: "#10b981",
+					desc: "Critical global bunkering harbor facility operating on the exterior side of the maritime bottleneck."
+				}
+			];
 
-            <section class="card">
-                <h2>Historic Timeline</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <strong>1515:</strong> The <b>Portuguese Empire</b> occupies Hormuz, building massive fortifications to control the trade routes to India.
-                    </div>
-                    <div class="timeline-item">
-                        <strong>1984–1988:</strong> The <b>Tanker War</b> phase of the Iran-Iraq War involves attacks on over 500 commercial vessels, necessitating international naval escorts.
-                    </div>
-                    <div class="timeline-item:">
-                        <strong>Feb 28, 2026:</strong> Launch of <b>Operation Epic Fury</b>; major commercial routes are disrupted as regional tensions reach an apex.
-                    </div>
-                    <div class="timeline-item">
-                        <strong>May 4, 2026:</strong> <b>Project Freedom</b> begins, utilizing international naval task forces to secure "Freedom of Navigation" for neutral tankers.
-                    </div>
+			const routeLinePoints = [
+				[26.0, 54.5], 
+				[26.3, 55.5], 
+				[26.5, 56.2], 
+				[26.6, 56.5], 
+				[26.0, 57.5], 
+				[25.0, 58.0]
+			];
+
+			// Init map focused on the wider region
+			const map = L.map('map', {
+				center: [26.3, 56.0],
+				zoom: 8,
+				zoomControl: true,
+			});
+
+			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+				attribution: '&copy; CARTO',
+				subdomains: 'abcd',
+				maxZoom: 15,
+			}).addTo(map);
+
+			const routeLine = L.polyline(routeLinePoints, { color: '#38bdf8', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+
+			function makeIcon(color) {
+				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
+              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
+              <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
+            </svg>`;
+				return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
+			}
+
+			const markers = [];
+
+			vectors.forEach(function (vector, i) {
+				const marker = L.marker([vector.lat, vector.lng], { icon: makeIcon(vector.color) }).addTo(map);
+				marker.bindPopup(
+					`<div class="popup-inner">
+                <p class="popup-tag">Vector ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-name">${vector.name}</p>
+                <div class="popup-coord">
+                  <span>Lat: <strong>${vector.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(vector.lng).toFixed(4)}° E</strong></span>
                 </div>
-            </section>
+              </div>
+              <div class="popup-footer">${vector.desc}</div>`,
+					{ maxWidth: 280 }
+				);
+				markers.push(marker);
 
-            <section class="card">
-                <h2>Impact on Daily Life</h2>
-                <p>Volatility in the Strait of Hormuz is the primary driver of <b>global energy price fluctuations</b>. Because roughly <b>20% of the world's liquid petroleum</b> passes through this channel daily, any threat to naval accessibility results in an immediate spike in fuel costs. This creates a ripple effect throughout the global economy, increasing the <b>cost of shipping</b> and contributing to <b>inflation</b> on consumer goods. In essence, the stability of this 21-mile-wide gap directly influences the <b>purchasing power</b> of households across every continent.</p>
-            </section>
-        </div>
+				// Sidebar vector item
+				const item = document.createElement('div');
+				item.className = 'port-item';
+				item.innerHTML = `
+              <span class="port-dot" style="background:${vector.color};"></span>
+              <div class="port-info">
+                <div class="port-name">${vector.short}</div>
+                <div class="port-coords">${vector.lat.toFixed(4)}° N · ${Math.abs(vector.lng).toFixed(4)}° E</div>
+              </div>`;
+				item.addEventListener('click', function () { focusVector(i); });
+				document.getElementById('port-list').appendChild(item);
 
-        <div class="sidebar-column">
-            <section class="card">
-                <h3>Technical Stats</h3>
-                <p><b>Length:</b> 96 miles (154 km)<br>
-                <b>Lane Width:</b> 2 miles each<br>
-                <b>Daily Flow:</b> ~21M Barrels<br>
-                <b>Vessel Count:</b> ~30,000/yr</p>
-            </section>
+				// Table row badge setup
+				let badgeClass = 'badge-pacific'; // Default GCC/Oman/UAE
+				if (vector.sovereignty === 'Iran') badgeClass = 'badge-atlantic';
+				if (vector.sovereignty === 'International') badgeClass = 'side-badge';
 
-            <section class="card">
-                <h3>Strategic Importance</h3>
-                <p>The Strait is the sole maritime exit for the world's largest oil producers, including <b>Saudi Arabia, Iraq, and Kuwait</b>. It is also the primary route for <b>Qatari LNG</b>. Most Gulf nations lack alternative pipelines, making the accessibility of these waters a <b>national security priority</b> for energy-dependent nations like China, Japan, and India.</p>
-            </section>
-        </div>
-    </div>
+				const badgeHtml = `<span class="side-badge ${badgeClass}">${vector.sovereignty}</span>`;
 
-    <h3>Strategic Coordinates Reference <span>WGS 84 datum</span></h3>
-    <table class="reference-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Vector / Landmark</th>
-                <th>Sovereignty</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>01</td>
-                <td>Bandar Abbas Base</td>
-                <td><span class="side-badge littoral-s">IRAN</span></td>
-                <td>27.1481° N</td>
-                <td>56.2303° E</td>
-                <td>Naval Command</td>
-            </tr>
-            <tr>
-                <td>02</td>
-                <td>Musandam Peninsula</td>
-                <td><span class="side-badge littoral-n">OMAN</span></td>
-                <td>26.3571° N</td>
-                <td>56.3881° E</td>
-                <td>Southern Flank</td>
-            </tr>
-            <tr>
-                <td>03</td>
-                <td>Little Tunb Island</td>
-                <td><span class="side-badge littoral-s">IRAN</span></td>
-                <td>26.2421° N</td>
-                <td>55.1691° E</td>
-                <td>Strategic Outpost</td>
-            </tr>
-            <tr>
-                <td>04</td>
-                <td>Port of Fujairah</td>
-                <td><span class="side-badge littoral-n">UAE</span></td>
-                <td>25.1841° N</td>
-                <td>56.3631° E</td>
-                <td>Bunkering Hub</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+				const row = document.createElement('tr');
+				row.innerHTML = `
+              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
+              <td>${vector.name}</td>
+              <td>${badgeHtml}</td>
+              <td class="mono">${vector.lat.toFixed(4)}° N</td>
+              <td class="mono">${Math.abs(vector.lng).toFixed(4)}° E</td>
+              <td>${vector.desc.split('.')[0]}</td>`; 
+				row.addEventListener('click', function () { focusVector(i); });
+				document.getElementById('table-body').appendChild(row);
+			});
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+			function focusVector(i) {
+				const targetZoom = vectors[i].short === 'The Chokepoint' ? 10 : 11;
+				document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+				document.querySelectorAll('#table-body tr').forEach(el => el.classList.remove('active'));
+				document.querySelectorAll('.port-item')[i].classList.add('active');
+				document.querySelectorAll('#table-body tr')[i].classList.add('active');
+				map.flyTo([vectors[i].lat, vectors[i].lng], targetZoom, { duration: 1.2 });
+				setTimeout(() => markers[i].openPopup(), 1300);
+			}
 
-<script>
-    var map = L.map('map').setView([26.6, 56.4], 8);
+			window.flyToLocation = function (coords, zoom) {
+				map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
+			};
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CARTO'
-    }).addTo(map);
+			// Fit bounds layout setup
+			map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
 
-    // Strategic Markers
-    const locations = [
-        {coords: [26.56, 56.44], title: "The Chokepoint (Shipping Lanes)"},
-        {coords: [27.1481, 56.2303], title: "Bandar Abbas Naval Base"},
-        {coords: [26.3571, 56.3881], title: "Musandam Peninsula (Oman)"},
-        {coords: [25.1841, 56.3631], title: "Port of Fujairah (UAE)"}
-    ];
+			// Resize monitoring system configuration
+			const mapContainer = document.getElementById('map');
+			const resizeObserver = new ResizeObserver(() => {
+				map.invalidateSize();
+			});
+			resizeObserver.observe(mapContainer);
 
-    locations.forEach(loc => {
-        L.marker(loc.coords).addTo(map).bindPopup(`<b>${loc.title}</b>`);
-    });
-
-    // Fly-to function
-    function flyToLocation(coords, zoom) {
-        map.flyTo(coords, zoom, { animate: true, duration: 2.0 });
-    }
-
-    // Shipping Route Visualization (Approximation)
-    var routeLine = [
-        [26.0, 54.5], [26.3, 55.5], [26.5, 56.2], 
-        [26.6, 56.5], [26.0, 57.5], [25.0, 58.0]
-    ];
-    L.polyline(routeLine, {color: '#38bdf8', weight: 4, dashArray: '10, 15', opacity: 0.7}).addTo(map);
-</script>
-
+			// Fallback view update logic
+			setTimeout(() => {
+				map.invalidateSize();
+			}, 250);
+		});
+	</script>
 </body>
+
 </html>
