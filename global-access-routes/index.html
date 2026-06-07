@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>6 Straits</title>
+		<link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.123/Build/Cesium/Widgets/widgets.css" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="page">
+			<header class="site-header">
+				<div class="site-heading">
+					<h1 class="site-title">6 Straits</h1>
+					<p class="site-subtitle">Explore some of the worlds most important straits.</p>
+				</div>
+				<nav class="site-nav">
+					<a href="index.html" class="is-active">Home</a>
+					<a href="hurmuz.html">Hurmuz</a>
+					<a href="bosphorus.html">Bosphorus</a>
+					<a href="bering.html">Bering</a>
+					<a href="suez.html">Suez</a>
+					<a href="panama.html">Panama</a>
+					<a href="malacca.html">Malacca</a>
+				</nav>
+			</header>
+
+			<main class="stage">
+				<div class="globe-wrap">
+					<div id="cesiumContainer" class="globe"></div>
+					<aside class="strait-panel" aria-label="Straits navigation">
+						<div class="panel-title">Zoom To</div>
+						<nav class="strait-list" id="strait-list"></nav>
+					</aside>
+				</div>
+			</main>
+		</div>
+
+		<script src="https://cesium.com/downloads/cesiumjs/releases/1.123/Build/Cesium/Cesium.js"></script>
+		<script>
+			window.CESIUM_ION_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTFkZWI0NS05Yzk0LTQwZmEtYWQ2NC0zMzA4MmYxNzJjYjAiLCJpZCI6MzUyNzQyLCJpYXQiOjE3NjEwNzEzMTF9.BE9PLgfA-0BEP3cJp0Rp4uvhXUvxBRO4F18s6lpfAj0";
+		</script>
+		<script src="script.js"></script>
+		<footer class="site-footer" id="main">
+			<p>This website is developed for VU Web Mapping & VU Multimedia Cartography Course by Erik Britz, Markus Weigand, Ricardo Ontaneda and Eren Filizfidanoglu.</p>
+		</footer>
+	</body>
+</html>
