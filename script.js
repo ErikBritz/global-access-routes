@@ -65,7 +65,7 @@ async function initGlobe() {
 				text: strait.name,
 				font: "600 13px 'IBM Plex Sans'",
                 fillColor: Cesium.Color.WHITE,
-            outlineColor: Cesium.Color.BLACK,
+           
             outlineWidth: 2,
             style: Cesium.LabelStyle.FILL_AND_OUTLINE,
             verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
