@@ -1,34 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Suez | 6 Straits</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="page">
-			<header class="site-header">
-				<div class="site-heading">
-					<h1 class="site-title">Suez</h1>
-					<p class="site-subtitle">Explore some of the worlds most important straits.</p>
-				</div>
-				<nav class="site-nav">
-					<a href="index.html">Home</a>
-					<a href="hurmuz.html">Hurmuz</a>
-					<a href="bosphorus.html">Bosphorus</a>
-					<a href="bering.html">Bering</a>
-					<a href="suez.html" class="is-active">Suez</a>
-					<a href="panama.html">Panama</a>
-					<a href="malacca.html">Malacca</a>
-				</nav>
-			</header>
-			<main class="stage">
-				<section class="globe-wrap">
-					<div class="panel-title">Placeholder</div>
-					<p class="site-subtitle">Content coming soon.</p>
-				</section>
-			</main>
-		</div>
-	</body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suez & Bab-El-Mandeb | 6 Straits</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div class="strait-bg" style="background-image: url('svg/suez.svg'); filter: brightness(2) opacity(0.1);"></div>
+    <div class="page">
+        <header class="site-header">
+            <div class="site-heading">
+                <h1 class="site-title">Suez Canal & Red Sea</h1>
+                <p class="site-subtitle">Explore some of the worlds most important straits.</p>
+            </div>
+            <nav class="site-nav">
+                <a href="index.html">Home</a>
+                <a href="hurmuz.html">Hurmuz</a>
+                <a href="bosphorus.html">Bosphorus</a>
+                <a href="bering.html">Bering</a>
+                <a href="suez.html" class="is-active">Suez</a>
+                <a href="panama.html">Panama</a>
+                <a href="malacca.html">Malacca</a>
+            </nav>
+        </header>
+
+        <main class="stage">
+            <section class="globe-wrap">
+                <div class="container">
+
+                    <div class="status-banner">
+                        Transit Status: Accessibility Under Siege — Red Sea Conflict Active
+                    </div>
+
+                    <div class="map-section">
+                        <div id="map"></div>
+                        <div class="map-sidebar">
+                            <h3>Strategic Nodes</h3>
+                            <div class="port-list-wrap" id="port-list"></div>
+                        </div>
+                    </div>
+
+                    <div class="legend">
+                        <span class="legend-item"><span class="legend-line" style="background:transparent; border-top: 2px dashed #e74c3c;"></span> Red Sea Corridor</span>
+                        <span class="legend-item"><span class="dot" style="background:#f39c12; border:2px solid white; box-shadow:0 0 0 2px #f39c12;"></span> Canal Infrastructure</span>
+                        <span class="legend-item"><span class="dot" style="background:#8e44ad; border:2px solid white; box-shadow:0 0 0 2px #8e44ad;"></span> Chokepoint</span>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="main-column">
+                            <section class="card">
+                                <h2>The Fragile Artery</h2>
+                                <p>The Suez Canal is a critical global artery responsible for handling 10-15% of global trade[cite: 124]. Extending south from the canal, maritime traffic must pass through the Bab-El-Mandeb strait (the "Gate of Tears") to reach the Indian Ocean[cite: 124]. The closure or restriction of the Bab-El-Mandeb Strait prevents tankers originating in the Persian Gulf from transiting the Suez Canal or reaching the SUMED Pipeline[cite: 126].</p>
+                            </section>
+
+                            <section class="card">
+                                <h2>Geopolitical Disruption</h2>
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <strong>March 2021:</strong> The <em>Ever Given</em> container ship runs aground, blocking the canal entirely and spotlighting the fragile nature of global just-in-time supply chains[cite: 128].
+                                    </div>
+                                    <div class="timeline-item">
+                                        <strong>Present:</strong> Escalating Houthi attacks in the Red Sea have created a scenario of "Accessibility under Siege"[cite: 128, 129]. 
+                                    </div>
+                                    <div class="timeline-item">
+                                        <strong>Rerouting Impact:</strong> To avoid the conflict zone, maritime vessels are forced to divert around the southern tip of Africa via the Cape of Good Hope, adding 10 or more days to delivery times[cite: 132, 134].
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div class="sidebar-column">
+                            <section class="card">
+                                <h3>Economic Spillover</h3>
+                                <p>The contrast between the accessible Suez route and the alternative Cape of Good Hope route has a severe "spillover" effect on national economies[cite: 132, 133]. The extended voyage distance significantly increases transit times, maritime fuel costs, and massive spikes in insurance premiums, driving global inflation[cite: 126, 133].</p>
+                            </section>
+                            
+                            <section class="card">
+                                <h3>Technical Stats</h3>
+                                <p>
+                                    <b>Canal Length:</b> ~193 km (120 mi)<br>
+                                    <b>Bab-El-Mandeb Width:</b> ~26 km (16 mi)<br>
+                                    <b>Global Trade Flow:</b> 10-15% [cite: 124]<br>
+                                    <b>Rerouting Delay:</b> +10 Days [cite: 134]
+                                </p>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="table-section-header">
+                        <h3>Node Coordinates Reference</h3>
+                        <span>WGS 84 datum</span>
+                    </div>
+                    <table class="reference-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Node / Location</th>
+                                <th>Region</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nodes = [
+                { name: "Port Said", short: "Port Said", lat: 31.2653, lng: 32.3019, region: "Mediterranean", color: "#f39c12", desc: "Northern terminus of the Suez Canal." },
+                { name: "Suez Port", short: "Suez Port", lat: 29.9668, lng: 32.5498, region: "Red Sea", color: "#f39c12", desc: "Southern terminus of the Suez Canal opening into the Gulf of Suez." },
+                { name: "Bab-El-Mandeb", short: "Gate of Tears", lat: 12.5833, lng: 43.3333, region: "Chokepoint", color: "#8e44ad", desc: "The narrowest point connecting the Red Sea to the Gulf of Aden." },
+                { name: "Port of Djibouti", short: "Djibouti", lat: 11.6041, lng: 43.1456, region: "Gulf of Aden", color: "#f39c12", desc: "Critical staging and security hub just south of the chokepoint." }
+            ];
+
+            const routePoints = [
+                [31.26, 32.30], [29.96, 32.55], [27.0, 34.0], [20.0, 39.0], [15.0, 41.5], [12.58, 43.33], [11.60, 44.0]
+            ];
+
+            const map = L.map('map', { center: [21.5, 38.0], zoom: 4, zoomControl: true });
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 15,
+            }).addTo(map);
+
+            const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+
+            function makeIcon(color) {
+                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
+              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
+              <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
+            </svg>`;
+                return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
+            }
+
+            const markers = [];
+
+            nodes.forEach(function (node, i) {
+                const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.color) }).addTo(map);
+                marker.bindPopup(
+                    `<div class="popup-inner">
+                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-name">${node.name}</p>
+                <div class="popup-coord">
+                  <span>Lat: <strong>${node.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(node.lng).toFixed(4)}° E</strong></span>
+                </div>
+              </div>
+              <div class="popup-footer">${node.desc}</div>`,
+                    { maxWidth: 280 }
+                );
+                markers.push(marker);
+
+                const item = document.createElement('div');
+                item.className = 'port-item';
+                item.innerHTML = `
+              <span class="port-dot" style="background:${node.color}; border: 2px solid rgba(0,0,0,0.4);"></span>
+              <div class="port-info">
+                <div class="port-name">${node.short}</div>
+                <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
+              </div>`;
+                item.addEventListener('click', function () { focusNode(i); });
+                document.getElementById('port-list').appendChild(item);
+
+                const badgeClass = node.region === 'Chokepoint' ? 'badge-atlantic' : 'badge-pacific';
+                const row = document.createElement('tr');
+                row.innerHTML = `
+              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
+              <td>${node.name}</td>
+              <td><span class="side-badge ${badgeClass}">${node.region}</span></td>
+              <td class="mono">${node.lat.toFixed(4)}° N</td>
+              <td class="mono">${Math.abs(node.lng).toFixed(4)}° E</td>`;
+                row.addEventListener('click', function () { focusNode(i); });
+                document.getElementById('table-body').appendChild(row);
+            });
+
+            function focusNode(i) {
+                document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('#table-body tr').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.port-item')[i].classList.add('active');
+                document.querySelectorAll('#table-body tr')[i].classList.add('active');
+                map.flyTo([nodes[i].lat, nodes[i].lng], 8, { duration: 1.2 });
+                setTimeout(() => markers[i].openPopup(), 1300);
+            }
+
+            map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
+
+            const mapContainer = document.getElementById('map');
+            const resizeObserver = new ResizeObserver(() => map.invalidateSize());
+            resizeObserver.observe(mapContainer);
+            setTimeout(() => map.invalidateSize(), 250);
+        });
+    </script>
+</body>
 </html>
