@@ -565,6 +565,26 @@ body::before {
 	font-size: 16px !important;
 }
 
+.site-footer {
+	position: fixed;
+	bottom: 0;
+	left:0;
+	right:0;
+	padding: 20px 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+	z-index: 10;
+}
+
+.site-footer p {
+	max-width: 1200px;
+	margin: 0 auto;
+    font-size: 12px;
+	text-align: right;
+    color: var(--ink-soft);
+    letter-spacing: 0.5px;
+    font-family: "IBM Plex Mono", monospace;
+}
+
 @media (max-width: 900px) {
 	.map-section { flex-direction: column; }
 	.content-grid { grid-template-columns: 1fr; }
