@@ -1,34 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Bosphorus | 6 Straits</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="page">
-			<header class="site-header">
-				<div class="site-heading">
-					<h1 class="site-title">Bosphorus</h1>
-					<p class="site-subtitle">Explore some of the worlds most important straits.</p>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Bosphorus | 6 Straits</title>
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+	<div class="strait-bg" style="background-image: url('svg/bosphorus.svg');
+			filter: brightness(2) opacity(0.1);"></div>
+	<div class="page">
+		<header class="site-header">
+			<div class="site-heading">
+				<h1 class="site-title">Bosphorus</h1>
+				<p class="site-subtitle">Explore some of the worlds most important straits.</p>
+			</div>
+			<nav class="site-nav">
+				<a href="index.html">Home</a>
+				<a href="hurmuz.html">Hurmuz</a>
+				<a href="bosphorus.html" class="is-active">Bosphorus</a>
+				<a href="bering.html">Bering</a>
+				<a href="suez.html">Suez</a>
+				<a href="panama.html">Panama</a>
+				<a href="malacca.html">Malacca</a>
+			</nav>
+		</header>
+
+		<main class="stage">
+			<section class="globe-wrap">
+				<div class="container">
+
+					<div class="status-banner">
+						Transit Status: Transit Restrictions Active (May 2026) — Black Sea ↔ Mediterranean Transit Route
+					</div>
+
+					<div class="map-section">
+						<div id="map"></div>
+						<div class="map-sidebar">
+							<h3>Key Landmarks</h3>
+							<div class="port-list-wrap" id="port-list"></div>
+						</div>
+					</div>
+
+					<div class="legend">
+						<span class="legend-item"><span class="legend-line" style="background:transparent; border-top: 2px dashed #fbbf24;"></span> Shipping Channel</span>
+						<span class="legend-item"><span class="dot" style="background:#3b82f6; border:2px solid white; box-shadow:0 0 0 2px #3b82f6;"></span> European Shore</span>
+						<span class="legend-item"><span class="dot" style="background:#ef4444; border:2px solid white; box-shadow:0 0 0 2px #ef4444;"></span> Asian Shore</span>
+						<span class="legend-item"><span class="dot" style="background:#ffffff; border:2px solid white; box-shadow:0 0 0 2px #2c3e50;"></span> VTS Station</span>
+					</div>
+
+					<div class="content-grid">
+						<div class="main-column">
+							<section class="card">
+								<h2>Geographic Context</h2>
+								<p>The Bosphorus Strait, also known as the <b>Strait of Istanbul</b>, is a 19-mile corridor that serves as the world’s narrowest strait used for international navigation. It serves as a natural boundary between <b>Europe and Asia</b>, cutting directly through the heart of Istanbul. Because of its treacherous "S" shape and <b>conflicting currents</b>, naval accessibility is a massive maritime safety operation, with ships navigating within 700 meters of historical landmarks and dense residential zones. It connects the <b>Black Sea</b> to the <b>Sea of Marmara</b>, forming a vital link to the Mediterranean.</p>
+							</section>
+
+							<section class="card">
+								<h2>Historic Timeline</h2>
+								<div class="timeline">
+									<div class="timeline-item">
+										<strong>667 BC:</strong> Foundation of <b>Byzantium</b>, establishing the strait as the primary trade hub between the Mediterranean and the Steppes.
+									</div>
+									<div class="timeline-item">
+										<strong>1453:</strong> <b>Fall of Constantinople</b> to the Ottoman Empire, granting the Sultans total sovereign control over Black Sea access.
+									</div>
+									<div class="timeline-item">
+										<strong>1936:</strong> Signing of the <b>Montreux Convention</b>, a landmark treaty that regulates naval passage and ensures civilian freedom.
+									</div>
+									<div class="timeline-item">
+										<strong>2022–2026:</strong> Consistent enforcement of the Montreux Convention during <b>Black Sea conflicts</b>, restricting warship passage to prevent regional escalation.
+									</div>
+								</div>
+							</section>
+
+							<section class="card">
+								<h2>Impact on Daily Life</h2>
+								<p>Disruptions in the Bosphorus are felt at every dinner table worldwide. As the primary exit for <b>grain and fertilizer</b> from the Black Sea region, any bottleneck here leads to immediate spikes in <b>global food prices</b>. Locally, the strait is a vital artery for Istanbul's <b>15 million residents</b>, with thousands of daily commuters relying on public ferries. An accident involving a large tanker would not only halt global trade but pose a catastrophic <b>environmental and safety risk</b> to one of the world's most populated urban centers.</p>
+							</section>
+						</div>
+
+						<div class="sidebar-column">
+							<section class="card">
+								<h3>Quick Data</h3>
+								<p>
+									<b>Length:</b> 19 miles (31 km)<br>
+									<b>Narrowest Point:</b> ~700 meters<br>
+									<b>Maximum Depth:</b> 110 meters<br>
+									<b>Annual Transits:</b> ~40,000 ships
+								</p>
+							</section>
+
+							<section class="card">
+								<h3>Strategic Importance</h3>
+								<p>The Bosphorus is the anchor of the <b>Black Sea Grain Corridor</b>. Ships exiting the strait move through the <b>Dardanelles</b> to reach the Mediterranean. Primary destination ports include those in <b>Egypt, Italy, and China</b>, carrying essential agricultural and mineral exports. For the Russian Federation, it remains the only warm-water access for the <b>Black Sea Fleet</b> to the open ocean.</p>
+							</section>
+						</div>
+					</div>
+
+					<div class="table-section-header">
+						<h3>Landmark Coordinates Reference</h3>
+						<span>WGS 84 datum</span>
+					</div>
+					<table class="reference-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Location / Landmark</th>
+								<th>Coastline</th>
+								<th>Latitude</th>
+								<th>Longitude</th>
+								<th>Function</th>
+							</tr>
+						</thead>
+						<tbody id="table-body"></tbody>
+					</table>
+
 				</div>
-				<nav class="site-nav">
-					<a href="index.html">Home</a>
-					<a href="hurmuz.html">Hurmuz</a>
-					<a href="bosphorus.html" class="is-active">Bosphorus</a>
-					<a href="bering.html">Bering</a>
-					<a href="suez.html">Suez</a>
-					<a href="panama.html">Panama</a>
-					<a href="malacca.html">Malacca</a>
-				</nav>
-			</header>
-			<main class="stage">
-				<section class="globe-wrap">
-					<div class="panel-title">Placeholder</div>
-					<p class="site-subtitle">Content coming soon.</p>
-				</section>
-			</main>
-		</div>
-	</body>
+			</section>
+		</main>
+	</div>
+
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+
+			const landmarks = [
+				{
+					name: "Poyrazköy Entry",
+					short: "Poyrazköy (North Entry)",
+					lat: 41.2227,
+					lng: 29.1158,
+					coast: "Asia",
+					color: "#ef4444",
+					desc: "The northern entrance hub tracking maritime assets entering the strait from the open waters of the Black Sea."
+				},
+				{
+					name: "Rumeli Hisarı",
+					short: "Rumeli Hisarı (Chokepoint)",
+					lat: 41.0841,
+					lng: 29.0566,
+					coast: "Europe",
+					color: "#3b82f6",
+					desc: "A critical geographical chokepoint flanked by historic military fortifications where navigation lanes narrow down dramatically."
+				},
+				{
+					name: "Kız Kulesi (Maiden's Tower)",
+					short: "Kız Kulesi",
+					lat: 41.0211,
+					lng: 29.0041,
+					coast: "Asia",
+					color: "#ef4444",
+					desc: "Historic navigational marker and beacon guiding pilotage shifts right at the southern approach limits."
+				},
+				{
+					name: "Ahırkapı Terminal",
+					short: "Ahırkapı (South Exit)",
+					lat: 41.0033,
+					lng: 28.9818,
+					coast: "Europe",
+					color: "#3b82f6",
+					desc: "The southern terminal and anchorage gate connecting inbound transit lines to the Sea of Marmara basin."
+				},
+				{
+					name: "Port of Istanbul",
+					short: "Port of Istanbul",
+					lat: 41.0256,
+					lng: 28.9958,
+					coast: "Europe",
+					color: "#ffffff",
+					desc: "Primary regional commercial and passenger harbor hub operating within the core urban lines of the metropolitan center."
+				}
+			];
+
+			const routePoints = [
+				[41.24, 29.13], 
+				[41.20, 29.11], 
+				[41.15, 29.07], 
+				[41.10, 29.05], 
+				[41.05, 29.02], 
+				[41.01, 28.99]
+			];
+
+			// Init map focused on the wider region
+			const map = L.map('map', {
+				center: [41.10, 29.05],
+				zoom: 11,
+				zoomControl: true,
+			});
+
+			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+				attribution: '&copy; CARTO',
+				subdomains: 'abcd',
+				maxZoom: 15,
+			}).addTo(map);
+
+			const routeLine = L.polyline(routePoints, { color: '#fbbf24', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+
+			function makeIcon(color) {
+				const borderColor = color === '#ffffff' ? '#2c3e50' : 'white';
+				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
+              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
+              <circle cx="14" cy="14" r="6" fill="${borderColor}" opacity=".9"/>
+            </svg>`;
+				return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
+			}
+
+			const markers = [];
+
+			landmarks.forEach(function (landmark, i) {
+				const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.color) }).addTo(map);
+				marker.bindPopup(
+					`<div class="popup-inner">
+                <p class="popup-tag">Point ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-name">${landmark.name}</p>
+                <div class="popup-coord">
+                  <span>Lat: <strong>${landmark.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(landmark.lng).toFixed(4)}° E</strong></span>
+                </div>
+              </div>
+              <div class="popup-footer">${landmark.desc}</div>`,
+					{ maxWidth: 280 }
+				);
+				markers.push(marker);
+
+				// Sidebar landmark item
+				const item = document.createElement('div');
+				item.className = 'port-item';
+				item.innerHTML = `
+              <span class="port-dot" style="background:${landmark.color}; border: 2px solid ${landmark.color === '#ffffff' ? '#2c3e50' : 'rgba(0,0,0,0.4)'};"></span>
+              <div class="port-info">
+                <div class="port-name">${landmark.short}</div>
+                <div class="port-coords">${landmark.lat.toFixed(4)}° N · ${Math.abs(landmark.lng).toFixed(4)}° E</div>
+              </div>`;
+				item.addEventListener('click', function () { focusLandmark(i); });
+				document.getElementById('port-list').appendChild(item);
+
+				// Table row
+				const badgeHtml = landmark.coast === 'Europe'
+					? '<span class="side-badge badge-atlantic">Europe</span>'
+					: '<span class="side-badge badge-pacific">Asia</span>';
+
+				const row = document.createElement('tr');
+				row.innerHTML = `
+              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
+              <td>${landmark.name}</td>
+              <td>${badgeHtml}</td>
+              <td class="mono">${landmark.lat.toFixed(4)}° N</td>
+              <td class="mono">${Math.abs(landmark.lng).toFixed(4)}° E</td>
+              <td>${landmark.desc.split('.')[0]}</td>`; 
+				row.addEventListener('click', function () { focusLandmark(i); });
+				document.getElementById('table-body').appendChild(row);
+			});
+
+			function focusLandmark(i) {
+				const targetZoom = i === 1 || i === 2 || i === 4 ? 14 : 13;
+				document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+				document.querySelectorAll('#table-body tr').forEach(el => el.classList.remove('active'));
+				document.querySelectorAll('.port-item')[i].classList.add('active');
+				document.querySelectorAll('#table-body tr')[i].classList.add('active');
+				map.flyTo([landmarks[i].lat, landmarks[i].lng], targetZoom, { duration: 1.2 });
+				setTimeout(() => markers[i].openPopup(), 1300);
+			}
+
+			window.flyToLocation = function (coords, zoom) {
+				map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
+			};
+
+			// Map bounds layout adjustments
+			map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
+
+			// Resize observer connection tracking container metrics updates
+			const mapContainer = document.getElementById('map');
+			const resizeObserver = new ResizeObserver(() => {
+				map.invalidateSize();
+			});
+			resizeObserver.observe(mapContainer);
+
+			// Fallback rendering call configuration
+			setTimeout(() => {
+				map.invalidateSize();
+			}, 250);
+		});
+	</script>
+</body>
+
 </html>
