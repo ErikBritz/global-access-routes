@@ -64,15 +64,14 @@ async function initGlobe() {
 			},
 			label: {
 				text: strait.name,
-				font: "14px sans-serif",
+				font: "600 16px 'IBM Plex Sans', sans-serif",
 				fillColor: Cesium.Color.WHITE,
-				style: Cesium.LabelStyle.FILL,
-				showBackground: true,
-				backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.8),
-				backgroundPadding: new Cesium.Cartesian2(7, 5),
+				style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+				outlineWidth: 3,
+				outlineColor: Cesium.Color.BLACK,
 				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-				pixelOffset: new Cesium.Cartesian2(0, -9),
-				disableDepthTestDistance: Number.POSITIVE_INFINITY
+				pixelOffset: new Cesium.Cartesian2(0, -12),
+				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
 			}
 		});
 
