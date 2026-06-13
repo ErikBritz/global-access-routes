@@ -60,12 +60,20 @@ async function initGlobe() {
 				outlineColor: Cesium.Color.WHITE,
 				outlineWidth: 1,
 				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+			},
+			label: {
+				text: strait.name,
+				font: "14pt sans-serif",
+				style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+				outlineWidth: 2,
+				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+				pixelOffset: new Cesium.Cartesian2(0, -9),
+				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
 			}
-			// The label block is completely gone from here now!
 		});
 
 		entityById[strait.id] = entity;
-	});~
+	});
 
 	function flyToStrait(straitId) {
 		const strait = straits.find((item) => item.id === straitId);
