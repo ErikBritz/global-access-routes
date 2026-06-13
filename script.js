@@ -63,12 +63,14 @@ async function initGlobe() {
 			},
 			label: {
 				text: strait.name,
-				font: "14pt sans-serif",
+				font: "14px sans-serif",
+				fillColor: Cesium.Color.WHITE,
 				style: Cesium.LabelStyle.FILL_AND_OUTLINE,
 				outlineWidth: 2,
+				outlineColor: Cesium.Color.BLACK,
 				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
 				pixelOffset: new Cesium.Cartesian2(0, -9),
-				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+				disableDepthTestDistance: Number.POSITIVE_INFINITY
 			}
 		});
 
