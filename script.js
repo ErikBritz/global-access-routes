@@ -36,6 +36,7 @@ async function initGlobe() {
 		infoBox: false,
 		fullscreenButton: false,
 		selectionIndicator: false,
+		orderIndependentTranslucency: false,
 		imageryProvider
 	});
 
