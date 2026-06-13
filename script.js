@@ -66,9 +66,10 @@ async function initGlobe() {
 				text: strait.name,
 				font: "14px sans-serif",
 				fillColor: Cesium.Color.WHITE,
-				style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-				outlineWidth: 2,
-				outlineColor: Cesium.Color.BLACK,
+				style: Cesium.LabelStyle.FILL,
+				showBackground: true,
+				backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.8),
+				backgroundPadding: new Cesium.Cartesian2(7, 5),
 				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
 				pixelOffset: new Cesium.Cartesian2(0, -9),
 				disableDepthTestDistance: Number.POSITIVE_INFINITY
