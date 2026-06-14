@@ -36,6 +36,7 @@ async function initGlobe() {
 		infoBox: false,
 		fullscreenButton: false,
 		selectionIndicator: false,
+		orderIndependentTranslucency: false,
 		imageryProvider
 	});
 
@@ -63,13 +64,14 @@ async function initGlobe() {
 			},
 			label: {
 				text: strait.name,
-				font: "600 13px 'IBM Plex Sans'",
-                fillColor: Cesium.Color.WHITE,
-            outlineColor: Cesium.Color.BLACK,
-            outlineWidth: 2,
-            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-            pixelOffset: new Cesium.Cartesian2(0, -12),
+				font: "600 16px 'IBM Plex Sans', sans-serif",
+				fillColor: Cesium.Color.WHITE,
+				style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+				outlineWidth: 3,
+				outlineColor: Cesium.Color.BLACK,
+				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+				pixelOffset: new Cesium.Cartesian2(0, -12),
+				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
 			}
 		});
 

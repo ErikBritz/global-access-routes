@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Malacca | 6 Straits</title>
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<style>
+		/* Status banner */
+		.status-banner {
+			background: rgba(143, 211, 255, 0.06);
+			border: 1px solid rgba(143, 211, 255, 0.18);
+			border-radius: 6px;
+			padding: 8px 16px;
+			font-size: 11px;
+			letter-spacing: 1.6px;
+			text-transform: uppercase;
+			color: var(--accent);
+			margin-bottom: 18px;
+		}
+
+		/* Map + sidebar row */
+		.map-section {
+			display: flex;
+			gap: 16px;
+			margin-bottom: 16px;
+		}
+
+		#map {
+			flex: 3;
+			min-height: 460px;
+			border-radius: 8px;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			z-index: 1;
+		}
+
+		.map-sidebar {
+			flex: 1;
+			min-width: 180px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.map-sidebar h3 {
+			font-family: "Cinzel", serif;
+			font-size: 11px;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			color: var(--ink-soft);
+			margin-bottom: 4px;
+		}
+
+		.landmark-item {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(255, 255, 255, 0.09);
+			border-radius: 6px;
+			padding: 10px 12px;
+			cursor: pointer;
+			transition: border-color 0.2s, background 0.2s;
+			display: flex;
+			flex-direction: column;
+			gap: 3px;
+		}
+
+		.landmark-item:hover {
+			border-color: rgba(143, 211, 255, 0.35);
+			background: rgba(143, 211, 255, 0.06);
+		}
+
+		.landmark-item strong {
+			font-size: 12px;
+			color: var(--ink);
+		}
+
+		.landmark-item span {
+			font-size: 10px;
+			color: var(--ink-soft);
+			letter-spacing: 0.5px;
+			font-family: "IBM Plex Mono", monospace;
+		}
+
+		/* Legend */
+		.legend {
+			display: flex;
+			gap: 20px;
+			flex-wrap: wrap;
+			align-items: center;
+			margin-bottom: 20px;
+			padding: 10px 14px;
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			border-radius: 6px;
+			font-size: 11px;
+			color: var(--ink-soft);
+		}
+
+		.legend-item {
+			display: flex;
+			align-items: center;
+			gap: 7px;
+		}
+
+		.dot {
+			width: 9px;
+			height: 9px;
+			border-radius: 50%;
+			display: inline-block;
+			flex-shrink: 0;
+		}
+
+		.legend-line {
+			display: inline-block;
+			width: 24px;
+			height: 2px;
+			border-radius: 2px;
+			flex-shrink: 0;
+		}
+
+		/* Content grid */
+		.content-grid {
+			display: grid;
+			grid-template-columns: 1fr 300px;
+			gap: 16px;
+			margin-bottom: 24px;
+		}
+
+		.main-column,
+		.sidebar-column {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		/* Cards */
+		.card {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(255, 255, 255, 0.09);
+			border-radius: 10px;
+			padding: 20px 22px;
+		}
+
+		.card h2 {
+			font-family: "Cinzel", serif;
+			font-size: 14px;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			color: var(--accent);
+			margin-bottom: 12px;
+		}
+
+		.card h3 {
+			font-family: "Cinzel", serif;
+			font-size: 12px;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			color: var(--accent);
+			margin-bottom: 10px;
+		}
+
+		.card p {
+			font-size: 13.5px;
+			line-height: 1.75;
+			color: var(--ink-soft);
+		}
+
+		/* Timeline */
+		.timeline {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.timeline-item {
+			font-size: 13px;
+			line-height: 1.65;
+			color: var(--ink-soft);
+			padding-left: 14px;
+			border-left: 2px solid rgba(143, 211, 255, 0.25);
+		}
+
+		.timeline-item strong {
+			color: var(--ink);
+		}
+
+		/* Port list (sidebar card) */
+		.port-list-wrap {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+		}
+
+		.port-item {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 9px 12px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			border-radius: 6px;
+			background: rgba(255, 255, 255, 0.02);
+			cursor: pointer;
+			transition: border-color 0.2s, background 0.2s;
+		}
+
+		.port-item:hover {
+			border-color: rgba(143, 211, 255, 0.3);
+			background: rgba(143, 211, 255, 0.05);
+		}
+
+		.port-item.active {
+			border-color: rgba(143, 211, 255, 0.55);
+			background: rgba(143, 211, 255, 0.08);
+		}
+
+		.port-dot {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			flex-shrink: 0;
+			border: 2px solid rgba(0, 0, 0, 0.4);
+		}
+
+		.port-info {
+			flex: 1;
+			min-width: 0;
+		}
+
+		.port-name {
+			font-size: 12px;
+			font-weight: 500;
+			color: var(--ink);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.port-coords {
+			font-size: 10px;
+			color: var(--ink-soft);
+			letter-spacing: 0.4px;
+			margin-top: 2px;
+		}
+
+		/* Reference table */
+		.reference-table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 12.5px;
+		}
+
+		.table-section-header {
+			display: flex;
+			align-items: baseline;
+			gap: 12px;
+			margin-bottom: 12px;
+		}
+
+		.table-section-header h3 {
+			font-family: "Cinzel", serif;
+			font-size: 13px;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			color: var(--ink);
+		}
+
+		.table-section-header span {
+			font-size: 10px;
+			color: var(--ink-soft);
+			letter-spacing: 1px;
+		}
+
+		.reference-table thead th {
+			background: rgba(255, 255, 255, 0.04);
+			color: var(--ink-soft);
+			font-size: 10px;
+			letter-spacing: 1.4px;
+			text-transform: uppercase;
+			padding: 10px 14px;
+			text-align: left;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			font-weight: 400;
+		}
+
+		.reference-table tbody tr {
+			border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+			cursor: pointer;
+			transition: background 0.15s;
+		}
+
+		.reference-table tbody tr:hover {
+			background: rgba(143, 211, 255, 0.05);
+		}
+
+		.reference-table tbody tr.active {
+			background: rgba(143, 211, 255, 0.08);
+		}
+
+		.reference-table tbody td {
+			padding: 10px 14px;
+			color: var(--ink-soft);
+		}
+
+		.reference-table tbody td:first-child {
+			color: var(--ink);
+			font-family: "IBM Plex Mono", monospace;
+			font-size: 11px;
+		}
+
+		.reference-table td.mono {
+			font-family: "IBM Plex Mono", monospace;
+			font-size: 11px;
+		}
+
+		/* Ocean badges */
+		.side-badge {
+			display: inline-block;
+			font-size: 9.5px;
+			letter-spacing: 0.8px;
+			padding: 2px 7px;
+			border-radius: 3px;
+			text-transform: uppercase;
+		}
+
+		.badge-atlantic {
+			background: rgba(41, 128, 185, 0.18);
+			color: #7ec8e3;
+			border: 1px solid rgba(41, 128, 185, 0.3);
+		}
+
+		.badge-pacific {
+			background: rgba(201, 168, 76, 0.15);
+			color: #d4aa50;
+			border: 1px solid rgba(201, 168, 76, 0.3);
+		}
+
+		/* Leaflet popup overrides */
+		.leaflet-popup-content-wrapper {
+			background: #0d1420;
+			border: 1px solid rgba(143, 211, 255, 0.25);
+			border-radius: 8px;
+			box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+			color: var(--ink);
+			padding: 0;
+			overflow: hidden;
+		}
+
+		.leaflet-popup-content {
+			margin: 0;
+			min-width: 240px;
+		}
+
+		.popup-inner {
+			padding: 12px 14px;
+		}
+
+		.popup-tag {
+			font-size: 9.5px;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			color: var(--accent);
+			margin-bottom: 4px;
+		}
+
+		.popup-name {
+			font-family: "Cinzel", serif;
+			font-size: 13px;
+			color: var(--ink);
+			margin-bottom: 6px;
+		}
+
+		.popup-coord {
+			font-size: 10.5px;
+			color: var(--ink-soft);
+			display: flex;
+			flex-direction: column;
+			gap: 2px;
+		}
+
+		.popup-footer {
+			background: rgba(143, 211, 255, 0.06);
+			border-top: 1px solid rgba(143, 211, 255, 0.12);
+			padding: 8px 14px;
+			font-size: 11.5px;
+			color: var(--ink-soft);
+			line-height: 1.55;
+		}
+
+		.leaflet-popup-tip-container {
+			display: none;
+		}
+
+		.leaflet-popup-close-button {
+			color: var(--ink-soft) !important;
+			font-size: 16px !important;
+		}
+
+		@media (max-width: 900px) {
+			.map-section {
+				flex-direction: column;
+			}
+
+			.content-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="strait-bg" style="background-image: url('svg/malacca.svg');
+			 		filter: brightness(2) opacity(0.1);"></div>
+	<div class="page">
+		<header class="site-header">
+			<div class="site-heading">
+				<h1 class="site-title">Malacca</h1>
+				<p class="site-subtitle">Explore some of the worlds most important straits.</p>
+			</div>
+			<nav class="site-nav">
+				<a href="index.html">Home</a>
+				<a href="hurmuz.html">Hurmuz</a>
+				<a href="bosphorus.html">Bosphorus</a>
+				<a href="bering.html">Bering</a>
+				<a href="suez.html">Suez</a>
+				<a href="panama.html">Panama</a>
+				<a href="malacca.html" class="is-active">Malacca</a>
+			</nav>
+		</header>
+
+		<main class="stage">
+			<section class="globe-wrap">
+				<div class="container">
+
+					<div class="status-banner">
+						Transit Status: Operational — Indian ↔ Pacific Transit Route
+					</div>
+
+					<div class="map-section">
+						<div id="map"></div>
+						<div class="map-sidebar">
+							<h3>Key Ports</h3>
+							<div class="port-list-wrap" id="port-list"></div>
+						</div>
+					</div>
+
+					<div class="legend">
+						<span class="legend-item"><span class="legend-line"
+								style="background:transparent; border-top: 2px dashed #2c3e50;"></span> Strait
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#1f77b4;border:2px solid white;box-shadow:0 0 0 2px #1f77b4;"></span>
+								Port Klang</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#ff7f0e;border:2px solid white;box-shadow:0 0 0 2px #ff7f0e;"></span>
+								Port Dickson</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#2ca02c;border:2px solid white;box-shadow:0 0 0 2px #2ca02c;"></span>
+								Penang</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#d62728;border:2px solid white;box-shadow:0 0 0 2px #d62728;"></span>
+								Sg. Udang</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#9467bd;border:2px solid white;box-shadow:0 0 0 2px #9467bd;"></span>
+								Lumut</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#8c564b;border:2px solid white;box-shadow:0 0 0 2px #8c564b;"></span>
+								Uleelheue</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#e377c2;border:2px solid white;box-shadow:0 0 0 2px #e377c2;"></span>
+								Sg. Pakning</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#7f7f7f;border:2px solid white;box-shadow:0 0 0 2px #7f7f7f;"></span>
+								Kuala Tanjung</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#bcbd22;border:2px solid white;box-shadow:0 0 0 2px #bcbd22;"></span>
+								Dumai</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#17becf;border:2px solid white;box-shadow:0 0 0 2px #17becf;"></span>
+								Blanglancang</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#08306b;border:2px solid white;box-shadow:0 0 0 2px #08306b;"></span>
+								Belawan</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#fd8d3c;border:2px solid white;box-shadow:0 0 0 2px #fd8d3c;"></span>
+								Serangoon</span>
+							<span class="legend-item"><span class="legend-dot"
+									style="background:#006d2c;border:2px solid white;box-shadow:0 0 0 2px #006d2c;"></span>
+								Singapore</span>
+					</div>
+
+					<div class="content-grid">
+						<div class="main-column">
+							<section class="card">
+								<h2>Geographic Context</h2>
+								<p>The Strait of Malacca is one of the world's most strategically vital waterways,
+									running
+									between the <b>Malay Peninsula</b> and the Indonesian island of <b>Sumatra</b> to
+									connect the
+									<b>Indian Ocean</b> (via the Andaman Sea) with the <b>Pacific Ocean</b> (via the
+									South China Sea).
+									Stretching roughly <b>930 kilometres (580 miles)</b>, it provides the shortest
+									maritime route
+									between the Middle East and East Asian markets, eliminating the need for vessels to
+									take
+									lengthy detours through the wider Indonesian archipelago. Unlike a man-made canal,
+									it is a
+									<b>natural funnel-shaped corridor</b> that narrows significantly at its southern
+									end, forcing
+									massive cargo ships to carefully navigate the shallow and highly congested
+									<b>Phillips Channel</b>.
+								</p>
+							</section>
+
+							<section class="card">
+								<h2>Historic Timeline</h2>
+								<div class="timeline">
+									<div class="timeline-item">
+										<strong>15th Century:</strong> The <b>Malacca Sultanate</b> rises to power,
+										transforming
+										the region into an international hub for the lucrative spice trade and drawing
+										merchants
+										from across Asia and the Middle East.
+									</div>
+									<div class="timeline-item">
+										<strong>1511:</strong> The <b>Portuguese Empire</b> captures the city of
+										Malacca, marking
+										the beginning of centuries of European colonial struggle (later involving the
+										Dutch and British)
+										to dominate this critical maritime chokepoint.
+									</div>
+									<div class="timeline-item">
+										<strong>1824:</strong> The <b>Anglo-Dutch Treaty</b> is signed, officially
+										dividing the
+										region's spheres of influence. This established the modern geopolitical borders
+										between
+										Malaysia/Singapore (British) and Indonesia (Dutch) along the strait.
+									</div>
+									<div class="timeline-item">
+										<strong>2004:</strong> In response to surging regional piracy, littoral states
+										launch
+										the <b>MALSINDO</b> coordinated sea patrols (Malaysia, Singapore, Indonesia),
+										significantly
+										enhancing the security of modern commercial shipping routes.
+									</div>
+								</div>
+							</section>
+
+							<section class="card">
+								<h2>Impact on Global Trade</h2>
+								<p>The Strait of Malacca handles approximately <b>25% of all global trade</b> and over
+									<b>80,000 vessel transits annually</b>. It is the primary maritime route connecting
+									the Middle
+									East and Europe to East Asian markets and is critical to the supply chains of
+									<b>crude oil,
+										liquefied natural gas (LNG), and manufactured goods</b>. Any disruption,
+									whether from
+									ship collisions in its narrowest chokepoints, piracy, or geopolitical tensions, has
+									immediate
+									and measurable consequences for global energy security and manufacturing networks.
+								</p>
+							</section>
+						</div>
+
+						<div class="sidebar-column">
+							<section class="card">
+								<h3>Technical Stats</h3>
+								<p>
+									<b>Length:</b> ~930 km (580 mi)<br>
+									<b>Narrowest Point:</b> ~2.8 km (1.7 mi) at Phillips Channel<br>
+									<b>Minimum Depth:</b> ~25 m (82 ft)<br>
+									<b>Daily Transits:</b> ~210–250 vessels<br>
+									<b>Annual Flow:</b> ~80,000–94,000 vessels/yr
+								</p>
+							</section>
+
+							<section class="card">
+								<h3>Strategic Importance</h3>
+								<p>The Strait of Malacca serves as the <b>vital maritime artery</b> of the Indo-Pacific.
+									Its geographical position dictates Middle Eastern energy exports, intra-Asian
+									manufacturing networks, and global commercial shipping routes. Nations like
+									<b>China,
+										Japan, and South Korea</b> rely heavily on this passage for the vast majority of
+									their energy imports, making the strait's security and navigational freedom a
+									profound
+									geopolitical imperative.
+								</p>
+							</section>
+						</div>
+					</div>
+
+					<div class="table-section-header">
+						<h3>Port Coordinates Reference</h3>
+						<span>WGS 84 datum</span>
+					</div>
+					<table class="reference-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Port / Location</th>
+								<th>Ocean Side</th>
+								<th>Latitude</th>
+								<th>Longitude</th>
+								<th>Elevation</th>
+							</tr>
+						</thead>
+						<tbody id="table-body"></tbody>
+					</table>
+
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+
+			const ports = [
+				{
+					name: "Port Klang",
+					short: "Port Klang",
+					lat: 2.972594826,
+					lng: 101.3403063,
+					ocean: "Pacific",
+					color: "#36b295",
+					desc: "Malaysia's primary commercial gateway. Top industries: Mineral and Vegetable Products.",
+				},
+				{
+					name: "Port Dickson",
+					short: "Port Dickson",
+					lat: 2.549916819,
+					lng: 101.7895789,
+					ocean: "Pacific",
+					color: "#c9a84c",
+					desc: "Key Malaysian maritime hub focusing heavily on tanker traffic and mineral products.",
+				},
+				{
+					name: "Penang",
+					short: "Penang",
+					lat: 5.379749741,
+					lng: 100.3899815,
+					ocean: "Pacific",
+					color: "#b85c38",
+					desc: "Major northern port handling high volumes of machinery and electrical equipment.",
+				},
+				{
+					name: "Pelabuhan Sungai Udang",
+					short: "Sg. Udang",
+					lat: 2.263627014,
+					lng: 102.1357975,
+					ocean: "Pacific",
+					color: "#2980b9",
+					desc: "Specialized industrial port handling mineral and chemical products exclusively via tankers.",
+				},
+				{
+					name: "Lumut",
+					short: "Lumut",
+					lat: 4.227365727,
+					lng: 100.6433762,
+					ocean: "Pacific",
+					color: "#a40e7e",
+					desc: "Handles substantial dry bulk commodities along the west coast of Peninsular Malaysia.",
+				},
+				{
+					name: "Uleelheue",
+					short: "Uleelheue",
+					lat: 5.59637662,
+					lng: 95.52598222,
+					ocean: "Pacific",
+					color: "#16a085",
+					desc: "Located at the northwestern tip of Sumatra, Indonesia, bordering the gateway to the Strait.",
+				},
+				{
+					name: "Sungai Pakning",
+					short: "Sg. Pakning",
+					lat: 1.348263696,
+					lng: 102.1578799,
+					ocean: "Pacific",
+					color: "#27ae60",
+					desc: "Indonesian anchorage port managing regional oil and gas maritime transit traffic.",
+				},
+				{
+					name: "Kuala Tanjung",
+					short: "Kuala Tanjung",
+					lat: 3.372062986,
+					lng: 99.45586143,
+					ocean: "Pacific",
+					color: "#2c3e50",
+					desc: "Developing industrial deep-sea port on the Sumatran coast of the Malacca Strait.",
+				},
+				{
+					name: "Dumai",
+					short: "Dumai",
+					lat: 1.717388504,
+					lng: 101.4188235,
+					ocean: "Pacific",
+					color: "#d35400",
+					desc: "Major Indonesian export node for mineral products, chemicals, and palm oil assets.",
+				},
+				{
+					name: "Blanglancang",
+					short: "Blanglancang",
+					lat: 5.230939806,
+					lng: 97.06571881,
+					ocean: "Pacific",
+					color: "#8e44ad",
+					desc: "Sumatran port mainly serving energy sectors, liquid bulk tankers, and mineral operations.",
+				},
+				{
+					name: "Belawan",
+					short: "Belawan",
+					lat: 3.78854271,
+					lng: 98.70736598,
+					ocean: "Pacific",
+					color: "#f39c12",
+					desc: "Indonesia's busiest port outside of Java, acting as a crucial link for agricultural exports.",
+				},
+				{
+					name: "Serangoon Harbor",
+					short: "Serangoon",
+					lat: 1.358261773,
+					lng: 104.0345309,
+					ocean: "Pacific",
+					color: "#7f8c8d",
+					desc: "Singaporean harbor handling significant localized vessel traffic, dominated by mineral and chemical transport.",
+				},
+				{
+					name: "Singapore",
+					short: "Singapore",
+					lat: 1.271989257,
+					lng: 103.7074816,
+					ocean: "Pacific",
+					color: "#e74c3c",
+					desc: "Global mega-hub accounting for over 95% of Singapore's maritime trade. Massive container and tanker traffic.",
+				}
+			];
+
+			// 1. Updated coordinate array representing the Malacca Strait shipping route
+			const straitRoute = [
+				[5.9000, 95.3000],  // Andaman Sea Entrance
+				[5.4000, 98.5000],
+				[4.5000, 99.8000],
+				[3.8000, 100.5000],
+				[2.9000, 101.1000], // Passing Port Klang
+				[2.3000, 101.6000],
+				[1.8000, 102.3000], // Passing Dumai
+				[1.3000, 103.2000],
+				[1.1500, 103.6000], // Phillips Channel (narrowest point)
+				[1.2000, 103.8500], // Singapore Strait
+				[1.3000, 104.3000]  // South China Sea Exit
+			];
+
+			// Init map focused on the wider region
+			const map = L.map('map', {
+				center: [3.5, 100.0],
+				zoom: 5,
+				zoomControl: true,
+			});
+
+			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+				attribution: '&copy; CARTO',
+				subdomains: 'abcd',
+				maxZoom: 15,
+			}).addTo(map);
+
+			const routeLine = L.polyline(straitRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+
+			function makeIcon(color) {
+				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
+              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
+              <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
+            </svg>`;
+				return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
+			}
+
+			const markers = [];
+
+			ports.forEach(function (port, i) {
+				const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.color) }).addTo(map);
+				marker.bindPopup(
+					`<div class="popup-inner">
+                <p class="popup-tag">Port ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-name">${port.name}</p>
+                <div class="popup-coord">
+                  <span>Lat: <strong>${port.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(port.lng).toFixed(4)}° E</strong></span>
+                </div>
+              </div>
+              <div class="popup-footer">${port.desc}</div>`,
+					{ maxWidth: 280 }
+				);
+				markers.push(marker);
+
+				// Sidebar port item
+				const item = document.createElement('div');
+				item.className = 'port-item';
+				item.innerHTML = `
+              <span class="port-dot" style="background:${port.color};"></span>
+              <div class="port-info">
+                <div class="port-name">${port.short}</div>
+                <div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° E</div>
+              </div>`;
+				item.addEventListener('click', function () { focusPort(i); });
+				document.getElementById('port-list').appendChild(item);
+
+				// Table row
+				const badgeHtml = port.ocean === 'Atlantic'
+					? '<span class="side-badge badge-atlantic">Atlantic</span>'
+					: '<span class="side-badge badge-pacific">Pacific</span>';
+
+				const row = document.createElement('tr');
+				row.innerHTML = `
+              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
+              <td>${port.name}</td>
+              <td>${badgeHtml}</td>
+              <td class="mono">${port.lat.toFixed(4)}° N</td>
+              <td class="mono">${Math.abs(port.lng).toFixed(4)}° E</td>
+              <td class="mono">-</td>`; // Removed undefined 'elev' variable 
+				row.addEventListener('click', function () { focusPort(i); });
+				document.getElementById('table-body').appendChild(row);
+			});
+
+			function focusPort(i) {
+				document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+				document.querySelectorAll('#table-body tr').forEach(el => el.classList.remove('active'));
+				document.querySelectorAll('.port-item')[i].classList.add('active');
+				document.querySelectorAll('#table-body tr')[i].classList.add('active');
+				map.flyTo([ports[i].lat, ports[i].lng], 10, { duration: 1.2 });
+				setTimeout(() => markers[i].openPopup(), 1300);
+			}
+
+			window.flyToLocation = function (coords, zoom) {
+				map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
+			};
+
+			// 2. Map container constraints & sizing fixes
+			map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
+
+			// Robust observer to catch any flex/grid container resizing and load missing grey tiles
+			const mapContainer = document.getElementById('map');
+			const resizeObserver = new ResizeObserver(() => {
+				map.invalidateSize();
+			});
+			resizeObserver.observe(mapContainer);
+
+			// Fallback invalidation on initial load
+			setTimeout(() => {
+				map.invalidateSize();
+			}, 250);
+		});
+	</script>
+</body>
+
+</html>
