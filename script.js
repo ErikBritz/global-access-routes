@@ -191,6 +191,10 @@ async function initGlobe() {
 		globalLink.addEventListener("click", (e) => {
 			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 			e.preventDefault();
+
+			autoRotate = false;
+        clearTimeout(dragTimeout);
+
 			listEl.querySelectorAll(".strait-link").forEach((el) => el.classList.remove("is-active"));
 			globalLink.classList.add("is-active");
 			flyToGlobal();
@@ -205,6 +209,10 @@ async function initGlobe() {
 			link.addEventListener("click", (e) => {
 				if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 				e.preventDefault();
+
+				autoRotate = false;
+            clearTimeout(dragTimeout);
+			
 				listEl.querySelectorAll(".strait-link").forEach((el) => el.classList.remove("is-active"));
 				link.classList.add("is-active");
 				flyToStrait(strait.id);
