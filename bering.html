@@ -58,17 +58,51 @@
                                 <h2>Historic Timeline</h2>
                                 <div class="timeline">
                                     <div class="timeline-item">
-                                        <strong>Cold War Era:</strong> Known as the "Ice Curtain", the strait served as a completely closed border between the Soviet Union and the US, with absolutely no air or boat traffic permitted.
+                                        <strong>The Land Bridge:</strong> During the Ice Age, dropping sea levels created a land bridge that allowed the first human migration from Asia into North America.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>2010–2019:</strong> The previous decade saw an annual average of 338 ships navigating the corridor.
+                                        <strong>1728 (First Exploration):</strong> Vitus Bering sailed through the strait, proving Asia and North America were separate continents. For centuries, thick ice made the region mostly impassable.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>2020–2023:</strong> Data indicates a surge in accessibility, with an annual average of 576 large vessels transiting the strait.
+                                        <strong>Cold War Era:</strong> Known as the "Ice Curtain," the strait was a completely closed, heavily militarized border between the Soviet Union and the United States.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>2023:</strong> Recorded the highest annual ship count to date, reaching 681 vessels.
+                                        <strong>21st Century (The Melt):</strong> Melting Arctic sea ice is transforming the Bering Strait into a viable global shipping corridor, steadily increasing maritime traffic.
                                     </div>
+                                </div>
+                            </section>
+
+                            <section class="card">
+                                <h2>Evolution of Bering Strait Transits (2010–2024)</h2>
+                                 <p>Based on AIS data from the Marine Exchange of Alaska, total annual ship transits have grown significantly over the last decade. This chart illustrates the overall volume of maritime traffic, climbing from just 242 vessels in 2010 to a peak of 681 in 2023, reflecting the increasing physical accessibility of the Arctic corridor.</p>
+    
+                                 <div style="width: 100%; aspect-ratio: 2 / 1; display: block;">
+                                   <svg viewBox="0 0 600 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            
+                                        <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                                        <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
+                                        <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
+
+                                        <text x="30" y="254" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">0</text>
+                                        <text x="30" y="154" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">400</text>
+                                        <text x="30" y="54" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">800</text>
+
+                                        <text x="40" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2010</text>
+                                        <text x="233" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2015</text>
+                                        <text x="426" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2020</text>
+                                        <text x="580" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2024</text>
+
+                                        <polyline points="40,189.5 78.6,190.25 117.1,171 155.7,164 194.3,186.25 233,137 271.4,165 310,160 348.6,160.5 387.1,130.75 426,110.75 464.3,111.25 502.9,122.75 541.4,79.75 580,83.75" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linejoin="round" />
+
+                                        <circle cx="40" cy="189.5" r="4" fill="#fbbf24"/>
+                                        <circle cx="233" cy="137" r="4" fill="#fbbf24"/>
+                                        <circle cx="426" cy="110.75" r="4" fill="#fbbf24"/>
+                                        <circle cx="541.4" cy="79.75" r="4" fill="#fbbf24"/>
+                                        <circle cx="580" cy="83.75" r="4" fill="#fbbf24"/>
+
+                                        <rect x="40" y="10" width="12" height="4" fill="#fbbf24" rx="2" />
+                                        <text x="60" y="17" fill="#e5e8ee" font-size="11" font-family="'IBM Plex Mono', monospace">Total Annual Transits</text>
+                                    </svg>
                                 </div>
                             </section>
                         </div>
@@ -78,7 +112,7 @@
                                 <h3>Technical Stats</h3>
                                 <p>
                                     <b>Narrowest Point:</b> 82 km<br>
-                                    <b>Annual Transits (Avg 20-23):</b> 576 vessels <br>
+                                    <b>Avg. Annual Transits 2020-2024:</b> 594 vessels <br>
                                     <b>Peak Annual Transits:</b> 681 (2023) <br>
                                     <b>Daily Transits:</b> 3 to 8 vessels (ice-free season) 
                                 </p>
@@ -96,10 +130,13 @@
         </main>
 
         <footer class="site-footer">
-			<p>Data Sources: Map tiles by CARTO (CC-BY 4.0); Navigation vectors via OpenStreetMap (ODbL); 
-        		IMF PortWatch data is used in accordance with the IMF Copyright and Usage Terms.
-   			 </p>
-		</footer>
+            <p>
+            Data Sources: Map tiles by CARTO (CC-BY 4.0); Navigation vectors via OpenStreetMap (ODbL); 
+            Transit statistics from Marine Exchange of Alaska / ArcticWatch (Educational Use); 
+            Thematic context from Encyclopaedia Britannica (Educational Use);
+            Sea ice context from National Snow and Ice Data Center (Educational Use).
+            </p>
+        </footer>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

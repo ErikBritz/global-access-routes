@@ -51,31 +51,33 @@
                         <div class="main-column">
                             <section class="card">
                                 <h2>Geographic Context</h2>
-                                <p>The Suez Canal is a critical global artery responsible for handling 10-15% of global trade. Extending south from the canal, maritime traffic must pass through the Bab-El-Mandeb strait (the "Gate of Tears") to reach the Indian Ocean. The closure or restriction of the Bab-El-Mandeb Strait prevents tankers originating in the Persian Gulf from transiting the Suez Canal or reaching the SUMED Pipeline.</p>
+                                <p>The Suez Canal and the Red Sea are two of the world's most important maritime routes, accounting for 10% of global trade and 12% of oil shipments worldwide. 
+                                    Southbound traffic must pass through the 26-kilometre-wide Bab-el-Mandeb Strait, also known as the 'Gate of Tears', to reach the Indian Ocean. 
+                                    As this route is integral to global supply chains, any military or physical blockage instantly cuts off the main shipping route between Europe and Asia.
+                                     This forces global shipping to find alternative routes.</p>
                             </section>
 
                             <section class="card">
                                 <h2>Historic Timeline</h2>
                                 <div class="timeline">
                                     <div class="timeline-item">
-                                        <strong>March 2021:</strong> The <em>Ever Given</em> container ship runs aground, blocking the canal entirely and spotlighting how fragile global supply chains are.
+                                        <strong>March 2021 (The Physical Blockage):</strong> The <em>Ever Given</em> container ship runs aground, blocking the canal entirely. This proved how easily a single physical event can disrupt global supply chains.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>Present:</strong> Escalating Houthi attacks in the Red Sea have resulted in a situation where accessibility is under threat.  
+                                        <strong>Present (The Security Blockage):</strong> Escalating Houthi militant attacks on vessels in the Bab-el-Mandeb Strait have turned the region into an active conflict zone. This effectively compromises the safety of the corridor.  
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>Rerouting Impact:</strong> To avoid the conflict zone, maritime vessels are forced to divert around the southern tip of Africa via the Cape of Good Hope, adding 10 or more days to delivery times.
+                                        <strong>The Rerouting Solution:</strong> To ensure crew and cargo safety, major shipping lines assess security risks dynamically. They reroute vessels around the southern tip of Africa via the Cape of Good Hope when security while transiting the Red Sea cannot be guaranteed.
                                     </div>
                                 </div>
                             </section>
 
                             <section class="card">
                                 <h2>Cape of Good Hope Rerouting Impact</h2>
-                                 <p style="margin-bottom: 20px; font-size: 12px;">As security threats in the Red Sea escalate, major global shipping lines are forced to reroute their ships dynamically to avoid active conflict zones. This seven-day moving average (in million tons) illustrates the relationship between the decline in Red Sea transits and the corresponding increase in the number of vessels taking the lengthy and expensive detour around Africa's Cape of Good Hope.</p>
+                                <p>This sudden shift from the Suez Canal to the African detour is clearly visible in the data. The seven-day moving average (in million tons) below illustrates the relationship: as Red Sea transits decrease due to security threats, the cargo volume taking the lengthy Cape of Good Hope detour increases.</p>
     
                                  <div style="width: 100%; aspect-ratio: 2 / 1; display: block;">
                                    <svg viewBox="0 0 600 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            
                                         <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
                                         <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
                                         <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
@@ -107,11 +109,6 @@
 
                         <div class="sidebar-column">
                             <section class="card">
-                                <h3>Impact on Global Trade</h3>
-                                <p>The difference in accessibility between the Suez route and the alternative Cape of Good Hope route has a severe spillover effect on national economies. The increased distance of the voyage significantly raises transit times and maritime fuel costs, as well as causing massive spikes in insurance premiums, thereby driving global inflation.</p>
-                            </section>
-                            
-                            <section class="card">
                                 <h3>Technical Stats</h3>
                                 <p>
                                     <b>Canal Length:</b> ~193 km<br>
@@ -119,6 +116,15 @@
                                     <b>Global Trade Flow:</b> 10-15%<br>
                                     <b>Rerouting Delay:</b> +10 Days
                                 </p>
+                            </section>
+
+                            <section class="card">
+                                <h3>Strategic Importance</h3>
+                                    <p>Forcing vessels to take the massive detour around the Cape of Good Hope has severe effects on national economies. 
+                                        Adding 10 or more days to a voyage increases fuel consumption and disrupts port schedules. 
+                                        It also causes significant increases in war-risk insurance premiums. 
+                                        All of these factors act as direct drivers of global inflation.
+                                    </p>
                             </section>
                         </div>
                     </div>
@@ -128,10 +134,10 @@
 
         <footer class="site-footer">
             <p>Data Sources: Map tiles by CARTO (CC-BY 4.0); Navigation vectors via OpenStreetMap (ODbL); 
-            IMF PortWatch data is used in accordance with the IMF Copyright and Usage Terms; 
-             Trade disruption analysis & data via CEPR / VoxEU (CC BY 4.0).
+            Transit statistics from: IMF PortWatch (Educational Use); 
+            Thematic context from: CEPR / VoxEU (CC-BY 4.0).
              </p>
-</footer>
+        </footer>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -141,7 +147,7 @@
                 { name: "Port Said", short: "Port Said", lat: 31.2653, lng: 32.3019, region: "Mediterranean", color: "#f39c12", desc: "Northern terminus of the Suez Canal." },
                 { name: "Suez Port", short: "Suez Port", lat: 29.9668, lng: 32.5498, region: "Red Sea", color: "#f39c12", desc: "Southern terminus of the Suez Canal opening into the Gulf of Suez." },
                 { name: "Bab-El-Mandeb", short: "Bab-El-Mandeb", lat: 12.5833, lng: 43.3333, region: "Chokepoint", color: "#8e44ad", desc: "The narrowest point connecting the Red Sea to the Gulf of Aden." },
-                { name: "Port of Djibouti", short: "Port of Djibouti", lat: 11.6041, lng: 43.1456, region: "Gulf of Aden", color: "#f39c12", desc: "Critical staging and security hub just south of the chokepoint." }
+                { name: "Port of Djibouti", short: "Port of Djibouti", lat: 11.6041, lng: 43.1456, region: "Gulf of Aden", color: "#f39c12", desc: "Critical staging and security port just south of the chokepoint." }
             ];
 
             const routePoints = [
