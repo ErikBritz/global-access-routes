@@ -37,15 +37,14 @@
                     <div class="map-section">
                         <div id="map"></div>
                         <div class="map-sidebar">
-                            <h3>Strategic Nodes</h3>
+                            <h3 style="margin-bottom: 5px;">Strategic Nodes</h3>
+                            <div style="font-size: 12px; margin-bottom: 15px; display: flex; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; color: #aab1c0;">
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #f39c12;"></span> Ports</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #8e44ad;"></span> Chokepoint</span>
+                            </div>
+                            
                             <div class="port-list-wrap" id="port-list"></div>
                         </div>
-                    </div>
-
-                    <div class="legend">
-                        <span class="legend-item"><span class="legend-line" style="background:transparent; border-top: 2px dashed #e74c3c;"></span> Red Sea Corridor</span>
-                        <span class="legend-item"><span class="dot" style="background:#f39c12; border:2px solid white; box-shadow:0 0 0 2px #f39c12;"></span> Canal Infrastructure</span>
-                        <span class="legend-item"><span class="dot" style="background:#8e44ad; border:2px solid white; box-shadow:0 0 0 2px #8e44ad;"></span> Chokepoint</span>
                     </div>
 
                     <div class="content-grid">
@@ -123,23 +122,6 @@
                             </section>
                         </div>
                     </div>
-
-                    <div class="table-section-header">
-                        <h3>Strategic Nodes Reference</h3>
-                    </div>
-                    <table class="reference-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Location</th>
-                                <th>Region</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body"></tbody>
-                    </table>
-
                 </div>
             </section>
         </main>
@@ -158,43 +140,46 @@
             const nodes = [
                 { name: "Port Said", short: "Port Said", lat: 31.2653, lng: 32.3019, region: "Mediterranean", color: "#f39c12", desc: "Northern terminus of the Suez Canal." },
                 { name: "Suez Port", short: "Suez Port", lat: 29.9668, lng: 32.5498, region: "Red Sea", color: "#f39c12", desc: "Southern terminus of the Suez Canal opening into the Gulf of Suez." },
-                { name: "Bab-El-Mandeb", short: "Gate of Tears", lat: 12.5833, lng: 43.3333, region: "Chokepoint", color: "#8e44ad", desc: "The narrowest point connecting the Red Sea to the Gulf of Aden." },
-                { name: "Port of Djibouti", short: "Djibouti", lat: 11.6041, lng: 43.1456, region: "Gulf of Aden", color: "#f39c12", desc: "Critical staging and security hub just south of the chokepoint." }
+                { name: "Bab-El-Mandeb", short: "Bab-El-Mandeb", lat: 12.5833, lng: 43.3333, region: "Chokepoint", color: "#8e44ad", desc: "The narrowest point connecting the Red Sea to the Gulf of Aden." },
+                { name: "Port of Djibouti", short: "Port of Djibouti", lat: 11.6041, lng: 43.1456, region: "Gulf of Aden", color: "#f39c12", desc: "Critical staging and security hub just south of the chokepoint." }
             ];
 
             const routePoints = [
-    // [ Segment 1: Mediterranean Approach (Shifted East for a perfect center-channel entry) ]
-    [
-        [31.6000, 32.4800],  // Outer Mediterranean (Pushed further East)
-        [31.3500, 32.3800],  // Aligning with the outer buoys
-        [31.2900, 32.3450],  // The exact center between Port Said and Port Fouad breakwaters
-        [31.2750, 32.3280],  // Safely inside the harbor limits
-        [31.2650, 32.3180]   // Terminates precisely at the Port Said Node
-    ],
-    
-    // [ Segment 2: Red Sea Exit & Extension (Through Bab-el-Mandeb, past Djibouti) ]
-    [
-        [29.9300, 32.5550],  // Begins precisely at the Suez Port Node
-        [29.0000, 32.8500],  // Mid-Gulf of Suez
-        [28.2000, 33.3000],  // Approaching the Strait of Gubal
-        [27.4000, 34.1500],  // Safely east of Shadwan Island
-        [26.8000, 34.5000],  // Safely east of Jazā'ir Jiftūn
-        [25.5000, 35.3000],  // Open Red Sea (Northern sector)
-        [21.5000, 38.0000],  // Open Red Sea (Central sector, off Jeddah)
-        [17.5000, 40.2000],  // Open Red Sea (Southern sector)
-        [14.0000, 42.5000],  // Approaching the Bab-el-Mandeb bottleneck
-        [12.6500, 43.3500],  // Threading the Bab-el-Mandeb Strait perfectly
-        [11.8000, 44.2000],  // Clearing the Horn of Africa, passing Djibouti
-        [11.5000, 45.5000]   // Exiting into the Gulf of Aden shipping lanes
-    ]
-];
+                // [ Segment 1: Mediterranean Approach (Shifted East for a perfect center-channel entry) ]
+                [
+                    [31.6000, 32.4800],  // Outer Mediterranean (Pushed further East)
+                    [31.3500, 32.3800],  // Aligning with the outer buoys
+                    [31.2900, 32.3450],  // The exact center between Port Said and Port Fouad breakwaters
+                    [31.2750, 32.3280],  // Safely inside the harbor limits
+                    [31.2650, 32.3180]   // Terminates precisely at the Port Said Node
+                ],
+                
+                // [ Segment 2: Red Sea Exit & Extension (Through Bab-el-Mandeb, past Djibouti) ]
+                [
+                    [29.9300, 32.5550],  // Begins precisely at the Suez Port Node
+                    [29.0000, 32.8500],  // Mid-Gulf of Suez
+                    [28.2000, 33.3000],  // Approaching the Strait of Gubal
+                    [27.4000, 34.1500],  // Safely east of Shadwan Island
+                    [26.8000, 34.5000],  // Safely east of Jazā'ir Jiftūn
+                    [25.5000, 35.3000],  // Open Red Sea (Northern sector)
+                    [21.5000, 38.0000],  // Open Red Sea (Central sector, off Jeddah)
+                    [17.5000, 40.2000],  // Open Red Sea (Southern sector)
+                    [14.0000, 42.5000],  // Approaching the Bab-el-Mandeb bottleneck
+                    [12.6500, 43.3500],  // Threading the Bab-el-Mandeb Strait perfectly
+                    [11.8000, 44.2000],  // Clearing the Horn of Africa, passing Djibouti
+                    [11.5000, 45.5000]   // Exiting into the Gulf of Aden shipping lanes
+                ]
+            ];
+
             const map = L.map('map', { center: [21.5, 38.0], zoom: 4, zoomControl: true });
 
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 15,
             }).addTo(map);
 
-           const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+           const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' })
+                .bindPopup('<div style="text-align:center; padding: 5px;"><strong>Red Sea Corridor</strong><br><span style="font-size:11px; opacity:0.8;">Mediterranean ↔ Gulf of Aden</span></div>')
+                .addTo(map);
 
             function makeIcon(color) {
                 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
@@ -206,7 +191,7 @@
 
             const markers = [];
 
-            nodes.forEach(function (node, i) {
+           nodes.forEach(function (node, i) {
                 const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.color) }).addTo(map);
                 marker.bindPopup(
                     `<div class="popup-inner">
@@ -233,23 +218,15 @@
                 item.addEventListener('click', function () { focusNode(i); });
                 document.getElementById('port-list').appendChild(item);
 
-                const badgeClass = node.region === 'Chokepoint' ? 'badge-atlantic' : 'badge-pacific';
-                const row = document.createElement('tr');
-                row.innerHTML = `
-              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
-              <td>${node.name}</td>
-              <td><span class="side-badge ${badgeClass}">${node.region}</span></td>
-              <td class="mono">${node.lat.toFixed(4)}° N</td>
-              <td class="mono">${Math.abs(node.lng).toFixed(4)}° E</td>`;
-                row.addEventListener('click', function () { focusNode(i); });
-                document.getElementById('table-body').appendChild(row);
+                // Table row generation removed entirely
             });
 
             function focusNode(i) {
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
-                document.querySelectorAll('#table-body tr').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
-                document.querySelectorAll('#table-body tr')[i].classList.add('active');
+                
+                // Table active state logic removed
+                
                 map.flyTo([nodes[i].lat, nodes[i].lng], 8, { duration: 1.2 });
                 setTimeout(() => markers[i].openPopup(), 1300);
             }
