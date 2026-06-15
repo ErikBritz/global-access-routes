@@ -4,9 +4,16 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Malacca | 6 Straits</title>
+	<title>Panama | 6 Straits</title>
 	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
+
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
+
+	<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+	<script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
 </head>
 
 <body>
@@ -55,7 +62,7 @@
 									connect the
 									<b>Indian Ocean</b> (via the Andaman Sea) with the <b>Pacific Ocean</b> (via the
 									South China Sea).
-									Stretching roughly <b>930 kilometres (580 miles)</b>, it provides the shortest
+									Stretching roughly <b>930 kilometres</b>, it provides the shortest
 									maritime route
 									between the Middle East and East Asian markets, eliminating the need for vessels to
 									take
@@ -106,8 +113,8 @@
 								<h2>Impact on Global Trade</h2>
 								<p>The Strait of Malacca handles approximately <b>25% of all global trade</b> and over
 									<b>80,000 vessel transits annually</b>. It is the primary maritime route connecting
-									the Middle
-									East and Europe to East Asian markets and is critical to the supply chains of
+									the Middle East and Europe to East Asian markets and is critical to the supply
+									chains of
 									<b>crude oil,
 										liquefied natural gas (LNG), and manufactured goods</b>. Any disruption,
 									whether from
@@ -155,7 +162,6 @@
 		</main>
 	</div>
 
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 
@@ -301,10 +307,44 @@
 				zoomControl: true,
 			});
 
-			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-				attribution: '&copy; CARTO',
-				subdomains: 'abcd',
-				maxZoom: 15,
+			// --- Pane setup styling and preparation for each layer in basemap---
+			map.createPane('esriBase');
+			map.getPane('esriBase').style.zIndex = '200';
+			map.getPane('esriBase').style.opacity = '1';
+
+			map.createPane('esriSatellite');
+			map.getPane('esriSatellite').style.zIndex = '300';
+			map.getPane('esriSatellite').style.opacity = '0.55';
+			map.getPane('esriSatellite').style.pointerEvents = 'none';
+
+			map.createPane('esriDetail');
+			map.getPane('esriDetail').style.zIndex = '350';
+			map.getPane('esriDetail').style.opacity = '0.15';
+			map.getPane('esriDetail').style.pointerEvents = 'none';
+
+			map.createPane('esriLabels');
+			map.getPane('esriLabels').style.zIndex = '450';
+			map.getPane('esriLabels').style.pointerEvents = 'none';
+
+			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+				pane: 'esriBase',
+				attribution: 'Cooper Thomas',
+			}).addTo(map);
+
+			L.esri.tiledMapLayer({
+				url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+				pane: 'esriSatellite',
+				attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+			}).addTo(map);
+
+			L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+				pane: 'esriDetail',
+				attribution: 'John Nelson',
+			}).addTo(map);
+
+			L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+				pane: 'esriLabels',
+				attribution: '&copy; Esri',
 			}).addTo(map);
 
 			const routeLine = L.polyline(straitRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
