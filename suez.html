@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suez & Bab-El-Mandeb | 6 Straits</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
+
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
 </head>
+
 <body>
     <div class="strait-bg" style="background-image: url('svg/suez.svg'); filter: brightness(2) opacity(0.05);"></div>
     <div class="page">
@@ -39,11 +48,14 @@
                         <div class="map-sidebar">
                             <h3>Strategic Nodes</h3>
                             <div class="sidebar-legend">
-                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon" alt="Entry"> Entry/Exit</span>
-                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port"> Ports</span>
-                                <span class="legend-label"><img src="iconpack/choke.svg" class="legend-icon" alt="Chokepoint"> Chokepoint</span>
+                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon"
+                                        alt="Entry"> Entry/Exit</span>
+                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port">
+                                    Ports</span>
+                                <span class="legend-label"><img src="iconpack/choke.svg" class="legend-icon"
+                                        alt="Chokepoint"> Chokepoint</span>
                             </div>
-                            
+
                             <div class="port-list-wrap" id="port-list"></div>
                         </div>
                     </div>
@@ -52,57 +64,86 @@
                         <div class="main-column">
                             <section class="card">
                                 <h2>Geographic Context</h2>
-                                <p>The Suez Canal and the Red Sea are two of the world's most important maritime routes, accounting for 10% of global trade and 12% of oil shipments worldwide. 
-                                    Southbound traffic must pass through the 26-kilometre-wide Bab-el-Mandeb Strait, also known as the 'Gate of Tears', to reach the Indian Ocean. 
-                                    As this route is integral to global supply chains, any military or physical blockage instantly cuts off the main shipping route between Europe and Asia.
-                                     This forces global shipping to find alternative routes.</p>
+                                <p>The Suez Canal and the Red Sea are two of the world's most important maritime routes,
+                                    accounting for 10% of global trade and 12% of oil shipments worldwide.
+                                    Southbound traffic must pass through the 26-kilometre-wide Bab-el-Mandeb Strait,
+                                    also known as the 'Gate of Tears', to reach the Indian Ocean.
+                                    As this route is integral to global supply chains, any military or physical blockage
+                                    instantly cuts off the main shipping route between Europe and Asia.
+                                    This forces global shipping to find alternative routes.</p>
                             </section>
 
                             <section class="card">
                                 <h2>Historic Timeline</h2>
                                 <div class="timeline">
                                     <div class="timeline-item">
-                                        <strong>March 2021 (The Physical Blockage):</strong> The <em>Ever Given</em> container ship runs aground, blocking the canal entirely. This proved how easily a single physical event can disrupt global supply chains.
+                                        <strong>March 2021 (The Physical Blockage):</strong> The <em>Ever Given</em>
+                                        container ship runs aground, blocking the canal entirely. This proved how easily
+                                        a single physical event can disrupt global supply chains.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>Present (The Security Blockage):</strong> Escalating Houthi militant attacks on vessels in the Bab-el-Mandeb Strait have turned the region into an active conflict zone. This effectively compromises the safety of the corridor.  
+                                        <strong>Present (The Security Blockage):</strong> Escalating Houthi militant
+                                        attacks on vessels in the Bab-el-Mandeb Strait have turned the region into an
+                                        active conflict zone. This effectively compromises the safety of the corridor.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>The Rerouting Solution:</strong> To ensure crew and cargo safety, major shipping lines assess security risks dynamically. They reroute vessels around the southern tip of Africa via the Cape of Good Hope when security while transiting the Red Sea cannot be guaranteed.
+                                        <strong>The Rerouting Solution:</strong> To ensure crew and cargo safety, major
+                                        shipping lines assess security risks dynamically. They reroute vessels around
+                                        the southern tip of Africa via the Cape of Good Hope when security while
+                                        transiting the Red Sea cannot be guaranteed.
                                     </div>
                                 </div>
                             </section>
 
                             <section class="card">
                                 <h2>Cape of Good Hope Rerouting Impact</h2>
-                                <p>This sudden shift from the Suez Canal to the African detour is clearly visible in the data. The seven-day moving average (in million tons) below illustrates the relationship: as Red Sea transits decrease due to security threats, the cargo volume taking the lengthy Cape of Good Hope detour increases.</p>
-    
-                                 <div style="width: 100%; aspect-ratio: 2 / 1; display: block;">
-                                   <svg viewBox="0 0 600 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-                                        <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
-                                        <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
+                                <p>This sudden shift from the Suez Canal to the African detour is clearly visible in the
+                                    data. The seven-day moving average (in million tons) below illustrates the
+                                    relationship: as Red Sea transits decrease due to security threats, the cargo volume
+                                    taking the lengthy Cape of Good Hope detour increases.</p>
 
-                                        <text x="30" y="254" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">0</text>
-                                        <text x="30" y="154" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">4</text>
-                                        <text x="30" y="54" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">8</text>
+                                <div style="width: 100%; aspect-ratio: 2 / 1; display: block;">
+                                    <svg viewBox="0 0 600 300" width="100%" height="100%"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)"
+                                            stroke-width="1" />
+                                        <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)"
+                                            stroke-width="1" stroke-dasharray="4 4" />
+                                        <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)"
+                                            stroke-width="1" stroke-dasharray="4 4" />
 
-                                        <text x="40" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">Jan '23</text>
-                                        <text x="310" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">Dec '23</text>
-                                        <text x="580" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">Mar '24</text>
+                                        <text x="30" y="254" fill="#aab1c0" font-size="11" text-anchor="end"
+                                            font-family="'IBM Plex Mono', monospace">0</text>
+                                        <text x="30" y="154" fill="#aab1c0" font-size="11" text-anchor="end"
+                                            font-family="'IBM Plex Mono', monospace">4</text>
+                                        <text x="30" y="54" fill="#aab1c0" font-size="11" text-anchor="end"
+                                            font-family="'IBM Plex Mono', monospace">8</text>
 
-                                        <polyline points="40,137.5 117,125 194,120 271,125 348,130 425,187.5 502,197.5 580,205" fill="none" stroke="#e74c3c" stroke-width="3" stroke-linejoin="round" />
-                                        
-                                        <polyline points="40,155 117,145 194,130 271,122.5 348,137.5 425,100 502,70 580,60" fill="none" stroke="#3498db" stroke-width="3" stroke-linejoin="round" />
+                                        <text x="40" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
+                                            font-family="'IBM Plex Mono', monospace">Jan '23</text>
+                                        <text x="310" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
+                                            font-family="'IBM Plex Mono', monospace">Dec '23</text>
+                                        <text x="580" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
+                                            font-family="'IBM Plex Mono', monospace">Mar '24</text>
 
-                                        <circle cx="580" cy="205" r="4" fill="#e74c3c"/>
-                                        <circle cx="580" cy="60" r="4" fill="#3498db"/>
+                                        <polyline
+                                            points="40,137.5 117,125 194,120 271,125 348,130 425,187.5 502,197.5 580,205"
+                                            fill="none" stroke="#e74c3c" stroke-width="3" stroke-linejoin="round" />
+
+                                        <polyline
+                                            points="40,155 117,145 194,130 271,122.5 348,137.5 425,100 502,70 580,60"
+                                            fill="none" stroke="#3498db" stroke-width="3" stroke-linejoin="round" />
+
+                                        <circle cx="580" cy="205" r="4" fill="#e74c3c" />
+                                        <circle cx="580" cy="60" r="4" fill="#3498db" />
 
                                         <rect x="40" y="10" width="12" height="4" fill="#e74c3c" rx="2" />
-                                        <text x="60" y="17" fill="#e5e8ee" font-size="11" font-family="'IBM Plex Mono', monospace">Suez Canal</text>
+                                        <text x="60" y="17" fill="#e5e8ee" font-size="11"
+                                            font-family="'IBM Plex Mono', monospace">Suez Canal</text>
 
                                         <rect x="160" y="10" width="12" height="4" fill="#3498db" rx="2" />
-                                        <text x="180" y="17" fill="#e5e8ee" font-size="11" font-family="'IBM Plex Mono', monospace">Cape of Good Hope</text>
+                                        <text x="180" y="17" fill="#e5e8ee" font-size="11"
+                                            font-family="'IBM Plex Mono', monospace">Cape of Good Hope</text>
                                     </svg>
                                 </div>
                             </section>
@@ -121,10 +162,12 @@
 
                             <section class="card">
                                 <h3>Strategic Importance</h3>
-                                    <p>Forcing vessels to take the massive detour around the Cape of Good Hope has severe effects on national economies. 
-                                        Adding 10 or more days to a voyage increases fuel consumption, disrupts port schedules and causes supply disruptions. 
-                                        All of these factors act as direct drivers of global inflation.
-                                    </p>
+                                <p>Forcing vessels to take the massive detour around the Cape of Good Hope has severe
+                                    effects on national economies.
+                                    Adding 10 or more days to a voyage increases fuel consumption, disrupts port
+                                    schedules and causes supply disruptions.
+                                    All of these factors act as direct drivers of global inflation.
+                                </p>
                             </section>
                         </div>
                     </div>
@@ -133,15 +176,14 @@
         </main>
 
         <footer class="site-footer">
-            <p>Data Sources: Map tiles by CARTO (CC-BY 4.0); 
-                Navigation vectors via OpenStreetMap (ODbL); 
-                Transit statistics: IMF PortWatch (Educational Use); 
-                Trade disruption context: CEPR / VoxEU (CC-BY 4.0); 
+            <p>Data Sources: Map tiles by CARTO (CC-BY 4.0);
+                Navigation vectors via OpenStreetMap (ODbL);
+                Transit statistics: IMF PortWatch (Educational Use);
+                Trade disruption context: CEPR / VoxEU (CC-BY 4.0);
                 Historical & geographic context: Encyclopaedia Britannica (Educational Use).</p>
         </footer>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const nodes = [
@@ -160,7 +202,7 @@
                     [31.2750, 32.3280],  // Safely inside the harbor limits
                     [31.2650, 32.3180]   // Terminates precisely at the Port Said Node
                 ],
-                
+
                 // [ Segment 2: Red Sea Exit & Extension (Through Bab-el-Mandeb, past Djibouti) ]
                 [
                     [29.9300, 32.5550],  // Begins precisely at the Suez Port Node
@@ -180,11 +222,47 @@
 
             const map = L.map('map', { center: [21.5, 38.0], zoom: 4, zoomControl: true });
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 15,
+            // --- Pane setup styling and preparation for each layer in basemap---
+            map.createPane('esriBase');
+            map.getPane('esriBase').style.zIndex = '200';
+            map.getPane('esriBase').style.opacity = '1';
+
+            map.createPane('esriSatellite');
+            map.getPane('esriSatellite').style.zIndex = '300';
+            map.getPane('esriSatellite').style.opacity = '0.55';
+            map.getPane('esriSatellite').style.pointerEvents = 'none';
+
+            map.createPane('esriDetail');
+            map.getPane('esriDetail').style.zIndex = '350';
+            map.getPane('esriDetail').style.opacity = '0.15';
+            map.getPane('esriDetail').style.pointerEvents = 'none';
+
+            map.createPane('esriLabels');
+            map.getPane('esriLabels').style.zIndex = '450';
+            map.getPane('esriLabels').style.pointerEvents = 'none';
+
+            const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+                pane: 'esriBase',
+                attribution: 'Cooper Thomas',
             }).addTo(map);
 
-           const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' })
+            L.esri.tiledMapLayer({
+                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+                pane: 'esriSatellite',
+                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+            }).addTo(map);
+
+            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+                pane: 'esriDetail',
+                attribution: 'John Nelson',
+            }).addTo(map);
+
+            L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+                pane: 'esriLabels',
+                attribution: '&copy; Esri',
+            }).addTo(map);
+
+            const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' })
                 .bindPopup('<div style="text-align:center; padding: 5px;"><strong>Red Sea Corridor</strong><br><span style="font-size:11px; opacity:0.8;">Mediterranean ↔ Gulf of Aden</span></div>')
                 .addTo(map);
 
@@ -208,7 +286,7 @@
             nodes.forEach(function (node, i) {
                 // Initialize marker with the new iconName
                 const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.iconName) }).addTo(map);
-                
+
                 marker.bindPopup(
                     `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
@@ -239,9 +317,9 @@
             function focusNode(i) {
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
-                
+
                 // Table active state logic removed
-                
+
                 map.flyTo([nodes[i].lat, nodes[i].lng], 8, { duration: 1.2 });
                 setTimeout(() => markers[i].openPopup(), 1300);
             }
@@ -255,4 +333,5 @@
         });
     </script>
 </body>
+
 </html>

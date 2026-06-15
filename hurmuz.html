@@ -7,6 +7,13 @@
 	<title>Hurmuz | 6 Straits</title>
 	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
+
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
+
+	<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+	<script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
 </head>
 
 <body>
@@ -46,39 +53,64 @@
 					</div>
 
 					<div class="legend">
-						<span class="legend-item"><span class="legend-line" style="background:transparent; border-top: 2px dashed #38bdf8;"></span> Shipping Lanes</span>
-						<span class="legend-item"><span class="dot" style="background:#10b981; border:2px solid white; box-shadow:0 0 0 2px #10b981;"></span> GCC Littoral State</span>
-						<span class="legend-item"><span class="dot" style="background:#f97316; border:2px solid white; box-shadow:0 0 0 2px #f97316;"></span> Islamic Republic of Iran</span>
+						<span class="legend-item"><span class="legend-line"
+								style="background:transparent; border-top: 2px dashed #38bdf8;"></span> Shipping
+							Lanes</span>
+						<span class="legend-item"><span class="dot"
+								style="background:#10b981; border:2px solid white; box-shadow:0 0 0 2px #10b981;"></span>
+							GCC Littoral State</span>
+						<span class="legend-item"><span class="dot"
+								style="background:#f97316; border:2px solid white; box-shadow:0 0 0 2px #f97316;"></span>
+							Islamic Republic of Iran</span>
 					</div>
 
 					<div class="content-grid">
 						<div class="main-column">
 							<section class="card">
 								<h2>Geographic Context</h2>
-								<p>The Strait of Hormuz is the world's most sensitive maritime "choke point," connecting the <b>Persian Gulf</b> with the <b>Gulf of Oman</b> and the Arabian Sea. While it spans roughly 33 to 95 kilometers in width, the actual navigable shipping lanes are extremely narrow, consisting of two <b>3.2-kilometer-wide channels</b> for inbound and outbound traffic, separated by a 3.2-kilometer buffer zone. This proximity of the <b>Omani Musandam Peninsula</b> and the <b>Iranian coastline</b> creates a natural bottleneck that governs the flow of the global energy market and requires precise naval accessibility management.</p>
+								<p>The Strait of Hormuz is the world's most sensitive maritime "choke point," connecting
+									the <b>Persian Gulf</b> with the <b>Gulf of Oman</b> and the Arabian Sea. While it
+									spans roughly 33 to 95 kilometers in width, the actual navigable shipping lanes are
+									extremely narrow, consisting of two <b>3.2-kilometer-wide channels</b> for inbound
+									and outbound traffic, separated by a 3.2-kilometer buffer zone. This proximity of
+									the <b>Omani Musandam Peninsula</b> and the <b>Iranian coastline</b> creates a
+									natural bottleneck that governs the flow of the global energy market and requires
+									precise naval accessibility management.</p>
 							</section>
 
 							<section class="card">
 								<h2>Historic Timeline</h2>
 								<div class="timeline">
 									<div class="timeline-item">
-										<strong>1515:</strong> The <b>Portuguese Empire</b> occupies Hormuz, building massive fortifications to control the trade routes to India.
+										<strong>1515:</strong> The <b>Portuguese Empire</b> occupies Hormuz, building
+										massive fortifications to control the trade routes to India.
 									</div>
 									<div class="timeline-item">
-										<strong>1984–1988:</strong> The <b>Tanker War</b> phase of the Iran-Iraq War involves attacks on over 500 commercial vessels, necessitating international naval escorts.
+										<strong>1984–1988:</strong> The <b>Tanker War</b> phase of the Iran-Iraq War
+										involves attacks on over 500 commercial vessels, necessitating international
+										naval escorts.
 									</div>
 									<div class="timeline-item">
-										<strong>Feb 28, 2026:</strong> Launch of <b>Operation Epic Fury</b>; major commercial routes are disrupted as regional tensions reach an apex.
+										<strong>Feb 28, 2026:</strong> Launch of <b>Operation Epic Fury</b>; major
+										commercial routes are disrupted as regional tensions reach an apex.
 									</div>
 									<div class="timeline-item">
-										<strong>May 4, 2026:</strong> <b>Project Freedom</b> begins, utilizing international naval task forces to secure "Freedom of Navigation" for neutral tankers.
+										<strong>May 4, 2026:</strong> <b>Project Freedom</b> begins, utilizing
+										international naval task forces to secure "Freedom of Navigation" for neutral
+										tankers.
 									</div>
 								</div>
 							</section>
 
 							<section class="card">
 								<h2>Impact on Global Trade</h2>
-								<p>Volatility in the Strait of Hormuz is the primary driver of <b>global energy price fluctuations</b>. Because roughly <b>20% of the world's liquid petroleum</b> passes through this channel daily, any threat to naval accessibility results in an immediate spike in fuel costs. This creates a ripple effect throughout the global economy, increasing the <b>cost of shipping</b> and contributing to <b>inflation</b> on consumer goods. In essence, the stability of this straight directly influences the <b>purchasing power</b> of households across every continent.</p>
+								<p>Volatility in the Strait of Hormuz is the primary driver of <b>global energy price
+										fluctuations</b>. Because roughly <b>20% of the world's liquid petroleum</b>
+									passes through this channel daily, any threat to naval accessibility results in an
+									immediate spike in fuel costs. This creates a ripple effect throughout the global
+									economy, increasing the <b>cost of shipping</b> and contributing to <b>inflation</b>
+									on consumer goods. In essence, the stability of this straight directly influences
+									the <b>purchasing power</b> of households across every continent.</p>
 							</section>
 						</div>
 
@@ -95,7 +127,11 @@
 
 							<section class="card">
 								<h3>Strategic Importance</h3>
-								<p>The Strait is the sole maritime exit for the world's largest oil producers, including <b>Saudi Arabia, Iraq, and Kuwait</b>. It is also the primary route for <b>Qatari LNG</b>. Most Gulf nations lack alternative pipelines, making the accessibility of these waters a <b>national security priority</b> for energy-dependent nations like China, Japan, and India.</p>
+								<p>The Strait is the sole maritime exit for the world's largest oil producers, including
+									<b>Saudi Arabia, Iraq, and Kuwait</b>. It is also the primary route for <b>Qatari
+										LNG</b>. Most Gulf nations lack alternative pipelines, making the accessibility
+									of these waters a <b>national security priority</b> for energy-dependent nations
+									like China, Japan, and India.</p>
 							</section>
 						</div>
 					</div>
@@ -104,13 +140,13 @@
 				</div>
 			</section>
 		</main>
-        <footer class="site-footer">
-			<p>Data Sources: Map tiles by CARTO (CC-BY 4.0); Strategic vectors via OpenStreetMap (ODbL); 
-        Energy flow analytics & conflict timelines from the Correlates of War Project & Strauss Center Open Databases.</p>
+		<footer class="site-footer">
+			<p>Data Sources: Map tiles by CARTO (CC-BY 4.0); Strategic vectors via OpenStreetMap (ODbL);
+				Energy flow analytics & conflict timelines from the Correlates of War Project & Strauss Center Open
+				Databases.</p>
 		</footer>
 	</div>
 
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 
@@ -163,16 +199,16 @@
 			];
 
 			const routeLinePoints = [
-				[26.0, 54.5], 
+				[26.0, 54.5],
 				[26.2, 55.0],
 				[26.3, 55.5],
-				[26.4, 55.8], 
+				[26.4, 55.8],
 				[26.5, 56.0],
-				[26.6, 56.4], 
+				[26.6, 56.4],
 				[26.6, 56.5],
-				[26.3, 56.7], 
+				[26.3, 56.7],
 				[26.0, 57.0],
-				[25.5, 57.2], 
+				[25.5, 57.2],
 				[25.0, 58.0]
 			];
 
@@ -183,36 +219,70 @@
 				zoomControl: true,
 			});
 
-			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-				attribution: '&copy; CARTO',
-				subdomains: 'abcd',
-				maxZoom: 15,
+			// --- Pane setup styling and preparation for each layer in basemap---
+			map.createPane('esriBase');
+			map.getPane('esriBase').style.zIndex = '200';
+			map.getPane('esriBase').style.opacity = '1';
+
+			map.createPane('esriSatellite');
+			map.getPane('esriSatellite').style.zIndex = '300';
+			map.getPane('esriSatellite').style.opacity = '0.55';
+			map.getPane('esriSatellite').style.pointerEvents = 'none';
+
+			map.createPane('esriDetail');
+			map.getPane('esriDetail').style.zIndex = '350';
+			map.getPane('esriDetail').style.opacity = '0.15';
+			map.getPane('esriDetail').style.pointerEvents = 'none';
+
+			map.createPane('esriLabels');
+			map.getPane('esriLabels').style.zIndex = '450';
+			map.getPane('esriLabels').style.pointerEvents = 'none';
+
+			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+				pane: 'esriBase',
+				attribution: 'Cooper Thomas',
+			}).addTo(map);
+
+			L.esri.tiledMapLayer({
+				url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+				pane: 'esriSatellite',
+				attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+			}).addTo(map);
+
+			L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+				pane: 'esriDetail',
+				attribution: 'John Nelson',
+			}).addTo(map);
+
+			L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+				pane: 'esriLabels',
+				attribution: '&copy; Esri',
 			}).addTo(map);
 
 			const routeLine = L.polyline(routeLinePoints, { color: '#38bdf8', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
 
 			function makeIcon(iconName) {
-                return L.divIcon({
-                    className: 'custom-composite-icon',
-                    html: `
+				return L.divIcon({
+					className: 'custom-composite-icon',
+					html: `
                         <div style="position: relative; width: 40px; height: 40px;">
                             <img src="iconpack/pin.svg" style="width: 100%; height: 100%;" alt="pin" />
                             <img src="${iconName}" style="position: absolute; top: 1px; left: 4px; width: 32px; height: 32px; border-radius: 50%;" alt="label" />
                         </div>
                     `,
-                    iconSize: [30, 45],
-                    iconAnchor: [15, 45],
-                    popupAnchor: [0, -45]
-                });
-            }
+					iconSize: [30, 45],
+					iconAnchor: [15, 45],
+					popupAnchor: [0, -45]
+				});
+			}
 
 			const markers = [];
 
-            vectors.forEach(function (vector, i) {
-                // Pass the specific iconName to the maker
-                const marker = L.marker([vector.lat, vector.lng], { icon: makeIcon(vector.iconName) }).addTo(map);
-                marker.bindPopup(
-                    `<div class="popup-inner">
+			vectors.forEach(function (vector, i) {
+				// Pass the specific iconName to the maker
+				const marker = L.marker([vector.lat, vector.lng], { icon: makeIcon(vector.iconName) }).addTo(map);
+				marker.bindPopup(
+					`<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
                 <p class="popup-name">${vector.name}</p>
                 <div class="popup-coord">
@@ -221,35 +291,35 @@
                 </div>
               </div>
               <div class="popup-footer">${vector.desc}</div>`,
-                    { maxWidth: 280 }
-                );
-                markers.push(marker);
+					{ maxWidth: 280 }
+				);
+				markers.push(marker);
 
-                // Sidebar vector item using custom SVG image
-                const item = document.createElement('div');
-                item.className = 'port-item';
-                item.innerHTML = `
+				// Sidebar vector item using custom SVG image
+				const item = document.createElement('div');
+				item.className = 'port-item';
+				item.innerHTML = `
               <img src="${vector.iconName}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 12px;" alt="${vector.short} icon">
               <div class="port-info">
                 <div class="port-name">${vector.short}</div>
                 <div class="port-coords">${vector.lat.toFixed(4)}° N · ${Math.abs(vector.lng).toFixed(4)}° E</div>
               </div>`;
-                item.addEventListener('click', function () { focusVector(i); });
-                document.getElementById('port-list').appendChild(item);
+				item.addEventListener('click', function () { focusVector(i); });
+				document.getElementById('port-list').appendChild(item);
 
-               
-            });
+
+			});
 
 			function focusVector(i) {
-                const targetZoom = vectors[i].short === 'The Chokepoint' ? 10 : 11;
-                document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
-                
-                // --- Table row focus logic has been removed from here ---
-                
-                document.querySelectorAll('.port-item')[i].classList.add('active');
-                map.flyTo([vectors[i].lat, vectors[i].lng], targetZoom, { duration: 1.2 });
-                setTimeout(() => markers[i].openPopup(), 1300);
-            }
+				const targetZoom = vectors[i].short === 'The Chokepoint' ? 10 : 11;
+				document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+
+				// --- Table row focus logic has been removed from here ---
+
+				document.querySelectorAll('.port-item')[i].classList.add('active');
+				map.flyTo([vectors[i].lat, vectors[i].lng], targetZoom, { duration: 1.2 });
+				setTimeout(() => markers[i].openPopup(), 1300);
+			}
 
 			window.flyToLocation = function (coords, zoom) {
 				map.flyTo(coords, zoom, { animate: true, duration: 1.8 });

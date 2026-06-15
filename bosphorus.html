@@ -7,6 +7,13 @@
     <title>Bosphorus | 6 Straits</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
+
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
 </head>
 
 <body>
@@ -46,40 +53,66 @@
                     </div>
 
                     <div class="legend">
-                        <span class="legend-item"><span class="legend-line" style="background:transparent; border-top: 2px dashed #fbbf24;"></span> Shipping Channel</span>
-                        <span class="legend-item"><span class="dot" style="background:#3b82f6; border:2px solid white; box-shadow:0 0 0 2px #3b82f6;"></span> European Shore</span>
-                        <span class="legend-item"><span class="dot" style="background:#ef4444; border:2px solid white; box-shadow:0 0 0 2px #ef4444;"></span> Asian Shore</span>
-                        <span class="legend-item"><span class="dot" style="background:#ffffff; border:2px solid white; box-shadow:0 0 0 2px #2c3e50;"></span> VTS Station</span>
+                        <span class="legend-item"><span class="legend-line"
+                                style="background:transparent; border-top: 2px dashed #fbbf24;"></span> Shipping
+                            Channel</span>
+                        <span class="legend-item"><span class="dot"
+                                style="background:#3b82f6; border:2px solid white; box-shadow:0 0 0 2px #3b82f6;"></span>
+                            European Shore</span>
+                        <span class="legend-item"><span class="dot"
+                                style="background:#ef4444; border:2px solid white; box-shadow:0 0 0 2px #ef4444;"></span>
+                            Asian Shore</span>
+                        <span class="legend-item"><span class="dot"
+                                style="background:#ffffff; border:2px solid white; box-shadow:0 0 0 2px #2c3e50;"></span>
+                            VTS Station</span>
                     </div>
 
                     <div class="content-grid">
                         <div class="main-column">
                             <section class="card">
                                 <h2>Geographic Context</h2>
-                                <p>The Bosphorus Strait, also known as the <b>Strait of Istanbul</b>, is a 31-kilometer corridor that serves as the world’s narrowest strait used for international navigation. It serves as a natural boundary between <b>Europe and Asia</b>, cutting directly through the heart of Istanbul. Because of its treacherous "S" shape and <b>conflicting currents</b>, naval accessibility is a massive maritime safety operation, with ships navigating within 700 meters of historical landmarks and dense residential zones. It connects the <b>Black Sea</b> to the <b>Sea of Marmara</b>, forming a vital link to the Mediterranean.</p>
+                                <p>The Bosphorus Strait, also known as the <b>Strait of Istanbul</b>, is a 31-kilometer
+                                    corridor that serves as the world’s narrowest strait used for international
+                                    navigation. It serves as a natural boundary between <b>Europe and Asia</b>, cutting
+                                    directly through the heart of Istanbul. Because of its treacherous "S" shape and
+                                    <b>conflicting currents</b>, naval accessibility is a massive maritime safety
+                                    operation, with ships navigating within 700 meters of historical landmarks and dense
+                                    residential zones. It connects the <b>Black Sea</b> to the <b>Sea of Marmara</b>,
+                                    forming a vital link to the Mediterranean.</p>
                             </section>
 
                             <section class="card">
                                 <h2>Historic Timeline</h2>
                                 <div class="timeline">
                                     <div class="timeline-item">
-                                        <strong>667 BC:</strong> Foundation of <b>Byzantium</b>, establishing the strait as the primary trade hub between the Mediterranean and the Steppes.
+                                        <strong>667 BC:</strong> Foundation of <b>Byzantium</b>, establishing the strait
+                                        as the primary trade hub between the Mediterranean and the Steppes.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>1453:</strong> <b>Fall of Constantinople</b> to the Ottoman Empire, granting the Sultans total sovereign control over Black Sea access.
+                                        <strong>1453:</strong> <b>Fall of Constantinople</b> to the Ottoman Empire,
+                                        granting the Sultans total sovereign control over Black Sea access.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>1936:</strong> Signing of the <b>Montreux Convention</b>, a landmark treaty that regulates naval passage and ensures civilian freedom.
+                                        <strong>1936:</strong> Signing of the <b>Montreux Convention</b>, a landmark
+                                        treaty that regulates naval passage and ensures civilian freedom.
                                     </div>
                                     <div class="timeline-item">
-                                        <strong>2022–2026:</strong> Consistent enforcement of the Montreux Convention during <b>Black Sea conflicts</b>, restricting warship passage to prevent regional escalation.
+                                        <strong>2022–2026:</strong> Consistent enforcement of the Montreux Convention
+                                        during <b>Black Sea conflicts</b>, restricting warship passage to prevent
+                                        regional escalation.
                                     </div>
                                 </div>
                             </section>
 
                             <section class="card">
                                 <h2>Impact on Global Trade</h2>
-                                <p>Disruptions in the Bosphorus are felt at every dinner table worldwide. As the primary exit for <b>grain and fertilizer</b> from the Black Sea region, any bottleneck here leads to immediate spikes in <b>global food prices</b>. Locally, the strait is a vital artery for Istanbul's <b>15 million residents</b>, with thousands of daily commuters relying on public ferries. An accident involving a large tanker would not only halt global trade but pose a catastrophic <b>environmental and safety risk</b> to one of the world's most populated urban centers.</p>
+                                <p>Disruptions in the Bosphorus are felt at every dinner table worldwide. As the primary
+                                    exit for <b>grain and fertilizer</b> from the Black Sea region, any bottleneck here
+                                    leads to immediate spikes in <b>global food prices</b>. Locally, the strait is a
+                                    vital artery for Istanbul's <b>15 million residents</b>, with thousands of daily
+                                    commuters relying on public ferries. An accident involving a large tanker would not
+                                    only halt global trade but pose a catastrophic <b>environmental and safety risk</b>
+                                    to one of the world's most populated urban centers.</p>
                             </section>
                         </div>
 
@@ -96,7 +129,11 @@
 
                             <section class="card">
                                 <h3>Strategic Importance</h3>
-                                <p>The Bosphorus is the anchor of the <b>Black Sea Grain Corridor</b>. Ships exiting the strait move through the <b>Dardanelles</b> to reach the Mediterranean. Primary destination ports include those in <b>Egypt, Italy, and China</b>, carrying essential agricultural and mineral exports. For the Russian Federation, it remains the only warm-water access for the <b>Black Sea Fleet</b> to the open ocean.</p>
+                                <p>The Bosphorus is the anchor of the <b>Black Sea Grain Corridor</b>. Ships exiting the
+                                    strait move through the <b>Dardanelles</b> to reach the Mediterranean. Primary
+                                    destination ports include those in <b>Egypt, Italy, and China</b>, carrying
+                                    essential agricultural and mineral exports. For the Russian Federation, it remains
+                                    the only warm-water access for the <b>Black Sea Fleet</b> to the open ocean.</p>
                             </section>
                         </div>
                     </div>
@@ -105,13 +142,12 @@
             </section>
         </main>
         <footer class="site-footer">
-            <p>Data Sources: Map tiles by CARTO (CC-BY 4.0); Navigation vectors via OpenStreetMap (ODbL); 
+            <p>Data Sources: Map tiles by CARTO (CC-BY 4.0); Navigation vectors via OpenStreetMap (ODbL);
                 Transit stats & treaty parameters from the 1936 Montreux Convention & DergiPark Open Academic Database.
-             </p>
+            </p>
         </footer>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
@@ -165,15 +201,15 @@
 
             const routePoints = [
                 [41.34, 29.13],
-				[41.22, 29.12], 
+                [41.22, 29.12],
                 [41.20, 29.11],
-				[41.17, 29.07], 
+                [41.17, 29.07],
                 [41.16, 29.06],
-				[41.13, 29.07], 
+                [41.13, 29.07],
                 [41.12, 29.08],
-				[41.10, 29.06], 
+                [41.10, 29.06],
                 [41.085, 29.06],
-				[41.04, 29.03], 
+                [41.04, 29.03],
                 [41.03, 29.00],
                 [41.01, 29.00],
                 [40.80, 28.80]
@@ -186,10 +222,44 @@
                 zoomControl: true,
             });
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; CARTO',
-                subdomains: 'abcd',
-                maxZoom: 15,
+            // --- Pane setup styling and preparation for each layer in basemap---
+            map.createPane('esriBase');
+            map.getPane('esriBase').style.zIndex = '200';
+            map.getPane('esriBase').style.opacity = '1';
+
+            map.createPane('esriSatellite');
+            map.getPane('esriSatellite').style.zIndex = '300';
+            map.getPane('esriSatellite').style.opacity = '0.55';
+            map.getPane('esriSatellite').style.pointerEvents = 'none';
+
+            map.createPane('esriDetail');
+            map.getPane('esriDetail').style.zIndex = '350';
+            map.getPane('esriDetail').style.opacity = '0.15';
+            map.getPane('esriDetail').style.pointerEvents = 'none';
+
+            map.createPane('esriLabels');
+            map.getPane('esriLabels').style.zIndex = '450';
+            map.getPane('esriLabels').style.pointerEvents = 'none';
+
+            const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+                pane: 'esriBase',
+                attribution: 'Cooper Thomas',
+            }).addTo(map);
+
+            L.esri.tiledMapLayer({
+                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+                pane: 'esriSatellite',
+                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+            }).addTo(map);
+
+            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+                pane: 'esriDetail',
+                attribution: 'John Nelson',
+            }).addTo(map);
+
+            L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+                pane: 'esriLabels',
+                attribution: '&copy; Esri',
             }).addTo(map);
 
             const routeLine = L.polyline(routePoints, { color: '#fbbf24', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
@@ -214,7 +284,7 @@
             landmarks.forEach(function (landmark, i) {
                 // Pass the iconName instead of the color
                 const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.iconName) }).addTo(map);
-                
+
                 marker.bindPopup(
                     `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
@@ -241,7 +311,7 @@
                 item.addEventListener('click', function () { focusLandmark(i); });
                 document.getElementById('port-list').appendChild(item);
             });
-            
+
             function focusLandmark(i) {
                 const targetZoom = i === 1 || i === 2 || i === 4 ? 14 : 13;
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
