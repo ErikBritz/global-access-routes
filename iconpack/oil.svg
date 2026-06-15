@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-450.913482,-163.37322)">
+        <g id="oil">
+            <g transform="matrix(0.233107,0,0,0.233107,403.397093,126.05674)">
+                <circle cx="315.377" cy="271.62" r="107.247" style="fill:rgb(153,102,102);stroke:rgb(235,235,235);stroke-width:8.58px;"/>
+            </g>
+            <g transform="matrix(1,0,0,1,-9.31607,-0.087559)">
+                <path d="M486.23,170.829C486.23,170.829 495.546,190.392 495.546,198.777C495.546,203.919 491.371,208.093 486.23,208.093C481.088,208.093 476.913,203.919 476.913,198.777C476.913,190.392 486.23,170.829 486.23,170.829Z" style="fill:none;stroke:rgb(235,235,235);stroke-width:3px;stroke-linecap:butt;"/>
+            </g>
+        </g>
+    </g>
+</svg>
