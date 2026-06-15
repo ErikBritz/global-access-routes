@@ -214,8 +214,22 @@ body::before {
 	flex: 3;
 	min-height: 460px;
 	border-radius: 8px;
-	border: 1px solid rgba(255,255,255,0.12);
+	border: 1px solid rgb(3, 6, 32);
 	z-index: 1;
+	background: #000000;
+}
+
+/* Basemap layers styling */
+.leaflet-esriBase-pane {
+    filter: brightness(1.4) contrast(1.2);
+}
+
+.leaflet-esriSatellite-pane {
+    filter: brightness(0.5) contrast(3) saturate(0);
+}
+
+.leaflet-esriDetail-pane {
+    filter: brightness(0.1) contrast(2);
 }
 
 .map-sidebar {
