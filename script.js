@@ -135,7 +135,7 @@ async function initGlobe() {
 	let dragTimeout;
 	viewer.scene.preRender.addEventListener(() => {
 		if (autoRotate) {
-			viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -0.002);
+			viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -0.005);
 		}
 	});
 	viewer.scene.canvas.addEventListener("mousedown", () => {
@@ -212,7 +212,7 @@ async function initGlobe() {
 
 				autoRotate = false;
             clearTimeout(dragTimeout);
-			
+
 				listEl.querySelectorAll(".strait-link").forEach((el) => el.classList.remove("is-active"));
 				link.classList.add("is-active");
 				flyToStrait(strait.id);
