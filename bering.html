@@ -39,8 +39,8 @@
                         <div class="map-sidebar">
                             <h3 style="margin-bottom: 5px;">Strategic Nodes</h3>
                             <div style="font-size: 12px; margin-bottom: 15px; display: flex; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; color: #aab1c0;">
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #3b82f6;"></span> USA</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span> Russia</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><img src="iconpack/important.svg" style="width: 14px; height: 14px; border-radius: 50%;"> Landmark</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><img src="iconpack/military.svg" style="width: 14px; height: 14px; border-radius: 50%;"> Military Base</span>
                             </div>
                             
                             <div class="port-list-wrap" id="port-list"></div>
@@ -143,10 +143,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const landmarks = [
-                { name: "Cape Prince of Wales", short: "Cape Prince of Wales", lat: 65.6136, lng: -168.0875, sovereignty: "USA", color: "#3b82f6", desc: "The westernmost point of mainland North America." },
-                { name: "Little Diomede Island", short: "Little Diomede Island", lat: 65.7522, lng: -168.9247, sovereignty: "USA", color: "#3b82f6", desc: "US island located exactly in the middle of the strait." },
-                { name: "Big Diomede Island", short: "Big Diomede Island", lat: 65.7800, lng: -169.0666, sovereignty: "Russia", color: "#ef4444", desc: "Russian military base situated just 3.8 kilometers from US territory." },
-                { name: "Cape Dezhnev", short: "Cape Dezhnev", lat: 66.0792, lng: -169.6525, sovereignty: "Russia", color: "#ef4444", desc: "The easternmost point of mainland Asia." }
+                { name: "Cape Prince of Wales", short: "Cape Prince of Wales (USA)", lat: 65.6136, lng: -168.0875, iconName: "iconpack/important.svg", desc: "The westernmost point of mainland North America." },
+                { name: "Little Diomede Island", short: "Little Diomede Island (USA)", lat: 65.7522, lng: -168.9247, iconName: "iconpack/important.svg", desc: "US island located exactly in the middle of the strait." },
+                { name: "Big Diomede Island", short: "Big Diomede Island (Russia)", lat: 65.7800, lng: -169.0666, iconName: "iconpack/military.svg", desc: "Russian military base situated just 3.8 kilometers from US territory." },
+                { name: "Cape Dezhnev", short: "Cape Dezhnev (Russia)", lat: 66.0792, lng: -169.6525, iconName: "iconpack/important.svg", desc: "The easternmost point of mainland Asia." }
             ];
 
             const routePoints = [
@@ -171,18 +171,25 @@
                 .bindPopup('<div style="text-align:center; padding: 5px;"><strong>Proposed Arctic Route</strong><br><span style="font-size:11px; opacity:0.8;">Bering Sea ↔ Arctic Ocean</span></div>')
                 .addTo(map);
 
-            function makeIcon(color) {
-                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
-              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
-              <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
-            </svg>`;
-                return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
+            function makeIcon(iconName) {
+                return L.divIcon({
+                    className: 'custom-composite-icon',
+                    html: `
+                        <div style="position: relative; width: 40px; height: 40px;">
+                            <img src="iconpack/pin.svg" style="width: 100%; height: 100%;" alt="pin" />
+                            <img src="${iconName}" style="position: absolute; top: 1px; left: 4px; width: 32px; height: 32px; border-radius: 50%;" alt="label" />
+                        </div>
+                    `,
+                    iconSize: [30, 45],
+                    iconAnchor: [15, 45],
+                    popupAnchor: [0, -45]
+                });
             }
 
             const markers = [];
 
             landmarks.forEach(function (landmark, i) {
-                const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.color) }).addTo(map);
+                const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.iconName) }).addTo(map);
                 marker.bindPopup(
                     `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
@@ -200,15 +207,13 @@
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <span class="port-dot" style="background:${landmark.color}; border: 2px solid rgba(0,0,0,0.4);"></span>
+              <img src="${landmark.iconName}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 12px;" alt="${landmark.short} icon">
               <div class="port-info">
                 <div class="port-name">${landmark.short}</div>
                 <div class="port-coords">${landmark.lat.toFixed(4)}° N · ${Math.abs(landmark.lng).toFixed(4)}° W</div>
               </div>`;
                 item.addEventListener('click', function () { focusLandmark(i); });
                 document.getElementById('port-list').appendChild(item);
-                
-                // The table row creation code that used to be here has been removed
             });
 
             function focusLandmark(i) {

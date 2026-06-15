@@ -39,8 +39,9 @@
                         <div class="map-sidebar">
                             <h3 style="margin-bottom: 5px;">Strategic Nodes</h3>
                             <div style="font-size: 12px; margin-bottom: 15px; display: flex; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; color: #aab1c0;">
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #f39c12;"></span> Ports</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #8e44ad;"></span> Chokepoint</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><img src="iconpack/passage.svg" style="width: 14px; height: 14px; border-radius: 50%;"> Entry/Exit</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><img src="iconpack/port1.svg" style="width: 14px; height: 14px; border-radius: 50%;"> Ports</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><img src="iconpack/choke.svg" style="width: 14px; height: 14px; border-radius: 50%;"> Chokepoint</span>
                             </div>
                             
                             <div class="port-list-wrap" id="port-list"></div>
@@ -144,10 +145,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const nodes = [
-                { name: "Port Said", short: "Port Said", lat: 31.2653, lng: 32.3019, region: "Mediterranean", color: "#f39c12", desc: "Northern terminus of the Suez Canal." },
-                { name: "Suez Port", short: "Suez Port", lat: 29.9668, lng: 32.5498, region: "Red Sea", color: "#f39c12", desc: "Southern terminus of the Suez Canal opening into the Gulf of Suez." },
-                { name: "Bab-El-Mandeb", short: "Bab-El-Mandeb", lat: 12.5833, lng: 43.3333, region: "Chokepoint", color: "#8e44ad", desc: "The narrowest point connecting the Red Sea to the Gulf of Aden." },
-                { name: "Port of Djibouti", short: "Port of Djibouti", lat: 11.6041, lng: 43.1456, region: "Gulf of Aden", color: "#f39c12", desc: "Critical staging and security port just south of the chokepoint." }
+                { name: "Port Said", short: "Port Said", lat: 31.2653, lng: 32.3019, region: "Mediterranean", iconName: "iconpack/passage.svg", desc: "Northern terminus of the Suez Canal." },
+                { name: "Suez Port", short: "Suez Port", lat: 29.9668, lng: 32.5498, region: "Red Sea", iconName: "iconpack/passage.svg", desc: "Southern terminus of the Suez Canal opening into the Gulf of Suez." },
+                { name: "Bab-El-Mandeb", short: "Bab-El-Mandeb", lat: 12.5833, lng: 43.3333, region: "Chokepoint", iconName: "iconpack/choke.svg", desc: "The narrowest point connecting the Red Sea to the Gulf of Aden." },
+                { name: "Port of Djibouti", short: "Port of Djibouti", lat: 11.6041, lng: 43.1456, region: "Gulf of Aden", iconName: "iconpack/port1.svg", desc: "Critical staging and security port just south of the chokepoint." }
             ];
 
             const routePoints = [
@@ -187,18 +188,27 @@
                 .bindPopup('<div style="text-align:center; padding: 5px;"><strong>Red Sea Corridor</strong><br><span style="font-size:11px; opacity:0.8;">Mediterranean ↔ Gulf of Aden</span></div>')
                 .addTo(map);
 
-            function makeIcon(color) {
-                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
-              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
-              <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
-            </svg>`;
-                return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
+            function makeIcon(iconName) {
+                return L.divIcon({
+                    className: 'custom-composite-icon',
+                    html: `
+                        <div style="position: relative; width: 40px; height: 40px;">
+                            <img src="iconpack/pin.svg" style="width: 100%; height: 100%;" alt="pin" />
+                            <img src="${iconName}" style="position: absolute; top: 1px; left: 4px; width: 32px; height: 32px; border-radius: 50%;" alt="label" />
+                        </div>
+                    `,
+                    iconSize: [30, 45],
+                    iconAnchor: [15, 45],
+                    popupAnchor: [0, -45]
+                });
             }
 
             const markers = [];
 
-           nodes.forEach(function (node, i) {
-                const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.color) }).addTo(map);
+            nodes.forEach(function (node, i) {
+                // Initialize marker with the new iconName
+                const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.iconName) }).addTo(map);
+                
                 marker.bindPopup(
                     `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
@@ -213,18 +223,17 @@
                 );
                 markers.push(marker);
 
+                // Build the sidebar item using the SVG image instead of a CSS dot
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <span class="port-dot" style="background:${node.color}; border: 2px solid rgba(0,0,0,0.4);"></span>
+              <img src="${node.iconName}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 12px;" alt="${node.short} icon">
               <div class="port-info">
                 <div class="port-name">${node.short}</div>
                 <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
               </div>`;
                 item.addEventListener('click', function () { focusNode(i); });
                 document.getElementById('port-list').appendChild(item);
-
-                // Table row generation removed entirely
             });
 
             function focusNode(i) {
