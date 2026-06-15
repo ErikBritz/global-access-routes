@@ -44,6 +44,8 @@ async function initGlobe() {
 		await Cesium.IonImageryProvider.fromAssetId(3812)
 	);
 
+	viewer.resolutionScale = window.devicePixelRatio;
+
 	viewer.scene.globe.enableLighting = false;
 	viewer.scene.backgroundColor = Cesium.Color.BLACK;
 	viewer.scene.globe.baseColor = Cesium.Color.BLACK;
@@ -64,6 +66,7 @@ async function initGlobe() {
 			},
 			label: {
 				text: strait.name,
+				font: "14px sans-serif",
 				font: "600 16px 'IBM Plex Sans', sans-serif",
 				fillColor: Cesium.Color.WHITE,
 				style: Cesium.LabelStyle.FILL_AND_OUTLINE,
