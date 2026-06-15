@@ -4,7 +4,7 @@
     <g transform="matrix(1,0,0,1,-371.772824,-163.37322)">
         <g id="port2">
             <g transform="matrix(0.233107,0,0,0.233107,324.256435,126.05674)">
-                <circle cx="315.377" cy="271.62" r="107.247" style="fill:rgb(114,153,102);stroke:rgb(235,235,235);stroke-width:8.58px;"/>
+                <circle cx="315.377" cy="271.62" r="107.247"  style="fill:rgb(114,153,102);stroke:rgb(235,235,235);stroke-width:8.58px;"/>
             </g>
             <g transform="matrix(0.732211,0,0,0.732211,161.479544,50.681148)">
                 <path d="M322.731,208.698L322.731,169.817" style="fill:none;stroke:rgb(235,235,235);stroke-width:5.46px;stroke-linecap:butt;"/>

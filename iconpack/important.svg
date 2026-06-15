@@ -4,7 +4,7 @@
     <g transform="matrix(1,0,0,1,-529.123527,-163.37322)">
         <g id="important">
             <g transform="matrix(0.233107,0,0,0.233107,481.607139,126.05674)">
-                <circle cx="315.377" cy="271.62" r="107.247" style="fill:rgb(161,166,89);stroke:rgb(235,235,235);stroke-width:8.58px;"/>
+                <circle cx="315.377" cy="271.62" r="107.247"  style="fill:rgb(161,166,89);stroke:rgb(235,235,235);stroke-width:8.58px;"/>
             </g>
             <g transform="matrix(1,0,0,1,-14.53653,0)">
                 <path d="M569.66,170.741L574.036,184.209L588.197,184.209L576.74,192.532L581.116,206L569.66,197.676L558.204,206L562.58,192.532L551.124,184.209L565.284,184.209L569.66,170.741Z" style="fill:none;stroke:rgb(235,235,235);stroke-width:3px;stroke-linecap:butt;"/>
