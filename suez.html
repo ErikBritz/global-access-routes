@@ -163,16 +163,38 @@
             ];
 
             const routePoints = [
-                [31.26, 32.30], [29.96, 32.55], [27.0, 34.0], [20.0, 39.0], [15.0, 41.5], [12.58, 43.33], [11.60, 44.0]
-            ];
-
+    // [ Segment 1: Mediterranean Approach (Shifted East for a perfect center-channel entry) ]
+    [
+        [31.6000, 32.4800],  // Outer Mediterranean (Pushed further East)
+        [31.3500, 32.3800],  // Aligning with the outer buoys
+        [31.2900, 32.3450],  // The exact center between Port Said and Port Fouad breakwaters
+        [31.2750, 32.3280],  // Safely inside the harbor limits
+        [31.2650, 32.3180]   // Terminates precisely at the Port Said Node
+    ],
+    
+    // [ Segment 2: Red Sea Exit & Extension (Through Bab-el-Mandeb, past Djibouti) ]
+    [
+        [29.9300, 32.5550],  // Begins precisely at the Suez Port Node
+        [29.0000, 32.8500],  // Mid-Gulf of Suez
+        [28.2000, 33.3000],  // Approaching the Strait of Gubal
+        [27.4000, 34.1500],  // Safely east of Shadwan Island
+        [26.8000, 34.5000],  // Safely east of Jazā'ir Jiftūn
+        [25.5000, 35.3000],  // Open Red Sea (Northern sector)
+        [21.5000, 38.0000],  // Open Red Sea (Central sector, off Jeddah)
+        [17.5000, 40.2000],  // Open Red Sea (Southern sector)
+        [14.0000, 42.5000],  // Approaching the Bab-el-Mandeb bottleneck
+        [12.6500, 43.3500],  // Threading the Bab-el-Mandeb Strait perfectly
+        [11.8000, 44.2000],  // Clearing the Horn of Africa, passing Djibouti
+        [11.5000, 45.5000]   // Exiting into the Gulf of Aden shipping lanes
+    ]
+];
             const map = L.map('map', { center: [21.5, 38.0], zoom: 4, zoomControl: true });
 
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 15,
             }).addTo(map);
 
-            const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+           const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
 
             function makeIcon(color) {
                 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">

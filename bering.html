@@ -125,12 +125,19 @@
             const landmarks = [
                 { name: "Cape Prince of Wales", short: "Wales (US)", lat: 65.6136, lng: -168.0875, sovereignty: "USA", color: "#3b82f6", desc: "The westernmost point of mainland North America." },
                 { name: "Little Diomede Island", short: "Little Diomede", lat: 65.7522, lng: -168.9247, sovereignty: "USA", color: "#3b82f6", desc: "US island located exactly in the middle of the strait." },
-                { name: "Big Diomede Island", short: "Big Diomede", lat: 65.7800, lng: -169.0666, sovereignty: "Russia", color: "#ef4444", desc: "Russian military base situated just 2.4 miles from US territory." },
+                { name: "Big Diomede Island", short: "Big Diomede", lat: 65.7800, lng: -169.0666, sovereignty: "Russia", color: "#ef4444", desc: "Russian military base situated just 3.8 kilometers from US territory." },
                 { name: "Cape Dezhnev", short: "Cape Dezhnev", lat: 66.0792, lng: -169.6525, sovereignty: "Russia", color: "#ef4444", desc: "The easternmost point of mainland Asia." }
             ];
 
             const routePoints = [
-                [64.5, -169.0], [65.0, -168.9], [65.76, -168.99], [66.5, -169.1], [67.0, -169.2]
+                [63.0000, -168.2000],  
+                [64.2000, -168.5000],
+                [65.0000, -168.8000],  
+                [65.5500, -168.9300],  
+                [65.7560, -168.9710], 
+                [65.9500, -169.0200],  
+                [66.6000, -169.2000],  
+                [68.0000, -169.5000]   
             ];
 
             const map = L.map('map', { center: [65.76, -168.99], zoom: 7, zoomControl: true });
