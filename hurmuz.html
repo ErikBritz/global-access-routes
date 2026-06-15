@@ -100,22 +100,6 @@
 						</div>
 					</div>
 
-					<div class="table-section-header">
-						<h3>Strategic Nodes Reference</h3>
-					</div>
-					<table class="reference-table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Location</th>
-								<th>Sovereignty</th>
-								<th>Latitude</th>
-								<th>Longitude</th>
-								<th>Role</th>
-							</tr>
-						</thead>
-						<tbody id="table-body"></tbody>
-					</table>
 
 				</div>
 			</section>
@@ -137,7 +121,7 @@
 					lat: 26.56,
 					lng: 56.44,
 					sovereignty: "International",
-					color: "#38bdf8",
+					iconName: "iconpack/choke.svg",
 					desc: "Central focus vector of shipping corridors handling massive daily maritime energy carrier assignments."
 				},
 				{
@@ -146,7 +130,7 @@
 					lat: 27.1481,
 					lng: 56.2303,
 					sovereignty: "Iran",
-					color: "#f97316",
+					iconName: "iconpack/port1.svg",
 					desc: "Primary regional Iranian naval base commanding surveillance systems along the northern coastline lines."
 				},
 				{
@@ -155,7 +139,7 @@
 					lat: 26.3571,
 					lng: 56.3881,
 					sovereignty: "Oman",
-					color: "#10b981",
+					iconName: "iconpack/military.svg",
 					desc: "Strategic lookouts and territorial outposts monitoring the southern approaches of the navigation route."
 				},
 				{
@@ -164,7 +148,7 @@
 					lat: 26.2421,
 					lng: 55.1691,
 					sovereignty: "Iran",
-					color: "#f97316",
+					iconName: "iconpack/military.svg",
 					desc: "Highly contested island outpost providing advanced tactical positioning platforms inside the Gulf."
 				},
 				{
@@ -173,7 +157,7 @@
 					lat: 25.1841,
 					lng: 56.3631,
 					sovereignty: "UAE",
-					color: "#10b981",
+					iconName: "iconpack/oil.svg",
 					desc: "Critical global bunkering harbor facility operating on the exterior side of the maritime bottleneck."
 				}
 			];
@@ -207,18 +191,26 @@
 
 			const routeLine = L.polyline(routeLinePoints, { color: '#38bdf8', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
 
-			function makeIcon(color) {
-				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
-              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
-              <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
-            </svg>`;
-				return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
-			}
+			function makeIcon(iconName) {
+                return L.divIcon({
+                    className: 'custom-composite-icon',
+                    html: `
+                        <div style="position: relative; width: 40px; height: 40px;">
+                            <img src="iconpack/pin.svg" style="width: 100%; height: 100%;" alt="pin" />
+                            <img src="${iconName}" style="position: absolute; top: 4px; left: 7px; width: 24px; height: 24px; border-radius: 50%;" alt="label" />
+                        </div>
+                    `,
+                    iconSize: [30, 45],
+                    iconAnchor: [15, 45],
+                    popupAnchor: [0, -45]
+                });
+            }
 
 			const markers = [];
 
-			vectors.forEach(function (vector, i) {
-                const marker = L.marker([vector.lat, vector.lng], { icon: makeIcon(vector.color) }).addTo(map);
+            vectors.forEach(function (vector, i) {
+                // Pass the specific iconName to the maker
+                const marker = L.marker([vector.lat, vector.lng], { icon: makeIcon(vector.iconName) }).addTo(map);
                 marker.bindPopup(
                     `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
@@ -233,11 +225,11 @@
                 );
                 markers.push(marker);
 
-                // Sidebar vector item
+                // Sidebar vector item using custom SVG image
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <span class="port-dot" style="background:${vector.color};"></span>
+              <img src="${vector.iconName}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 12px;" alt="${vector.short} icon">
               <div class="port-info">
                 <div class="port-name">${vector.short}</div>
                 <div class="port-coords">${vector.lat.toFixed(4)}° N · ${Math.abs(vector.lng).toFixed(4)}° E</div>
@@ -245,34 +237,19 @@
                 item.addEventListener('click', function () { focusVector(i); });
                 document.getElementById('port-list').appendChild(item);
 
-                // Table row badge setup
-                let badgeClass = 'badge-pacific'; // Default GCC/Oman/UAE
-                if (vector.sovereignty === 'Iran') badgeClass = 'badge-atlantic';
-                if (vector.sovereignty === 'International') badgeClass = 'side-badge';
-
-                const badgeHtml = `<span class="side-badge ${badgeClass}">${vector.sovereignty}</span>`;
-
-                const row = document.createElement('tr');
-                row.innerHTML = `
-              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
-              <td>${vector.name}</td>
-              <td>${badgeHtml}</td>
-              <td class="mono">${vector.lat.toFixed(4)}° N</td>
-              <td class="mono">${Math.abs(vector.lng).toFixed(4)}° E</td>
-              <td>${vector.desc.split('.')[0]}</td>`; 
-                row.addEventListener('click', function () { focusVector(i); });
-                document.getElementById('table-body').appendChild(row);
+               
             });
 
 			function focusVector(i) {
-				const targetZoom = vectors[i].short === 'The Chokepoint' ? 10 : 11;
-				document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
-				document.querySelectorAll('#table-body tr').forEach(el => el.classList.remove('active'));
-				document.querySelectorAll('.port-item')[i].classList.add('active');
-				document.querySelectorAll('#table-body tr')[i].classList.add('active');
-				map.flyTo([vectors[i].lat, vectors[i].lng], targetZoom, { duration: 1.2 });
-				setTimeout(() => markers[i].openPopup(), 1300);
-			}
+                const targetZoom = vectors[i].short === 'The Chokepoint' ? 10 : 11;
+                document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+                
+                // --- Table row focus logic has been removed from here ---
+                
+                document.querySelectorAll('.port-item')[i].classList.add('active');
+                map.flyTo([vectors[i].lat, vectors[i].lng], targetZoom, { duration: 1.2 });
+                setTimeout(() => markers[i].openPopup(), 1300);
+            }
 
 			window.flyToLocation = function (coords, zoom) {
 				map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
