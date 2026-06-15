@@ -167,49 +167,49 @@
 		  const markers = [];
 
 		  ports.forEach(function (port, i) {
-		    const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.color) }).addTo(map);
-		    marker.bindPopup(
-		      `<div class="popup-inner">
-		        <p class="popup-tag">Port ${String(i + 1).padStart(2, '0')}</p>
-		        <p class="popup-name">${port.name}</p>
-		        <div class="popup-coord">
-		          <span>Lat: <strong>${port.lat.toFixed(4)}° N</strong></span>
-		          <span>Lng: <strong>${Math.abs(port.lng).toFixed(4)}° W</strong></span>
-		        </div>
-		      </div>
-		      <div class="popup-footer">${port.desc}</div>`,
-		      { maxWidth: 280 }
-		    );
-		    markers.push(marker);
+            const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.color) }).addTo(map);
+            marker.bindPopup(
+              `<div class="popup-inner">
+                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-name">${port.name}</p>
+                <div class="popup-coord">
+                  <span>Lat: <strong>${port.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(port.lng).toFixed(4)}° W</strong></span>
+                </div>
+              </div>
+              <div class="popup-footer">${port.desc}</div>`,
+              { maxWidth: 280 }
+            );
+            markers.push(marker);
 
-		    // Sidebar port item
-		    const item = document.createElement('div');
-		    item.className = 'port-item';
-		    item.innerHTML = `
-		      <span class="port-dot" style="background:${port.color};"></span>
-		      <div class="port-info">
-		        <div class="port-name">${port.short}</div>
-		        <div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° W</div>
-		      </div>`;
-		    item.addEventListener('click', function () { focusPort(i); });
-		    document.getElementById('port-list').appendChild(item);
+            // Sidebar port item
+            const item = document.createElement('div');
+            item.className = 'port-item';
+            item.innerHTML = `
+              <span class="port-dot" style="background:${port.color};"></span>
+              <div class="port-info">
+                <div class="port-name">${port.short}</div>
+                <div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° W</div>
+              </div>`;
+            item.addEventListener('click', function () { focusPort(i); });
+            document.getElementById('port-list').appendChild(item);
 
-		    // Table row
-		    const badgeHtml = port.ocean === 'Atlantic'
-		      ? '<span class="side-badge badge-atlantic">Atlantic</span>'
-		      : '<span class="side-badge badge-pacific">Pacific</span>';
+            // Table row
+            const badgeHtml = port.ocean === 'Atlantic'
+              ? '<span class="side-badge badge-atlantic">Atlantic</span>'
+              : '<span class="side-badge badge-pacific">Pacific</span>';
 
-		    const row = document.createElement('tr');
-		    row.innerHTML = `
-		      <td class="mono">${String(i + 1).padStart(2, '0')}</td>
-		      <td>${port.name}</td>
-		      <td>${badgeHtml}</td>
-		      <td class="mono">${port.lat.toFixed(4)}° N</td>
-		      <td class="mono">${Math.abs(port.lng).toFixed(4)}° W</td>
-		      <td class="mono">${port.elev}</td>`;
-		    row.addEventListener('click', function () { focusPort(i); });
-		    document.getElementById('table-body').appendChild(row);
-		  });
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
+              <td>${port.name}</td>
+              <td>${badgeHtml}</td>
+              <td class="mono">${port.lat.toFixed(4)}° N</td>
+              <td class="mono">${Math.abs(port.lng).toFixed(4)}° W</td>
+              <td class="mono">${port.elev}</td>`;
+            row.addEventListener('click', function () { focusPort(i); });
+            document.getElementById('table-body').appendChild(row);
+          });
 
 		  function focusPort(i) {
 		    document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));

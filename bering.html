@@ -155,7 +155,7 @@
                 const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.color) }).addTo(map);
                 marker.bindPopup(
                     `<div class="popup-inner">
-                <p class="popup-tag">Point ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
                 <p class="popup-name">${landmark.name}</p>
                 <div class="popup-coord">
                   <span>Lat: <strong>${landmark.lat.toFixed(4)}° N</strong></span>

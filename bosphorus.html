@@ -204,11 +204,11 @@
 
             const markers = [];
 
-            landmarks.forEach(function (landmark, i) {
+           landmarks.forEach(function (landmark, i) {
                 const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.color) }).addTo(map);
                 marker.bindPopup(
                     `<div class="popup-inner">
-                <p class="popup-tag">Point ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
                 <p class="popup-name">${landmark.name}</p>
                 <div class="popup-coord">
                   <span>Lat: <strong>${landmark.lat.toFixed(4)}° N</strong></span>
@@ -232,7 +232,7 @@
                 item.addEventListener('click', function () { focusLandmark(i); });
                 document.getElementById('port-list').appendChild(item);
             });
-
+            
             function focusLandmark(i) {
                 const targetZoom = i === 1 || i === 2 || i === 4 ? 14 : 13;
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));

@@ -218,10 +218,10 @@
 			const markers = [];
 
 			vectors.forEach(function (vector, i) {
-				const marker = L.marker([vector.lat, vector.lng], { icon: makeIcon(vector.color) }).addTo(map);
-				marker.bindPopup(
-					`<div class="popup-inner">
-                <p class="popup-tag">Vector ${String(i + 1).padStart(2, '0')}</p>
+                const marker = L.marker([vector.lat, vector.lng], { icon: makeIcon(vector.color) }).addTo(map);
+                marker.bindPopup(
+                    `<div class="popup-inner">
+                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
                 <p class="popup-name">${vector.name}</p>
                 <div class="popup-coord">
                   <span>Lat: <strong>${vector.lat.toFixed(4)}° N</strong></span>
@@ -229,40 +229,40 @@
                 </div>
               </div>
               <div class="popup-footer">${vector.desc}</div>`,
-					{ maxWidth: 280 }
-				);
-				markers.push(marker);
+                    { maxWidth: 280 }
+                );
+                markers.push(marker);
 
-				// Sidebar vector item
-				const item = document.createElement('div');
-				item.className = 'port-item';
-				item.innerHTML = `
+                // Sidebar vector item
+                const item = document.createElement('div');
+                item.className = 'port-item';
+                item.innerHTML = `
               <span class="port-dot" style="background:${vector.color};"></span>
               <div class="port-info">
                 <div class="port-name">${vector.short}</div>
                 <div class="port-coords">${vector.lat.toFixed(4)}° N · ${Math.abs(vector.lng).toFixed(4)}° E</div>
               </div>`;
-				item.addEventListener('click', function () { focusVector(i); });
-				document.getElementById('port-list').appendChild(item);
+                item.addEventListener('click', function () { focusVector(i); });
+                document.getElementById('port-list').appendChild(item);
 
-				// Table row badge setup
-				let badgeClass = 'badge-pacific'; // Default GCC/Oman/UAE
-				if (vector.sovereignty === 'Iran') badgeClass = 'badge-atlantic';
-				if (vector.sovereignty === 'International') badgeClass = 'side-badge';
+                // Table row badge setup
+                let badgeClass = 'badge-pacific'; // Default GCC/Oman/UAE
+                if (vector.sovereignty === 'Iran') badgeClass = 'badge-atlantic';
+                if (vector.sovereignty === 'International') badgeClass = 'side-badge';
 
-				const badgeHtml = `<span class="side-badge ${badgeClass}">${vector.sovereignty}</span>`;
+                const badgeHtml = `<span class="side-badge ${badgeClass}">${vector.sovereignty}</span>`;
 
-				const row = document.createElement('tr');
-				row.innerHTML = `
+                const row = document.createElement('tr');
+                row.innerHTML = `
               <td class="mono">${String(i + 1).padStart(2, '0')}</td>
               <td>${vector.name}</td>
               <td>${badgeHtml}</td>
               <td class="mono">${vector.lat.toFixed(4)}° N</td>
               <td class="mono">${Math.abs(vector.lng).toFixed(4)}° E</td>
               <td>${vector.desc.split('.')[0]}</td>`; 
-				row.addEventListener('click', function () { focusVector(i); });
-				document.getElementById('table-body').appendChild(row);
-			});
+                row.addEventListener('click', function () { focusVector(i); });
+                document.getElementById('table-body').appendChild(row);
+            });
 
 			function focusVector(i) {
 				const targetZoom = vectors[i].short === 'The Chokepoint' ? 10 : 11;
