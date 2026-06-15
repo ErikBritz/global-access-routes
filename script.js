@@ -37,6 +37,7 @@ async function initGlobe() {
 		fullscreenButton: false,
 		selectionIndicator: false,
 		orderIndependentTranslucency: false,
+		useBrowserRecommendedResolution: false,
 		imageryProvider
 	});
 
