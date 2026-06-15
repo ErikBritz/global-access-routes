@@ -53,6 +53,7 @@ async function initGlobe() {
 
 	const entityById = {};
 	const listEl = document.getElementById("strait-list");
+	const dpr = window.devicePixelRatio || 1;
 
 	straits.forEach((strait) => {
 		const entity = viewer.entities.add({
@@ -67,12 +68,12 @@ async function initGlobe() {
 			},
 			label: {
 				text: strait.name,
-				font: "14px sans-serif",
-				font: "600 16px 'IBM Plex Sans', sans-serif",
+				font: `600 ${Math.round(16 * dpr)}px 'IBM Plex Sans', sans-serif`,
 				fillColor: Cesium.Color.WHITE,
 				style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-				outlineWidth: 3,
+				outlineWidth: 3 * dpr,
 				outlineColor: Cesium.Color.BLACK,
+				scale: 1 / dpr,
 				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
 				pixelOffset: new Cesium.Cartesian2(0, -12),
 				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
