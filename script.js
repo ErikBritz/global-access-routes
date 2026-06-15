@@ -76,7 +76,8 @@ async function initGlobe() {
 				scale: 1 / dpr,
 				verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
 				pixelOffset: new Cesium.Cartesian2(0, -12),
-				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+				heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+				disableDepthTestDistance: Number.POSITIVE_INFINITY
 			}
 		});
 
