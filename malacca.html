@@ -17,7 +17,8 @@
 </head>
 
 <body>
-    <div class="strait-bg" style="background-image: url('svg/malacca.svg');"></div>
+    <div class="strait-bg" style="background-image: url('svg/malacca.svg');
+            filter: brightness(2) opacity(0.05);"></div>
     <div class="page">
         <header class="site-header">
             <div class="site-heading">
@@ -26,7 +27,7 @@
             </div>
             <nav class="site-nav">
                 <a href="index.html">Home</a>
-                <a href="hurmuz.html">Hormuz</a>
+                <a href="hurmuz.html">Hurmuz</a>
                 <a href="bosphorus.html">Bosphorus</a>
                 <a href="bering.html">Bering</a>
                 <a href="suez.html">Suez</a>
@@ -48,9 +49,12 @@
                         <div class="map-sidebar">
                             <h3>Strategic Nodes</h3>
                             <div class="sidebar-legend">
-                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon" alt="Entry"> Passage</span>
-                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port"> Port</span>
-                                <span class="legend-label"><img src="iconpack/oil.svg" class="legend-icon" alt="Energy"> Oil Terminal</span>
+                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon"
+                                        alt="Entry"> Passage</span>
+                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port">
+                                    Port</span>
+                                <span class="legend-label"><img src="iconpack/oil.svg" class="legend-icon" alt="Energy">
+                                    Oil Terminal</span>
                             </div>
                             <div class="port-list-wrap" id="port-list"></div>
                         </div>
@@ -58,6 +62,19 @@
 
                     <div class="content-grid">
                         <div class="main-column">
+                            <section class="card">
+                                <h2>Port Arrivals (Monthly)</h2>
+                                <p>Select a port from the Strategic Nodes section to view its specific traffic trends.
+                                </p>
+
+                                <div style="width: 100%; aspect-ratio: 5 / 1; display: block;">
+                                    <div class="timeline-widget">
+                                        <svg id="timeline-svg"
+                                            style="width: 100%; height: 150px; display: block;"></svg>
+                                    </div>
+                                </div>
+                            </section>
+
                             <section class="card">
                                 <h2>Geographic Context</h2>
                                 <p>The Strait of Malacca is one of the world's most strategically vital waterways,
@@ -158,124 +175,126 @@
                 </div>
             </section>
         </main>
+        <footer class="site-footer">
+			<p>Data Sources:
+				Navigation vectors manually extracted;
+				Transit statistics: IMF PortWatch (Educational Use);
+				Historical & geographic context: The Strait of Malacca and Strait of Hormuz: A Brief Historical Review.</p>
+		</footer>
     </div>
-
     <script>
+        // Hardcoded monthly ship arrivals across all 6 Malacca Strait ports
+        const malaccaPortsData = { "belawan": [{ "Month": "2019-01", "Total": 46 }, { "Month": "2019-02", "Total": 50 }, { "Month": "2019-03", "Total": 58 }, { "Month": "2019-04", "Total": 55 }, { "Month": "2019-05", "Total": 43 }, { "Month": "2019-06", "Total": 39 }, { "Month": "2019-07", "Total": 45 }, { "Month": "2019-08", "Total": 50 }, { "Month": "2019-09", "Total": 45 }, { "Month": "2019-10", "Total": 44 }, { "Month": "2019-11", "Total": 50 }, { "Month": "2019-12", "Total": 47 }, { "Month": "2020-01", "Total": 62 }, { "Month": "2020-02", "Total": 44 }, { "Month": "2020-03", "Total": 52 }, { "Month": "2020-04", "Total": 55 }, { "Month": "2020-05", "Total": 49 }, { "Month": "2020-06", "Total": 48 }, { "Month": "2020-07", "Total": 45 }, { "Month": "2020-08", "Total": 51 }, { "Month": "2020-09", "Total": 57 }, { "Month": "2020-10", "Total": 42 }, { "Month": "2020-11", "Total": 51 }, { "Month": "2020-12", "Total": 46 }, { "Month": "2021-01", "Total": 40 }, { "Month": "2021-02", "Total": 45 }, { "Month": "2021-03", "Total": 41 }, { "Month": "2021-04", "Total": 36 }, { "Month": "2021-05", "Total": 36 }, { "Month": "2021-06", "Total": 39 }, { "Month": "2021-07", "Total": 49 }, { "Month": "2021-08", "Total": 55 }, { "Month": "2021-09", "Total": 52 }, { "Month": "2021-10", "Total": 45 }, { "Month": "2021-11", "Total": 106 }, { "Month": "2021-12", "Total": 116 }, { "Month": "2022-01", "Total": 96 }, { "Month": "2022-02", "Total": 87 }, { "Month": "2022-03", "Total": 135 }, { "Month": "2022-04", "Total": 135 }, { "Month": "2022-05", "Total": 86 }, { "Month": "2022-06", "Total": 112 }, { "Month": "2022-07", "Total": 159 }, { "Month": "2022-08", "Total": 145 }, { "Month": "2022-09", "Total": 195 }, { "Month": "2022-10", "Total": 219 }, { "Month": "2022-11", "Total": 199 }, { "Month": "2022-12", "Total": 174 }, { "Month": "2023-01", "Total": 190 }, { "Month": "2023-02", "Total": 166 }, { "Month": "2023-03", "Total": 190 }, { "Month": "2023-04", "Total": 140 }, { "Month": "2023-05", "Total": 177 }, { "Month": "2023-06", "Total": 172 }, { "Month": "2023-07", "Total": 183 }, { "Month": "2023-08", "Total": 174 }, { "Month": "2023-09", "Total": 165 }, { "Month": "2023-10", "Total": 179 }, { "Month": "2023-11", "Total": 188 }, { "Month": "2023-12", "Total": 175 }, { "Month": "2024-01", "Total": 154 }, { "Month": "2024-02", "Total": 149 }, { "Month": "2024-03", "Total": 175 }, { "Month": "2024-04", "Total": 121 }, { "Month": "2024-05", "Total": 166 }, { "Month": "2024-06", "Total": 155 }, { "Month": "2024-07", "Total": 148 }, { "Month": "2024-08", "Total": 79 }, { "Month": "2024-09", "Total": 80 }, { "Month": "2024-10", "Total": 131 }, { "Month": "2024-11", "Total": 166 }, { "Month": "2024-12", "Total": 179 }, { "Month": "2025-01", "Total": 169 }, { "Month": "2025-02", "Total": 160 }, { "Month": "2025-03", "Total": 149 }, { "Month": "2025-04", "Total": 159 }, { "Month": "2025-05", "Total": 176 }, { "Month": "2025-06", "Total": 171 }, { "Month": "2025-07", "Total": 178 }, { "Month": "2025-08", "Total": 164 }, { "Month": "2025-09", "Total": 185 }, { "Month": "2025-10", "Total": 179 }, { "Month": "2025-11", "Total": 142 }, { "Month": "2025-12", "Total": 127 }, { "Month": "2026-01", "Total": 100 }, { "Month": "2026-02", "Total": 86 }, { "Month": "2026-03", "Total": 99 }, { "Month": "2026-04", "Total": 100 }, { "Month": "2026-05", "Total": 153 }, { "Month": "2026-06", "Total": 27 }], "blanglancang": [{ "Month": "2019-01", "Total": 6 }, { "Month": "2019-02", "Total": 4 }, { "Month": "2019-03", "Total": 1 }, { "Month": "2019-04", "Total": 8 }, { "Month": "2019-05", "Total": 2 }, { "Month": "2019-06", "Total": 5 }, { "Month": "2019-07", "Total": 2 }, { "Month": "2019-08", "Total": 8 }, { "Month": "2019-09", "Total": 7 }, { "Month": "2019-10", "Total": 6 }, { "Month": "2019-11", "Total": 6 }, { "Month": "2019-12", "Total": 3 }, { "Month": "2020-01", "Total": 5 }, { "Month": "2020-02", "Total": 5 }, { "Month": "2020-03", "Total": 4 }, { "Month": "2020-04", "Total": 6 }, { "Month": "2020-05", "Total": 5 }, { "Month": "2020-06", "Total": 6 }, { "Month": "2020-07", "Total": 5 }, { "Month": "2020-08", "Total": 5 }, { "Month": "2020-09", "Total": 6 }, { "Month": "2020-10", "Total": 6 }, { "Month": "2020-11", "Total": 5 }, { "Month": "2020-12", "Total": 6 }, { "Month": "2021-01", "Total": 7 }, { "Month": "2021-02", "Total": 3 }, { "Month": "2021-03", "Total": 7 }, { "Month": "2021-04", "Total": 8 }, { "Month": "2021-05", "Total": 6 }, { "Month": "2021-06", "Total": 6 }, { "Month": "2021-07", "Total": 8 }, { "Month": "2021-08", "Total": 15 }, { "Month": "2021-09", "Total": 8 }, { "Month": "2021-10", "Total": 16 }, { "Month": "2021-11", "Total": 8 }, { "Month": "2021-12", "Total": 11 }, { "Month": "2022-01", "Total": 13 }, { "Month": "2022-02", "Total": 3 }, { "Month": "2022-03", "Total": 6 }, { "Month": "2022-04", "Total": 10 }, { "Month": "2022-05", "Total": 16 }, { "Month": "2022-06", "Total": 9 }, { "Month": "2022-07", "Total": 7 }, { "Month": "2022-08", "Total": 10 }, { "Month": "2022-09", "Total": 12 }, { "Month": "2022-10", "Total": 23 }, { "Month": "2022-11", "Total": 12 }, { "Month": "2022-12", "Total": 4 }, { "Month": "2023-01", "Total": 7 }, { "Month": "2023-02", "Total": 7 }, { "Month": "2023-03", "Total": 12 }, { "Month": "2023-04", "Total": 7 }, { "Month": "2023-05", "Total": 5 }, { "Month": "2023-06", "Total": 5 }, { "Month": "2023-07", "Total": 1 }, { "Month": "2023-08", "Total": 9 }, { "Month": "2023-09", "Total": 8 }, { "Month": "2023-10", "Total": 3 }, { "Month": "2023-11", "Total": 5 }, { "Month": "2023-12", "Total": 19 }, { "Month": "2024-01", "Total": 11 }, { "Month": "2024-02", "Total": 7 }, { "Month": "2024-03", "Total": 16 }, { "Month": "2024-04", "Total": 15 }, { "Month": "2024-05", "Total": 15 }, { "Month": "2024-06", "Total": 14 }, { "Month": "2024-07", "Total": 21 }, { "Month": "2024-08", "Total": 14 }, { "Month": "2024-09", "Total": 14 }, { "Month": "2024-10", "Total": 17 }, { "Month": "2024-11", "Total": 19 }, { "Month": "2024-12", "Total": 21 }, { "Month": "2025-01", "Total": 18 }, { "Month": "2025-02", "Total": 15 }, { "Month": "2025-03", "Total": 17 }, { "Month": "2025-04", "Total": 12 }, { "Month": "2025-05", "Total": 18 }, { "Month": "2025-06", "Total": 27 }, { "Month": "2025-07", "Total": 23 }, { "Month": "2025-08", "Total": 24 }, { "Month": "2025-09", "Total": 23 }, { "Month": "2025-10", "Total": 26 }, { "Month": "2025-11", "Total": 23 }, { "Month": "2025-12", "Total": 18 }, { "Month": "2026-01", "Total": 15 }, { "Month": "2026-02", "Total": 20 }, { "Month": "2026-03", "Total": 35 }, { "Month": "2026-04", "Total": 38 }, { "Month": "2026-05", "Total": 59 }, { "Month": "2026-06", "Total": 13 }], "disckson": [{ "Month": "2019-01", "Total": 25 }, { "Month": "2019-02", "Total": 20 }, { "Month": "2019-03", "Total": 16 }, { "Month": "2019-04", "Total": 13 }, { "Month": "2019-05", "Total": 15 }, { "Month": "2019-06", "Total": 13 }, { "Month": "2019-07", "Total": 21 }, { "Month": "2019-08", "Total": 13 }, { "Month": "2019-09", "Total": 15 }, { "Month": "2019-10", "Total": 26 }, { "Month": "2019-11", "Total": 17 }, { "Month": "2019-12", "Total": 24 }, { "Month": "2020-01", "Total": 8 }, { "Month": "2020-02", "Total": 19 }, { "Month": "2020-03", "Total": 14 }, { "Month": "2020-04", "Total": 21 }, { "Month": "2020-05", "Total": 27 }, { "Month": "2020-06", "Total": 19 }, { "Month": "2020-07", "Total": 14 }, { "Month": "2020-08", "Total": 12 }, { "Month": "2020-09", "Total": 18 }, { "Month": "2020-10", "Total": 24 }, { "Month": "2020-11", "Total": 17 }, { "Month": "2020-12", "Total": 15 }, { "Month": "2021-01", "Total": 8 }, { "Month": "2021-02", "Total": 10 }, { "Month": "2021-03", "Total": 15 }, { "Month": "2021-04", "Total": 17 }, { "Month": "2021-05", "Total": 14 }, { "Month": "2021-06", "Total": 13 }, { "Month": "2021-07", "Total": 19 }, { "Month": "2021-08", "Total": 16 }, { "Month": "2021-09", "Total": 11 }, { "Month": "2021-10", "Total": 11 }, { "Month": "2021-11", "Total": 46 }, { "Month": "2021-12", "Total": 45 }, { "Month": "2022-01", "Total": 45 }, { "Month": "2022-02", "Total": 56 }, { "Month": "2022-03", "Total": 60 }, { "Month": "2022-04", "Total": 60 }, { "Month": "2022-05", "Total": 57 }, { "Month": "2022-06", "Total": 59 }, { "Month": "2022-07", "Total": 57 }, { "Month": "2022-08", "Total": 61 }, { "Month": "2022-09", "Total": 44 }, { "Month": "2022-10", "Total": 53 }, { "Month": "2022-11", "Total": 53 }, { "Month": "2022-12", "Total": 60 }, { "Month": "2023-01", "Total": 61 }, { "Month": "2023-02", "Total": 57 }, { "Month": "2023-03", "Total": 67 }, { "Month": "2023-04", "Total": 74 }, { "Month": "2023-05", "Total": 64 }, { "Month": "2023-06", "Total": 48 }, { "Month": "2023-07", "Total": 57 }, { "Month": "2023-08", "Total": 51 }, { "Month": "2023-09", "Total": 65 }, { "Month": "2023-10", "Total": 54 }, { "Month": "2023-11", "Total": 58 }, { "Month": "2023-12", "Total": 71 }, { "Month": "2024-01", "Total": 72 }, { "Month": "2024-02", "Total": 69 }, { "Month": "2024-03", "Total": 67 }, { "Month": "2024-04", "Total": 73 }, { "Month": "2024-05", "Total": 52 }, { "Month": "2024-06", "Total": 52 }, { "Month": "2024-07", "Total": 61 }, { "Month": "2024-08", "Total": 50 }, { "Month": "2024-09", "Total": 51 }, { "Month": "2024-10", "Total": 48 }, { "Month": "2024-11", "Total": 39 }, { "Month": "2024-12", "Total": 48 }, { "Month": "2025-01", "Total": 54 }, { "Month": "2025-02", "Total": 37 }, { "Month": "2025-03", "Total": 42 }, { "Month": "2025-04", "Total": 50 }, { "Month": "2025-05", "Total": 42 }, { "Month": "2025-06", "Total": 39 }, { "Month": "2025-07", "Total": 46 }, { "Month": "2025-08", "Total": 55 }, { "Month": "2025-09", "Total": 62 }, { "Month": "2025-10", "Total": 57 }, { "Month": "2025-11", "Total": 61 }, { "Month": "2025-12", "Total": 45 }, { "Month": "2026-01", "Total": 33 }, { "Month": "2026-02", "Total": 28 }, { "Month": "2026-03", "Total": 39 }, { "Month": "2026-04", "Total": 37 }, { "Month": "2026-05", "Total": 41 }, { "Month": "2026-06", "Total": 6 }], "dumai": [{ "Month": "2019-01", "Total": 175 }, { "Month": "2019-02", "Total": 209 }, { "Month": "2019-03", "Total": 155 }, { "Month": "2019-04", "Total": 147 }, { "Month": "2019-05", "Total": 174 }, { "Month": "2019-06", "Total": 152 }, { "Month": "2019-07", "Total": 181 }, { "Month": "2019-08", "Total": 162 }, { "Month": "2019-09", "Total": 189 }, { "Month": "2019-10", "Total": 209 }, { "Month": "2019-11", "Total": 190 }, { "Month": "2019-12", "Total": 210 }, { "Month": "2020-01", "Total": 184 }, { "Month": "2020-02", "Total": 201 }, { "Month": "2020-03", "Total": 181 }, { "Month": "2020-04", "Total": 177 }, { "Month": "2020-05", "Total": 138 }, { "Month": "2020-06", "Total": 117 }, { "Month": "2020-07", "Total": 140 }, { "Month": "2020-08", "Total": 153 }, { "Month": "2020-09", "Total": 123 }, { "Month": "2020-10", "Total": 151 }, { "Month": "2020-11", "Total": 152 }, { "Month": "2020-12", "Total": 167 }, { "Month": "2021-01", "Total": 160 }, { "Month": "2021-02", "Total": 132 }, { "Month": "2021-03", "Total": 143 }, { "Month": "2021-04", "Total": 186 }, { "Month": "2021-05", "Total": 164 }, { "Month": "2021-06", "Total": 129 }, { "Month": "2021-07", "Total": 149 }, { "Month": "2021-08", "Total": 241 }, { "Month": "2021-09", "Total": 156 }, { "Month": "2021-10", "Total": 148 }, { "Month": "2021-11", "Total": 252 }, { "Month": "2021-12", "Total": 272 }, { "Month": "2022-01", "Total": 236 }, { "Month": "2022-02", "Total": 254 }, { "Month": "2022-03", "Total": 285 }, { "Month": "2022-04", "Total": 250 }, { "Month": "2022-05", "Total": 217 }, { "Month": "2022-06", "Total": 267 }, { "Month": "2022-07", "Total": 344 }, { "Month": "2022-08", "Total": 321 }, { "Month": "2022-09", "Total": 273 }, { "Month": "2022-10", "Total": 314 }, { "Month": "2022-11", "Total": 280 }, { "Month": "2022-12", "Total": 262 }, { "Month": "2023-01", "Total": 260 }, { "Month": "2023-02", "Total": 199 }, { "Month": "2023-03", "Total": 187 }, { "Month": "2023-04", "Total": 198 }, { "Month": "2023-05", "Total": 225 }, { "Month": "2023-06", "Total": 288 }, { "Month": "2023-07", "Total": 314 }, { "Month": "2023-08", "Total": 306 }, { "Month": "2023-09", "Total": 261 }, { "Month": "2023-10", "Total": 281 }, { "Month": "2023-11", "Total": 284 }, { "Month": "2023-12", "Total": 285 }, { "Month": "2024-01", "Total": 280 }, { "Month": "2024-02", "Total": 205 }, { "Month": "2024-03", "Total": 253 }, { "Month": "2024-04", "Total": 239 }, { "Month": "2024-05", "Total": 271 }, { "Month": "2024-06", "Total": 262 }, { "Month": "2024-07", "Total": 168 }, { "Month": "2024-08", "Total": 252 }, { "Month": "2024-09", "Total": 263 }, { "Month": "2024-10", "Total": 274 }, { "Month": "2024-11", "Total": 237 }, { "Month": "2024-12", "Total": 225 }, { "Month": "2025-01", "Total": 183 }, { "Month": "2025-02", "Total": 232 }, { "Month": "2025-03", "Total": 243 }, { "Month": "2025-04", "Total": 186 }, { "Month": "2025-05", "Total": 224 }, { "Month": "2025-06", "Total": 246 }, { "Month": "2025-07", "Total": 228 }, { "Month": "2025-08", "Total": 212 }, { "Month": "2025-09", "Total": 198 }, { "Month": "2025-10", "Total": 230 }, { "Month": "2025-11", "Total": 195 }, { "Month": "2025-12", "Total": 232 }, { "Month": "2026-01", "Total": 194 }, { "Month": "2026-02", "Total": 201 }, { "Month": "2026-03", "Total": 166 }, { "Month": "2026-04", "Total": 175 }, { "Month": "2026-05", "Total": 189 }, { "Month": "2026-06", "Total": 39 }], "klang": [{ "Month": "2019-01", "Total": 859 }, { "Month": "2019-02", "Total": 641 }, { "Month": "2019-03", "Total": 979 }, { "Month": "2019-04", "Total": 780 }, { "Month": "2019-05", "Total": 985 }, { "Month": "2019-06", "Total": 783 }, { "Month": "2019-07", "Total": 963 }, { "Month": "2019-08", "Total": 955 }, { "Month": "2019-09", "Total": 972 }, { "Month": "2019-10", "Total": 966 }, { "Month": "2019-11", "Total": 939 }, { "Month": "2019-12", "Total": 978 }, { "Month": "2020-01", "Total": 969 }, { "Month": "2020-02", "Total": 902 }, { "Month": "2020-03", "Total": 888 }, { "Month": "2020-04", "Total": 384 }, { "Month": "2020-05", "Total": 631 }, { "Month": "2020-06", "Total": 802 }, { "Month": "2020-07", "Total": 948 }, { "Month": "2020-08", "Total": 763 }, { "Month": "2020-09", "Total": 985 }, { "Month": "2020-10", "Total": 953 }, { "Month": "2020-11", "Total": 730 }, { "Month": "2020-12", "Total": 499 }, { "Month": "2021-01", "Total": 500 }, { "Month": "2021-02", "Total": 628 }, { "Month": "2021-03", "Total": 902 }, { "Month": "2021-04", "Total": 707 }, { "Month": "2021-05", "Total": 789 }, { "Month": "2021-06", "Total": 603 }, { "Month": "2021-07", "Total": 643 }, { "Month": "2021-08", "Total": 720 }, { "Month": "2021-09", "Total": 251 }, { "Month": "2021-10", "Total": 380 }, { "Month": "2021-11", "Total": 811 }, { "Month": "2021-12", "Total": 907 }, { "Month": "2022-01", "Total": 919 }, { "Month": "2022-02", "Total": 873 }, { "Month": "2022-03", "Total": 954 }, { "Month": "2022-04", "Total": 928 }, { "Month": "2022-05", "Total": 983 }, { "Month": "2022-06", "Total": 949 }, { "Month": "2022-07", "Total": 971 }, { "Month": "2022-08", "Total": 1041 }, { "Month": "2022-09", "Total": 1002 }, { "Month": "2022-10", "Total": 1057 }, { "Month": "2022-11", "Total": 1050 }, { "Month": "2022-12", "Total": 1098 }, { "Month": "2023-01", "Total": 1087 }, { "Month": "2023-02", "Total": 1008 }, { "Month": "2023-03", "Total": 1141 }, { "Month": "2023-04", "Total": 1063 }, { "Month": "2023-05", "Total": 1101 }, { "Month": "2023-06", "Total": 1161 }, { "Month": "2023-07", "Total": 1139 }, { "Month": "2023-08", "Total": 1094 }, { "Month": "2023-09", "Total": 1112 }, { "Month": "2023-10", "Total": 1158 }, { "Month": "2023-11", "Total": 1118 }, { "Month": "2023-12", "Total": 1160 }, { "Month": "2024-01", "Total": 1134 }, { "Month": "2024-02", "Total": 1034 }, { "Month": "2024-03", "Total": 1042 }, { "Month": "2024-04", "Total": 1037 }, { "Month": "2024-05", "Total": 1079 }, { "Month": "2024-06", "Total": 1068 }, { "Month": "2024-07", "Total": 1091 }, { "Month": "2024-08", "Total": 1095 }, { "Month": "2024-09", "Total": 1038 }, { "Month": "2024-10", "Total": 1106 }, { "Month": "2024-11", "Total": 1051 }, { "Month": "2024-12", "Total": 1137 }, { "Month": "2025-01", "Total": 1126 }, { "Month": "2025-02", "Total": 998 }, { "Month": "2025-03", "Total": 1066 }, { "Month": "2025-04", "Total": 1051 }, { "Month": "2025-05", "Total": 1061 }, { "Month": "2025-06", "Total": 1018 }, { "Month": "2025-07", "Total": 1080 }, { "Month": "2025-08", "Total": 1084 }, { "Month": "2025-09", "Total": 1076 }, { "Month": "2025-10", "Total": 1132 }, { "Month": "2025-11", "Total": 1017 }, { "Month": "2025-12", "Total": 1043 }, { "Month": "2026-01", "Total": 1082 }, { "Month": "2026-02", "Total": 960 }, { "Month": "2026-03", "Total": 1076 }, { "Month": "2026-04", "Total": 1058 }, { "Month": "2026-05", "Total": 1029 }, { "Month": "2026-06", "Total": 153 }], "kuala-tanjung": [{ "Month": "2019-01", "Total": 7 }, { "Month": "2019-02", "Total": 7 }, { "Month": "2019-03", "Total": 8 }, { "Month": "2019-04", "Total": 3 }, { "Month": "2019-05", "Total": 6 }, { "Month": "2019-06", "Total": 7 }, { "Month": "2019-07", "Total": 5 }, { "Month": "2019-08", "Total": 6 }, { "Month": "2019-09", "Total": 13 }, { "Month": "2019-10", "Total": 13 }, { "Month": "2019-11", "Total": 11 }, { "Month": "2019-12", "Total": 10 }, { "Month": "2020-01", "Total": 8 }, { "Month": "2020-02", "Total": 9 }, { "Month": "2020-03", "Total": 13 }, { "Month": "2020-04", "Total": 13 }, { "Month": "2020-05", "Total": 6 }, { "Month": "2020-06", "Total": 10 }, { "Month": "2020-07", "Total": 10 }, { "Month": "2020-08", "Total": 15 }, { "Month": "2020-09", "Total": 9 }, { "Month": "2020-10", "Total": 11 }, { "Month": "2020-11", "Total": 6 }, { "Month": "2020-12", "Total": 10 }, { "Month": "2021-01", "Total": 10 }, { "Month": "2021-02", "Total": 9 }, { "Month": "2021-03", "Total": 13 }, { "Month": "2021-04", "Total": 11 }, { "Month": "2021-05", "Total": 12 }, { "Month": "2021-06", "Total": 5 }, { "Month": "2021-07", "Total": 12 }, { "Month": "2021-08", "Total": 15 }, { "Month": "2021-09", "Total": 11 }, { "Month": "2021-10", "Total": 11 }, { "Month": "2021-11", "Total": 10 }, { "Month": "2021-12", "Total": 16 }, { "Month": "2022-01", "Total": 12 }, { "Month": "2022-02", "Total": 13 }, { "Month": "2022-03", "Total": 6 }, { "Month": "2022-04", "Total": 13 }, { "Month": "2022-05", "Total": 12 }, { "Month": "2022-06", "Total": 11 }, { "Month": "2022-07", "Total": 20 }, { "Month": "2022-08", "Total": 24 }, { "Month": "2022-09", "Total": 19 }, { "Month": "2022-10", "Total": 12 }, { "Month": "2022-11", "Total": 13 }, { "Month": "2022-12", "Total": 14 }, { "Month": "2023-01", "Total": 14 }, { "Month": "2023-02", "Total": 17 }, { "Month": "2023-03", "Total": 15 }, { "Month": "2023-04", "Total": 18 }, { "Month": "2023-05", "Total": 17 }, { "Month": "2023-06", "Total": 22 }, { "Month": "2023-07", "Total": 22 }, { "Month": "2023-08", "Total": 18 }, { "Month": "2023-09", "Total": 11 }, { "Month": "2023-10", "Total": 19 }, { "Month": "2023-11", "Total": 20 }, { "Month": "2023-12", "Total": 14 }, { "Month": "2024-01", "Total": 8 }, { "Month": "2024-02", "Total": 17 }, { "Month": "2024-03", "Total": 25 }, { "Month": "2024-04", "Total": 13 }, { "Month": "2024-05", "Total": 18 }, { "Month": "2024-06", "Total": 10 }, { "Month": "2024-07", "Total": 19 }, { "Month": "2024-08", "Total": 10 }, { "Month": "2024-09", "Total": 15 }, { "Month": "2024-10", "Total": 14 }, { "Month": "2024-11", "Total": 12 }, { "Month": "2024-12", "Total": 16 }, { "Month": "2025-01", "Total": 10 }, { "Month": "2025-02", "Total": 9 }, { "Month": "2025-03", "Total": 14 }, { "Month": "2025-04", "Total": 5 }, { "Month": "2025-05", "Total": 16 }, { "Month": "2025-06", "Total": 19 }, { "Month": "2025-07", "Total": 22 }, { "Month": "2025-08", "Total": 16 }, { "Month": "2025-09", "Total": 13 }, { "Month": "2025-10", "Total": 17 }, { "Month": "2025-11", "Total": 8 }, { "Month": "2025-12", "Total": 12 }, { "Month": "2026-01", "Total": 17 }, { "Month": "2026-02", "Total": 22 }, { "Month": "2026-03", "Total": 25 }, { "Month": "2026-04", "Total": 27 }, { "Month": "2026-05", "Total": 39 }, { "Month": "2026-06", "Total": 10 }], "lumut": [{ "Month": "2019-01", "Total": 66 }, { "Month": "2019-02", "Total": 70 }, { "Month": "2019-03", "Total": 47 }, { "Month": "2019-04", "Total": 71 }, { "Month": "2019-05", "Total": 59 }, { "Month": "2019-06", "Total": 70 }, { "Month": "2019-07", "Total": 67 }, { "Month": "2019-08", "Total": 70 }, { "Month": "2019-09", "Total": 68 }, { "Month": "2019-10", "Total": 68 }, { "Month": "2019-11", "Total": 64 }, { "Month": "2019-12", "Total": 61 }, { "Month": "2020-01", "Total": 52 }, { "Month": "2020-02", "Total": 54 }, { "Month": "2020-03", "Total": 61 }, { "Month": "2020-04", "Total": 31 }, { "Month": "2020-05", "Total": 26 }, { "Month": "2020-06", "Total": 47 }, { "Month": "2020-07", "Total": 63 }, { "Month": "2020-08", "Total": 59 }, { "Month": "2020-09", "Total": 17 }, { "Month": "2020-10", "Total": 49 }, { "Month": "2020-11", "Total": 61 }, { "Month": "2020-12", "Total": 49 }, { "Month": "2021-01", "Total": 58 }, { "Month": "2021-02", "Total": 25 }, { "Month": "2021-03", "Total": 56 }, { "Month": "2021-04", "Total": 59 }, { "Month": "2021-05", "Total": 50 }, { "Month": "2021-06", "Total": 52 }, { "Month": "2021-07", "Total": 48 }, { "Month": "2021-08", "Total": 52 }, { "Month": "2021-09", "Total": 64 }, { "Month": "2021-10", "Total": 62 }, { "Month": "2021-11", "Total": 62 }, { "Month": "2021-12", "Total": 65 }, { "Month": "2022-01", "Total": 44 }, { "Month": "2022-02", "Total": 50 }, { "Month": "2022-03", "Total": 68 }, { "Month": "2022-04", "Total": 62 }, { "Month": "2022-05", "Total": 64 }, { "Month": "2022-06", "Total": 55 }, { "Month": "2022-07", "Total": 66 }, { "Month": "2022-08", "Total": 61 }, { "Month": "2022-09", "Total": 58 }, { "Month": "2022-10", "Total": 80 }, { "Month": "2022-11", "Total": 57 }, { "Month": "2022-12", "Total": 68 }, { "Month": "2023-01", "Total": 56 }, { "Month": "2023-02", "Total": 53 }, { "Month": "2023-03", "Total": 56 }, { "Month": "2023-04", "Total": 58 }, { "Month": "2023-05", "Total": 47 }, { "Month": "2023-06", "Total": 43 }, { "Month": "2023-07", "Total": 50 }, { "Month": "2023-08", "Total": 60 }, { "Month": "2023-09", "Total": 49 }, { "Month": "2023-10", "Total": 53 }, { "Month": "2023-11", "Total": 55 }, { "Month": "2023-12", "Total": 51 }, { "Month": "2024-01", "Total": 59 }, { "Month": "2024-02", "Total": 46 }, { "Month": "2024-03", "Total": 53 }, { "Month": "2024-04", "Total": 56 }, { "Month": "2024-05", "Total": 59 }, { "Month": "2024-06", "Total": 53 }, { "Month": "2024-07", "Total": 54 }, { "Month": "2024-08", "Total": 55 }, { "Month": "2024-09", "Total": 32 }, { "Month": "2024-10", "Total": 44 }, { "Month": "2024-11", "Total": 47 }, { "Month": "2024-12", "Total": 57 }, { "Month": "2025-01", "Total": 55 }, { "Month": "2025-02", "Total": 54 }, { "Month": "2025-03", "Total": 61 }, { "Month": "2025-04", "Total": 54 }, { "Month": "2025-05", "Total": 57 }, { "Month": "2025-06", "Total": 66 }, { "Month": "2025-07", "Total": 61 }, { "Month": "2025-08", "Total": 64 }, { "Month": "2025-09", "Total": 56 }, { "Month": "2025-10", "Total": 62 }, { "Month": "2025-11", "Total": 49 }, { "Month": "2025-12", "Total": 70 }, { "Month": "2026-01", "Total": 67 }, { "Month": "2026-02", "Total": 50 }, { "Month": "2026-03", "Total": 65 }, { "Month": "2026-04", "Total": 61 }, { "Month": "2026-05", "Total": 52 }, { "Month": "2026-06", "Total": 10 }], "penang": [{ "Month": "2019-01", "Total": 162 }, { "Month": "2019-02", "Total": 140 }, { "Month": "2019-03", "Total": 164 }, { "Month": "2019-04", "Total": 164 }, { "Month": "2019-05", "Total": 172 }, { "Month": "2019-06", "Total": 159 }, { "Month": "2019-07", "Total": 172 }, { "Month": "2019-08", "Total": 169 }, { "Month": "2019-09", "Total": 158 }, { "Month": "2019-10", "Total": 164 }, { "Month": "2019-11", "Total": 163 }, { "Month": "2019-12", "Total": 149 }, { "Month": "2020-01", "Total": 174 }, { "Month": "2020-02", "Total": 154 }, { "Month": "2020-03", "Total": 154 }, { "Month": "2020-04", "Total": 131 }, { "Month": "2020-05", "Total": 131 }, { "Month": "2020-06", "Total": 149 }, { "Month": "2020-07", "Total": 152 }, { "Month": "2020-08", "Total": 150 }, { "Month": "2020-09", "Total": 147 }, { "Month": "2020-10", "Total": 154 }, { "Month": "2020-11", "Total": 144 }, { "Month": "2020-12", "Total": 152 }, { "Month": "2021-01", "Total": 128 }, { "Month": "2021-02", "Total": 129 }, { "Month": "2021-03", "Total": 135 }, { "Month": "2021-04", "Total": 100 }, { "Month": "2021-05", "Total": 32 }, { "Month": "2021-06", "Total": 23 }, { "Month": "2021-07", "Total": 123 }, { "Month": "2021-08", "Total": 122 }, { "Month": "2021-09", "Total": 116 }, { "Month": "2021-10", "Total": 142 }, { "Month": "2021-11", "Total": 138 }, { "Month": "2021-12", "Total": 142 }, { "Month": "2022-01", "Total": 136 }, { "Month": "2022-02", "Total": 115 }, { "Month": "2022-03", "Total": 151 }, { "Month": "2022-04", "Total": 141 }, { "Month": "2022-05", "Total": 148 }, { "Month": "2022-06", "Total": 141 }, { "Month": "2022-07", "Total": 153 }, { "Month": "2022-08", "Total": 160 }, { "Month": "2022-09", "Total": 144 }, { "Month": "2022-10", "Total": 149 }, { "Month": "2022-11", "Total": 156 }, { "Month": "2022-12", "Total": 162 }, { "Month": "2023-01", "Total": 156 }, { "Month": "2023-02", "Total": 150 }, { "Month": "2023-03", "Total": 161 }, { "Month": "2023-04", "Total": 157 }, { "Month": "2023-05", "Total": 159 }, { "Month": "2023-06", "Total": 160 }, { "Month": "2023-07", "Total": 152 }, { "Month": "2023-08", "Total": 161 }, { "Month": "2023-09", "Total": 168 }, { "Month": "2023-10", "Total": 174 }, { "Month": "2023-11", "Total": 173 }, { "Month": "2023-12", "Total": 179 }, { "Month": "2024-01", "Total": 183 }, { "Month": "2024-02", "Total": 157 }, { "Month": "2024-03", "Total": 171 }, { "Month": "2024-04", "Total": 163 }, { "Month": "2024-05", "Total": 164 }, { "Month": "2024-06", "Total": 155 }, { "Month": "2024-07", "Total": 155 }, { "Month": "2024-08", "Total": 163 }, { "Month": "2024-09", "Total": 172 }, { "Month": "2024-10", "Total": 165 }, { "Month": "2024-11", "Total": 142 }, { "Month": "2024-12", "Total": 157 }, { "Month": "2025-01", "Total": 164 }, { "Month": "2025-02", "Total": 119 }, { "Month": "2025-03", "Total": 151 }, { "Month": "2025-04", "Total": 147 }, { "Month": "2025-05", "Total": 158 }, { "Month": "2025-06", "Total": 157 }, { "Month": "2025-07", "Total": 161 }, { "Month": "2025-08", "Total": 155 }, { "Month": "2025-09", "Total": 155 }, { "Month": "2025-10", "Total": 149 }, { "Month": "2025-11", "Total": 148 }, { "Month": "2025-12", "Total": 159 }, { "Month": "2026-01", "Total": 162 }, { "Month": "2026-02", "Total": 143 }, { "Month": "2026-03", "Total": 146 }, { "Month": "2026-04", "Total": 147 }, { "Month": "2026-05", "Total": 154 }, { "Month": "2026-06", "Total": 21 }], "serangoon": [{ "Month": "2019-01", "Total": 175 }, { "Month": "2019-02", "Total": 185 }, { "Month": "2019-03", "Total": 214 }, { "Month": "2019-04", "Total": 232 }, { "Month": "2019-05", "Total": 294 }, { "Month": "2019-06", "Total": 258 }, { "Month": "2019-07", "Total": 261 }, { "Month": "2019-08", "Total": 276 }, { "Month": "2019-09", "Total": 270 }, { "Month": "2019-10", "Total": 267 }, { "Month": "2019-11", "Total": 266 }, { "Month": "2019-12", "Total": 266 }, { "Month": "2020-01", "Total": 253 }, { "Month": "2020-02", "Total": 241 }, { "Month": "2020-03", "Total": 239 }, { "Month": "2020-04", "Total": 177 }, { "Month": "2020-05", "Total": 186 }, { "Month": "2020-06", "Total": 229 }, { "Month": "2020-07", "Total": 222 }, { "Month": "2020-08", "Total": 228 }, { "Month": "2020-09", "Total": 221 }, { "Month": "2020-10", "Total": 226 }, { "Month": "2020-11", "Total": 247 }, { "Month": "2020-12", "Total": 240 }, { "Month": "2021-01", "Total": 246 }, { "Month": "2021-02", "Total": 238 }, { "Month": "2021-03", "Total": 253 }, { "Month": "2021-04", "Total": 218 }, { "Month": "2021-05", "Total": 240 }, { "Month": "2021-06", "Total": 221 }, { "Month": "2021-07", "Total": 244 }, { "Month": "2021-08", "Total": 231 }, { "Month": "2021-09", "Total": 224 }, { "Month": "2021-10", "Total": 251 }, { "Month": "2021-11", "Total": 245 }, { "Month": "2021-12", "Total": 270 }, { "Month": "2022-01", "Total": 270 }, { "Month": "2022-02", "Total": 228 }, { "Month": "2022-03", "Total": 265 }, { "Month": "2022-04", "Total": 231 }, { "Month": "2022-05", "Total": 240 }, { "Month": "2022-06", "Total": 246 }, { "Month": "2022-07", "Total": 264 }, { "Month": "2022-08", "Total": 267 }, { "Month": "2022-09", "Total": 255 }, { "Month": "2022-10", "Total": 257 }, { "Month": "2022-11", "Total": 233 }, { "Month": "2022-12", "Total": 273 }, { "Month": "2023-01", "Total": 250 }, { "Month": "2023-02", "Total": 269 }, { "Month": "2023-03", "Total": 300 }, { "Month": "2023-04", "Total": 293 }, { "Month": "2023-05", "Total": 281 }, { "Month": "2023-06", "Total": 307 }, { "Month": "2023-07", "Total": 269 }, { "Month": "2023-08", "Total": 287 }, { "Month": "2023-09", "Total": 314 }, { "Month": "2023-10", "Total": 321 }, { "Month": "2023-11", "Total": 300 }, { "Month": "2023-12", "Total": 317 }, { "Month": "2024-01", "Total": 299 }, { "Month": "2024-02", "Total": 292 }, { "Month": "2024-03", "Total": 327 }, { "Month": "2024-04", "Total": 326 }, { "Month": "2024-05", "Total": 349 }, { "Month": "2024-06", "Total": 325 }, { "Month": "2024-07", "Total": 307 }, { "Month": "2024-08", "Total": 330 }, { "Month": "2024-09", "Total": 272 }, { "Month": "2024-10", "Total": 274 }, { "Month": "2024-11", "Total": 284 }, { "Month": "2024-12", "Total": 309 }, { "Month": "2025-01", "Total": 308 }, { "Month": "2025-02", "Total": 273 }, { "Month": "2025-03", "Total": 295 }, { "Month": "2025-04", "Total": 275 }, { "Month": "2025-05", "Total": 286 }, { "Month": "2025-06", "Total": 276 }, { "Month": "2025-07", "Total": 288 }, { "Month": "2025-08", "Total": 283 }, { "Month": "2025-09", "Total": 273 }, { "Month": "2025-10", "Total": 268 }, { "Month": "2025-11", "Total": 268 }, { "Month": "2025-12", "Total": 298 }, { "Month": "2026-01", "Total": 302 }, { "Month": "2026-02", "Total": 265 }, { "Month": "2026-03", "Total": 260 }, { "Month": "2026-04", "Total": 241 }, { "Month": "2026-05", "Total": 216 }, { "Month": "2026-06", "Total": 40 }], "singapore": [{ "Month": "2019-01", "Total": 3791 }, { "Month": "2019-02", "Total": 3435 }, { "Month": "2019-03", "Total": 3717 }, { "Month": "2019-04", "Total": 3665 }, { "Month": "2019-05", "Total": 3872 }, { "Month": "2019-06", "Total": 3736 }, { "Month": "2019-07", "Total": 3895 }, { "Month": "2019-08", "Total": 3746 }, { "Month": "2019-09", "Total": 3787 }, { "Month": "2019-10", "Total": 3975 }, { "Month": "2019-11", "Total": 3855 }, { "Month": "2019-12", "Total": 3952 }, { "Month": "2020-01", "Total": 3996 }, { "Month": "2020-02", "Total": 3608 }, { "Month": "2020-03", "Total": 3985 }, { "Month": "2020-04", "Total": 3543 }, { "Month": "2020-05", "Total": 3519 }, { "Month": "2020-06", "Total": 3495 }, { "Month": "2020-07", "Total": 3614 }, { "Month": "2020-08", "Total": 3689 }, { "Month": "2020-09", "Total": 3565 }, { "Month": "2020-10", "Total": 3634 }, { "Month": "2020-11", "Total": 3517 }, { "Month": "2020-12", "Total": 3594 }, { "Month": "2021-01", "Total": 3979 }, { "Month": "2021-02", "Total": 3402 }, { "Month": "2021-03", "Total": 3693 }, { "Month": "2021-04", "Total": 3599 }, { "Month": "2021-05", "Total": 3658 }, { "Month": "2021-06", "Total": 3382 }, { "Month": "2021-07", "Total": 3503 }, { "Month": "2021-08", "Total": 3420 }, { "Month": "2021-09", "Total": 3355 }, { "Month": "2021-10", "Total": 3424 }, { "Month": "2021-11", "Total": 3485 }, { "Month": "2021-12", "Total": 3513 }, { "Month": "2022-01", "Total": 3602 }, { "Month": "2022-02", "Total": 3262 }, { "Month": "2022-03", "Total": 3567 }, { "Month": "2022-04", "Total": 3527 }, { "Month": "2022-05", "Total": 3670 }, { "Month": "2022-06", "Total": 3586 }, { "Month": "2022-07", "Total": 3702 }, { "Month": "2022-08", "Total": 3721 }, { "Month": "2022-09", "Total": 3531 }, { "Month": "2022-10", "Total": 3728 }, { "Month": "2022-11", "Total": 3717 }, { "Month": "2022-12", "Total": 3775 }, { "Month": "2023-01", "Total": 3817 }, { "Month": "2023-02", "Total": 3490 }, { "Month": "2023-03", "Total": 3765 }, { "Month": "2023-04", "Total": 3779 }, { "Month": "2023-05", "Total": 3925 }, { "Month": "2023-06", "Total": 3783 }, { "Month": "2023-07", "Total": 3875 }, { "Month": "2023-08", "Total": 3872 }, { "Month": "2023-09", "Total": 3698 }, { "Month": "2023-10", "Total": 3824 }, { "Month": "2023-11", "Total": 3667 }, { "Month": "2023-12", "Total": 3783 }, { "Month": "2024-01", "Total": 3830 }, { "Month": "2024-02", "Total": 3633 }, { "Month": "2024-03", "Total": 3720 }, { "Month": "2024-04", "Total": 3670 }, { "Month": "2024-05", "Total": 3741 }, { "Month": "2024-06", "Total": 3551 }, { "Month": "2024-07", "Total": 3554 }, { "Month": "2024-08", "Total": 3722 }, { "Month": "2024-09", "Total": 3582 }, { "Month": "2024-10", "Total": 3749 }, { "Month": "2024-11", "Total": 3709 }, { "Month": "2024-12", "Total": 3820 }, { "Month": "2025-01", "Total": 3822 }, { "Month": "2025-02", "Total": 3407 }, { "Month": "2025-03", "Total": 3855 }, { "Month": "2025-04", "Total": 3771 }, { "Month": "2025-05", "Total": 3929 }, { "Month": "2025-06", "Total": 3871 }, { "Month": "2025-07", "Total": 3942 }, { "Month": "2025-08", "Total": 3884 }, { "Month": "2025-09", "Total": 3770 }, { "Month": "2025-10", "Total": 4043 }, { "Month": "2025-11", "Total": 3878 }, { "Month": "2025-12", "Total": 3883 }, { "Month": "2026-01", "Total": 3932 }, { "Month": "2026-02", "Total": 3525 }, { "Month": "2026-03", "Total": 3869 }, { "Month": "2026-04", "Total": 3625 }, { "Month": "2026-05", "Total": 3863 }, { "Month": "2026-06", "Total": 598 }], "sungai-pakning": [{ "Month": "2019-01", "Total": 9 }, { "Month": "2019-02", "Total": 8 }, { "Month": "2019-03", "Total": 12 }, { "Month": "2019-04", "Total": 7 }, { "Month": "2019-05", "Total": 5 }, { "Month": "2019-06", "Total": 8 }, { "Month": "2019-07", "Total": 3 }, { "Month": "2019-08", "Total": 6 }, { "Month": "2019-09", "Total": 3 }, { "Month": "2019-10", "Total": 6 }, { "Month": "2019-11", "Total": 6 }, { "Month": "2019-12", "Total": 10 }, { "Month": "2020-01", "Total": 11 }, { "Month": "2020-02", "Total": 9 }, { "Month": "2020-03", "Total": 7 }, { "Month": "2020-04", "Total": 9 }, { "Month": "2020-05", "Total": 8 }, { "Month": "2020-06", "Total": 4 }, { "Month": "2020-07", "Total": 3 }, { "Month": "2020-08", "Total": 6 }, { "Month": "2020-09", "Total": 3 }, { "Month": "2020-10", "Total": 3 }, { "Month": "2020-11", "Total": 7 }, { "Month": "2020-12", "Total": 9 }, { "Month": "2021-01", "Total": 9 }, { "Month": "2021-02", "Total": 2 }, { "Month": "2021-03", "Total": 6 }, { "Month": "2021-04", "Total": 6 }, { "Month": "2021-05", "Total": 9 }, { "Month": "2021-06", "Total": 4 }, { "Month": "2021-07", "Total": 3 }, { "Month": "2021-08", "Total": 5 }, { "Month": "2021-09", "Total": 1 }, { "Month": "2021-10", "Total": 8 }, { "Month": "2021-11", "Total": 6 }, { "Month": "2021-12", "Total": 4 }, { "Month": "2022-01", "Total": 4 }, { "Month": "2022-02", "Total": 7 }, { "Month": "2022-03", "Total": 7 }, { "Month": "2022-04", "Total": 5 }, { "Month": "2022-05", "Total": 2 }, { "Month": "2022-06", "Total": 2 }, { "Month": "2022-07", "Total": 8 }, { "Month": "2022-08", "Total": 3 }, { "Month": "2022-09", "Total": 11 }, { "Month": "2022-10", "Total": 7 }, { "Month": "2022-11", "Total": 7 }, { "Month": "2022-12", "Total": 9 }, { "Month": "2023-01", "Total": 10 }, { "Month": "2023-02", "Total": 13 }, { "Month": "2023-03", "Total": 13 }, { "Month": "2023-04", "Total": 12 }, { "Month": "2023-05", "Total": 7 }, { "Month": "2023-06", "Total": 14 }, { "Month": "2023-07", "Total": 10 }, { "Month": "2023-08", "Total": 12 }, { "Month": "2023-09", "Total": 13 }, { "Month": "2023-10", "Total": 14 }, { "Month": "2023-11", "Total": 7 }, { "Month": "2023-12", "Total": 12 }, { "Month": "2024-01", "Total": 9 }, { "Month": "2024-02", "Total": 11 }, { "Month": "2024-03", "Total": 9 }, { "Month": "2024-04", "Total": 8 }, { "Month": "2024-05", "Total": 11 }, { "Month": "2024-06", "Total": 9 }, { "Month": "2024-07", "Total": 7 }, { "Month": "2024-08", "Total": 4 }, { "Month": "2024-09", "Total": 7 }, { "Month": "2024-10", "Total": 10 }, { "Month": "2024-11", "Total": 9 }, { "Month": "2024-12", "Total": 12 }, { "Month": "2025-01", "Total": 12 }, { "Month": "2025-02", "Total": 10 }, { "Month": "2025-03", "Total": 6 }, { "Month": "2025-04", "Total": 13 }, { "Month": "2025-05", "Total": 7 }, { "Month": "2025-06", "Total": 7 }, { "Month": "2025-07", "Total": 14 }, { "Month": "2025-08", "Total": 16 }, { "Month": "2025-09", "Total": 18 }, { "Month": "2025-10", "Total": 16 }, { "Month": "2025-11", "Total": 16 }, { "Month": "2025-12", "Total": 14 }, { "Month": "2026-01", "Total": 21 }, { "Month": "2026-02", "Total": 19 }, { "Month": "2026-03", "Total": 14 }, { "Month": "2026-04", "Total": 19 }, { "Month": "2026-05", "Total": 21 }, { "Month": "2026-06", "Total": 2 }], "udang": [{ "Month": "2019-01", "Total": 33 }, { "Month": "2019-02", "Total": 22 }, { "Month": "2019-03", "Total": 26 }, { "Month": "2019-04", "Total": 28 }, { "Month": "2019-05", "Total": 33 }, { "Month": "2019-06", "Total": 24 }, { "Month": "2019-07", "Total": 24 }, { "Month": "2019-08", "Total": 30 }, { "Month": "2019-09", "Total": 29 }, { "Month": "2019-10", "Total": 36 }, { "Month": "2019-11", "Total": 18 }, { "Month": "2019-12", "Total": 19 }, { "Month": "2020-01", "Total": 30 }, { "Month": "2020-02", "Total": 16 }, { "Month": "2020-03", "Total": 27 }, { "Month": "2020-04", "Total": 21 }, { "Month": "2020-05", "Total": 19 }, { "Month": "2020-06", "Total": 16 }, { "Month": "2020-07", "Total": 30 }, { "Month": "2020-08", "Total": 24 }, { "Month": "2020-09", "Total": 37 }, { "Month": "2020-10", "Total": 37 }, { "Month": "2020-11", "Total": 39 }, { "Month": "2020-12", "Total": 26 }, { "Month": "2021-01", "Total": 22 }, { "Month": "2021-02", "Total": 31 }, { "Month": "2021-03", "Total": 29 }, { "Month": "2021-04", "Total": 24 }, { "Month": "2021-05", "Total": 38 }, { "Month": "2021-06", "Total": 39 }, { "Month": "2021-07", "Total": 33 }, { "Month": "2021-08", "Total": 35 }, { "Month": "2021-09", "Total": 36 }, { "Month": "2021-10", "Total": 33 }, { "Month": "2021-11", "Total": 60 }, { "Month": "2021-12", "Total": 73 }, { "Month": "2022-01", "Total": 73 }, { "Month": "2022-02", "Total": 64 }, { "Month": "2022-03", "Total": 75 }, { "Month": "2022-04", "Total": 70 }, { "Month": "2022-05", "Total": 68 }, { "Month": "2022-06", "Total": 42 }, { "Month": "2022-07", "Total": 56 }, { "Month": "2022-08", "Total": 86 }, { "Month": "2022-09", "Total": 70 }, { "Month": "2022-10", "Total": 68 }, { "Month": "2022-11", "Total": 71 }, { "Month": "2022-12", "Total": 79 }, { "Month": "2023-01", "Total": 77 }, { "Month": "2023-02", "Total": 60 }, { "Month": "2023-03", "Total": 77 }, { "Month": "2023-04", "Total": 87 }, { "Month": "2023-05", "Total": 79 }, { "Month": "2023-06", "Total": 75 }, { "Month": "2023-07", "Total": 70 }, { "Month": "2023-08", "Total": 78 }, { "Month": "2023-09", "Total": 66 }, { "Month": "2023-10", "Total": 54 }, { "Month": "2023-11", "Total": 57 }, { "Month": "2023-12", "Total": 81 }, { "Month": "2024-01", "Total": 54 }, { "Month": "2024-02", "Total": 44 }, { "Month": "2024-03", "Total": 69 }, { "Month": "2024-04", "Total": 72 }, { "Month": "2024-05", "Total": 78 }, { "Month": "2024-06", "Total": 73 }, { "Month": "2024-07", "Total": 69 }, { "Month": "2024-08", "Total": 65 }, { "Month": "2024-09", "Total": 58 }, { "Month": "2024-10", "Total": 74 }, { "Month": "2024-11", "Total": 71 }, { "Month": "2024-12", "Total": 73 }, { "Month": "2025-01", "Total": 72 }, { "Month": "2025-02", "Total": 69 }, { "Month": "2025-03", "Total": 70 }, { "Month": "2025-04", "Total": 69 }, { "Month": "2025-05", "Total": 75 }, { "Month": "2025-06", "Total": 69 }, { "Month": "2025-07", "Total": 80 }, { "Month": "2025-08", "Total": 70 }, { "Month": "2025-09", "Total": 76 }, { "Month": "2025-10", "Total": 63 }, { "Month": "2025-11", "Total": 70 }, { "Month": "2025-12", "Total": 84 }, { "Month": "2026-01", "Total": 67 }, { "Month": "2026-02", "Total": 67 }, { "Month": "2026-03", "Total": 73 }, { "Month": "2026-04", "Total": 70 }, { "Month": "2026-05", "Total": 73 }, { "Month": "2026-06", "Total": 12 }], "uleelheue": [{ "Month": "2019-01", "Total": 3 }, { "Month": "2019-02", "Total": 5 }, { "Month": "2019-03", "Total": 2 }, { "Month": "2019-04", "Total": 4 }, { "Month": "2019-05", "Total": 3 }, { "Month": "2019-06", "Total": 4 }, { "Month": "2019-07", "Total": 5 }, { "Month": "2019-08", "Total": 5 }, { "Month": "2019-09", "Total": 2 }, { "Month": "2019-10", "Total": 7 }, { "Month": "2019-11", "Total": 7 }, { "Month": "2019-12", "Total": 6 }, { "Month": "2020-01", "Total": 7 }, { "Month": "2020-02", "Total": 2 }, { "Month": "2020-03", "Total": 3 }, { "Month": "2020-04", "Total": 7 }, { "Month": "2020-05", "Total": 3 }, { "Month": "2020-06", "Total": 5 }, { "Month": "2020-07", "Total": 4 }, { "Month": "2020-08", "Total": 2 }, { "Month": "2020-09", "Total": 2 }, { "Month": "2020-10", "Total": 4 }, { "Month": "2020-11", "Total": 0 }, { "Month": "2020-12", "Total": 0 }, { "Month": "2021-01", "Total": 1 }, { "Month": "2021-02", "Total": 4 }, { "Month": "2021-03", "Total": 2 }, { "Month": "2021-04", "Total": 2 }, { "Month": "2021-05", "Total": 5 }, { "Month": "2021-06", "Total": 3 }, { "Month": "2021-07", "Total": 3 }, { "Month": "2021-08", "Total": 6 }, { "Month": "2021-09", "Total": 7 }, { "Month": "2021-10", "Total": 3 }, { "Month": "2021-11", "Total": 6 }, { "Month": "2021-12", "Total": 5 }, { "Month": "2022-01", "Total": 7 }, { "Month": "2022-02", "Total": 6 }, { "Month": "2022-03", "Total": 7 }, { "Month": "2022-04", "Total": 5 }, { "Month": "2022-05", "Total": 3 }, { "Month": "2022-06", "Total": 5 }, { "Month": "2022-07", "Total": 4 }, { "Month": "2022-08", "Total": 8 }, { "Month": "2022-09", "Total": 6 }, { "Month": "2022-10", "Total": 5 }, { "Month": "2022-11", "Total": 5 }, { "Month": "2022-12", "Total": 5 }, { "Month": "2023-01", "Total": 7 }, { "Month": "2023-02", "Total": 7 }, { "Month": "2023-03", "Total": 7 }, { "Month": "2023-04", "Total": 7 }, { "Month": "2023-05", "Total": 11 }, { "Month": "2023-06", "Total": 14 }, { "Month": "2023-07", "Total": 6 }, { "Month": "2023-08", "Total": 3 }, { "Month": "2023-09", "Total": 3 }, { "Month": "2023-10", "Total": 6 }, { "Month": "2023-11", "Total": 6 }, { "Month": "2023-12", "Total": 4 }, { "Month": "2024-01", "Total": 5 }, { "Month": "2024-02", "Total": 5 }, { "Month": "2024-03", "Total": 5 }, { "Month": "2024-04", "Total": 3 }, { "Month": "2024-05", "Total": 1 }, { "Month": "2024-06", "Total": 0 }, { "Month": "2024-07", "Total": 3 }, { "Month": "2024-08", "Total": 0 }, { "Month": "2024-09", "Total": 1 }, { "Month": "2024-10", "Total": 1 }, { "Month": "2024-11", "Total": 3 }, { "Month": "2024-12", "Total": 6 }, { "Month": "2025-01", "Total": 2 }, { "Month": "2025-02", "Total": 0 }, { "Month": "2025-03", "Total": 3 }, { "Month": "2025-04", "Total": 5 }, { "Month": "2025-05", "Total": 3 }, { "Month": "2025-06", "Total": 6 }, { "Month": "2025-07", "Total": 3 }, { "Month": "2025-08", "Total": 5 }, { "Month": "2025-09", "Total": 3 }, { "Month": "2025-10", "Total": 4 }, { "Month": "2025-11", "Total": 2 }, { "Month": "2025-12", "Total": 4 }, { "Month": "2026-01", "Total": 3 }, { "Month": "2026-02", "Total": 3 }, { "Month": "2026-03", "Total": 5 }, { "Month": "2026-04", "Total": 6 }, { "Month": "2026-05", "Total": 14 }, { "Month": "2026-06", "Total": 3 }] };
+
+        const renderGraph = (data) => {
+            if (!data || data.length === 0) return;
+
+            const svgEl = document.getElementById('timeline-svg');
+            if (!svgEl) return;
+
+            // Get actual dimensions so text and axes scale perfectly
+            const rect = svgEl.getBoundingClientRect();
+            const width = rect.width > 0 ? rect.width : 500;
+            const height = rect.height > 0 ? rect.height : 150;
+
+            // Apply true dimensions to viewBox to prevent stretching
+            svgEl.setAttribute('viewBox', `0 0 ${width} ${height}`);
+            svgEl.removeAttribute('preserveAspectRatio');
+
+            const totals = data.map(d => d.Total);
+            const maxVal = Math.max(...totals);
+            const minVal = Math.min(...totals);
+
+            // Padding creates room for the axes and text labels
+            const padding = { top: 20, right: 30, bottom: 30, left: 40 };
+            const usableWidth = width - padding.left - padding.right;
+            const usableHeight = height - padding.top - padding.bottom;
+
+            // 1. Draw Axes Lines
+            let svgContent = `
+        <line x1="${padding.left}" y1="${height - padding.bottom}" x2="${width - padding.right}" y2="${height - padding.bottom}" stroke="#888" stroke-width="1" />
+        <line x1="${padding.left}" y1="${padding.top}" x2="${padding.left}" y2="${height - padding.bottom}" stroke="#888" stroke-width="1" />
+    `;
+
+            // 2. Draw Y-Axis Labels (Max and Min totals)
+            svgContent += `
+        <text x="${padding.left - 8}" y="${padding.top + 4}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="end">${maxVal}</text>
+        <text x="${padding.left - 8}" y="${height - padding.bottom + 4}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="end">${minVal}</text>
+    `;
+
+            // 3. Draw X-Axis Labels (Start, Middle, and End dates)
+            const startMonth = data[0].Month;
+            const midMonth = data[Math.floor(data.length / 2)].Month;
+            const endMonth = data[data.length - 1].Month;
+
+            svgContent += `
+        <text x="${padding.left}" y="${height - padding.bottom + 18}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="middle">${startMonth}</text>
+        <text x="${padding.left + usableWidth / 2}" y="${height - padding.bottom + 18}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="middle">${midMonth}</text>
+        <text x="${padding.left + usableWidth}" y="${height - padding.bottom + 18}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="middle">${endMonth}</text>
+    `;
+
+            // 4. Calculate and Draw the Data Line Path
+            let pathDataStr = "";
+            data.forEach((d, index) => {
+                const x = padding.left + (index / (data.length - 1)) * usableWidth;
+                const normalizedY = ((d.Total - minVal) / (maxVal - minVal || 1));
+                const y = height - padding.bottom - (normalizedY * usableHeight);
+
+                if (index === 0) {
+                    pathDataStr += `M ${x.toFixed(2)} ${y.toFixed(2)} `;
+                } else {
+                    pathDataStr += `L ${x.toFixed(2)} ${y.toFixed(2)} `;
+                }
+            });
+
+            // Inject the stroke path
+            svgContent += `<path d="${pathDataStr.trim()}" fill="none" stroke="#ffffff" stroke-width="2" />`;
+
+            // 5. Draw the End Node Circle
+            const lastIndex = data.length - 1;
+            const lastX = padding.left + usableWidth;
+            const lastNormalizedY = ((data[lastIndex].Total - minVal) / (maxVal - minVal || 1));
+            const lastY = height - padding.bottom - (lastNormalizedY * usableHeight);
+
+            svgContent += `<circle cx="${lastX.toFixed(2)}" cy="${lastY.toFixed(2)}" r="4" fill="#ff4d4d" />`;
+
+            // Write it all directly into the SVG container
+            svgEl.innerHTML = svgContent;
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
 
             const nodes = [
-                {
-					name: "Uleelheue (Indonesia)", 
-					short: "Uleelheue (Indonesia)", 
-					lat: 5.59637662, 
-					lng: 95.52598222, 
-					iconName: "iconpack/passage.svg", 
-					desc: "Located at the northwestern tip of Sumatra, Indonesia, bordering the gateway to the Strait." 
-				},
-                { 
-					name: "Blanglancang (Indonesia)", 
-					short: "Blanglancang (Indonesia)", 
-					lat: 5.230939806, 
-					lng: 97.06571881, 
-					iconName: "iconpack/oil.svg", 
-					desc: "Sumatran port mainly serving energy sectors, liquid bulk tankers, and mineral operations." 
-				},
-                { 
-					name: "Belawan (Indonesia)", 
-					short: "Belawan (Indonesia)", 
-					lat: 3.78854271, 
-					lng: 98.70736598, 
-					iconName: "iconpack/port1.svg", 
-					desc: "Indonesia's busiest port outside of Java, acting as a crucial link for agricultural exports." 
-				},
-                { 
-					name: "Kuala Tanjung (Indonesia)", 
-					short: "Kuala Tanjung (Indonesia)", 
-					lat: 3.372062986, 
-					lng: 99.45586143, 
-					iconName: "iconpack/port1.svg", 
-					desc: "Developing industrial deep-sea port on the Sumatran coast of the Malacca Strait." 
-				},
-                { 
-					name: "Penang (Malaysia)", 
-					short: "Penang (Malaysia)", 
-					lat: 5.379749741, 
-					lng: 100.3899815, 
-					iconName: "iconpack/port1.svg", 
-					desc: "Major northern port handling high volumes of machinery and electrical equipment." 
-				},
-                { 
-					name: "Lumut (Malaysia)", 
-					short: "Lumut (Malaysia)", 
-					lat: 4.227365727, 
-					lng: 100.6433762, 
-					iconName: "iconpack/port1.svg", 
-					desc: "Handles substantial dry bulk commodities along the west coast of Peninsular Malaysia." 
-				},
-                { 
-					name: "Klang (Malaysia)", 
-					short: "Klang (Malaysia)", 
-					lat: 2.972594826, lng: 101.3403063, 
-					iconName: "iconpack/port1.svg", 
-					desc: "Malaysia's primary commercial gateway. Top industries: Mineral and Vegetable Products."
-
-				},
-                { 
-					name: "Dumai (Indonesia)", 
-					short: "Dumai (Indonesia)", 
-					lat: 1.717388504, 
-					lng: 101.4188235, 
-					iconName: "iconpack/oil.svg", 
-					desc: "Major Indonesian export node for mineral products, chemicals, and palm oil assets." 
-				},
-                { 
-					name: "Dickson (Malaysia)", 
-					short: "Dickson (Malaysia)", 
-					lat: 2.549916819, 
-					lng: 101.7895789, 
-					iconName: "iconpack/oil.svg", 
-					desc: "Key Malaysian maritime hub focusing heavily on tanker traffic and mineral products." 
-				},
-                { 
-					name: "Pelabuhan Sungai Udang (Malaysia)", 
-					short: "Sg. Udang (Malaysia)", 
-					lat: 2.263627014, 
-					lng: 102.1357975, 
-					iconName: "iconpack/oil.svg", 
-					desc: "Specialized industrial port handling mineral and chemical products exclusively via tankers." 
-				},
-                { 
-					name: "Sungai Pakning (Indonesia)", 
-					short: "Sg. Pakning (Indonesia)", 
-					lat: 1.348263696, 
-					lng: 102.1578799, 
-					iconName: "iconpack/oil.svg", 
-					desc: "Indonesian anchorage port managing regional oil and gas maritime transit traffic." 
-				},
-                { 
-					name: "Singapore Main Port", 
-					short: "Singapore Main Port", 
-					lat: 1.271989257, 
-					lng: 103.7074816, 
-					iconName: "iconpack/port1.svg", 
-					desc: "Global mega-hub accounting for over 95% of Singapore's maritime trade. Massive container and tanker traffic." 
-				},
-                { 
-					name: "Serangoon (Singapore)", 
-					short: "Serangoon (Singapore)", 
-					lat: 1.358261773, 
-					lng: 104.0345309, 
-					iconName: "iconpack/port1.svg", 
-					desc: "Singaporean harbor handling significant localized vessel traffic, dominated by mineral and chemical transport."
-				}
+                { id: "uleelheue", name: "Uleelheue (Indonesia)", short: "Uleelheue (Indonesia)", lat: 5.59637662, lng: 95.52598222, iconName: "iconpack/passage.svg", desc: "Located at the northwestern tip of Sumatra, Indonesia, bordering the gateway to the Strait." },
+                { id: "blanglancang", name: "Blanglancang (Indonesia)", short: "Blanglancang (Indonesia)", lat: 5.230939806, lng: 97.06571881, iconName: "iconpack/oil.svg", desc: "Sumatran port mainly serving energy sectors, liquid bulk tankers, and mineral operations." },
+                { id: "belawan", name: "Belawan (Indonesia)", short: "Belawan (Indonesia)", lat: 3.78854271, lng: 98.70736598, iconName: "iconpack/port1.svg", desc: "Indonesia's busiest port outside of Java, acting as a crucial link for agricultural exports." },
+                { id: "kuala-tanjung", name: "Kuala Tanjung (Indonesia)", short: "Kuala Tanjung (Indonesia)", lat: 3.372062986, lng: 99.45586143, iconName: "iconpack/port1.svg", desc: "Developing industrial deep-sea port on the Sumatran coast of the Malacca Strait." },
+                { id: "penang", name: "Penang (Malaysia)", short: "Penang (Malaysia)", lat: 5.379749741, lng: 100.3899815, iconName: "iconpack/port1.svg", desc: "Major northern port handling high volumes of machinery and electrical equipment." },
+                { id: "lumut", name: "Lumut (Malaysia)", short: "Lumut (Malaysia)", lat: 4.227365727, lng: 100.6433762, iconName: "iconpack/port1.svg", desc: "Handles substantial dry bulk commodities along the west coast of Peninsular Malaysia." },
+                { id: "klang", name: "Klang (Malaysia)", short: "Klang (Malaysia)", lat: 2.972594826, lng: 101.3403063, iconName: "iconpack/port1.svg", desc: "Malaysia's primary commercial gateway. Top industries: Mineral and Vegetable Products." },
+                { id: "dumai", name: "Dumai (Indonesia)", short: "Dumai (Indonesia)", lat: 1.717388504, lng: 101.4188235, iconName: "iconpack/oil.svg", desc: "Major Indonesian export node for mineral products, chemicals, and palm oil assets." },
+                { id: "disckson", name: "Dickson (Malaysia)", short: "Dickson (Malaysia)", lat: 2.549916819, lng: 101.7895789, iconName: "iconpack/oil.svg", desc: "Key Malaysian maritime hub focusing heavily on tanker traffic and mineral products." },
+                { id: "udang", name: "Pelabuhan Sungai Udang (Malaysia)", short: "Sg. Udang (Malaysia)", lat: 2.263627014, lng: 102.1357975, iconName: "iconpack/oil.svg", desc: "Specialized industrial port handling mineral and chemical products exclusively via tankers." },
+                { id: "sungai-pakning", name: "Sungai Pakning (Indonesia)", short: "Sg. Pakning (Indonesia)", lat: 1.348263696, lng: 102.1578799, iconName: "iconpack/oil.svg", desc: "Indonesian anchorage port managing regional oil and gas maritime transit traffic." },
+                { id: "singapore", name: "Singapore Main Port", short: "Singapore Main Port", lat: 1.271989257, lng: 103.7074816, iconName: "iconpack/port1.svg", desc: "Global mega-hub accounting for over 95% of Singapore's maritime trade. Massive container and tanker traffic." },
+                { id: "serangoon", name: "Serangoon (Singapore)", short: "Serangoon (Singapore)", lat: 1.358261773, lng: 104.0345309, iconName: "iconpack/port1.svg", desc: "Singaporean harbor handling significant localized vessel traffic, dominated by mineral and chemical transport." }
             ];
 
-            const routePoints = [
-                [5.9000, 95.5000], [5.4000, 98.5000], [4.5000, 99.8000], [3.8000, 100.5000],
-                [2.9000, 101.1000], [2.3000, 101.6000], [1.8000, 102.3000], [1.3000, 103.2000],
-                [1.1500, 103.6000], [1.2000, 103.8500], [1.3000, 104.3000]
+            const straitRoute = [
+                [5.9000, 95.5000],  // Andaman Sea Entrance
+                [5.4000, 98.5000],
+                [4.5000, 99.8000],
+                [3.8000, 100.5000],
+                [2.9000, 101.1000], // Passing Port Klang
+                [2.3000, 101.6000],
+                [1.8000, 102.3000], // Passing Dumai
+                [1.3000, 103.2000],
+                [1.1500, 103.6000], // Phillips Channel (narrowest point)
+                [1.2000, 103.8500], // Singapore Strait
+                [1.3000, 104.3000]  // South China Sea Exit
             ];
 
+            // Init map focused on the wider region
             const map = L.map('map', {
                 center: [3.5, 100.0],
                 zoom: 5,
@@ -296,7 +315,7 @@
                 attribution: '&copy; Esri',
             }).addTo(map);
 
-            const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
+            const routeLine = L.polyline(straitRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route' })
                 .bindPopup('<div class="route-popup-content"><strong>Strait of Malacca</strong><br><span class="route-popup-subtext">Indian Ocean ↔ South China Sea</span></div>')
                 .addTo(map);
 
@@ -304,11 +323,11 @@
                 return L.divIcon({
                     className: 'custom-composite-icon',
                     html: `
-                        <div style="position: relative; width: 40px; height: 40px;">
+						<div style= "position: relative; width: 40px; height: 40px;" >
                             <img src="iconpack/pin.svg" style="width: 100%; height: 100%;" alt="pin" />
                             <img src="${iconName}" style="position: absolute; top: 1px; left: 4px; width: 32px; height: 32px; border-radius: 50%;" alt="label" />
-                        </div>
-                    `,
+                        </div >
+			`,
                     iconSize: [30, 45],
                     iconAnchor: [15, 45],
                     popupAnchor: [0, -45]
@@ -327,43 +346,69 @@
                   <span>Lat: <strong>${node.lat.toFixed(4)}° N</strong></span>
                   <span>Lng: <strong>${Math.abs(node.lng).toFixed(4)}° E</strong></span>
                 </div>
-              </div>
-              <div class="popup-footer">${node.desc}</div>`,
+              </div >
+			<div class="popup-footer">${node.desc}</div>`,
                     { maxWidth: 280 }
                 );
                 markers.push(marker);
 
+                // Sidebar port item updated to use the clean CSS class
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
-              <div class="port-info">
-                <div class="port-name">${node.short}</div>
-                <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
-              </div>`;
-              
-                item.addEventListener('click', function () { focusNode(i); });
+					<img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
+					<div class="port-info">
+						<div class="port-name">${node.short}</div>
+						<div class="port-coords">${node.lat.toFixed(4)}° N &middot; ${Math.abs(node.lng).toFixed(4)}° E</div>
+					</div>`;
+                item.addEventListener('click', function () { focusPort(i); });
                 document.getElementById('port-list').appendChild(item);
 
             });
 
-            function focusNode(i) {
+            // This function is REQUIRED to make the sidebar interactive
+            function focusPort(i) {
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
+
+                // Get the port's ID (e.g. 'dumai') to fetch the correct data array
+                const selectedPortId = nodes[i].id; // Make sure your 'ports' array has an id that matches the file names
+                const dataForGraph = malaccaPortsData[selectedPortId];
+
+                // Redraw the timeline graph for this specific port
+                if (dataForGraph) {
+                    renderGraph(dataForGraph);
+                }
+
                 map.flyTo([nodes[i].lat, nodes[i].lng], 10, { duration: 1.2 });
                 setTimeout(() => markers[i].openPopup(), 1300);
             }
 
-            
+            // Standard map helper
+            window.flyToLocation = function (coords, zoom) {
+                map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
+            };
+
+            // 2. Map container constraints & sizing fixes
             map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
 
-            window.addEventListener('resize', function() {
+            // Robust observer to catch any flex/grid container resizing and load missing grey tiles
+            // ADD THIS LINE to define the container:
+            const mapContainer = document.getElementById('map');
+
+            // Existing resize observer code...
+            const resizeObserver = new ResizeObserver(() => {
                 map.invalidateSize();
             });
+            resizeObserver.observe(mapContainer);
 
+            // Fallback invalidation on initial load
             setTimeout(() => {
                 map.invalidateSize();
             }, 250);
+
+            // Initialize the graph and map focus on Singapore
+            focusPort(11);
         });
     </script>
 </body>

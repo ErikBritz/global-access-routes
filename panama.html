@@ -17,7 +17,8 @@
 </head>
 
 <body>
-    <div class="strait-bg" style="background-image: url('svg/panama.svg');"></div>
+    <div class="strait-bg" style="background-image: url('svg/panama.svg');
+            filter: brightness(2) opacity(0.05);"></div>
     <div class="page">
         <header class="site-header">
             <div class="site-heading">
@@ -26,7 +27,7 @@
             </div>
             <nav class="site-nav">
                 <a href="index.html">Home</a>
-                <a href="hurmuz.html">Hormuz</a>
+                <a href="hurmuz.html">Hurmuz</a>
                 <a href="bosphorus.html">Bosphorus</a>
                 <a href="bering.html">Bering</a>
                 <a href="suez.html">Suez</a>
@@ -58,6 +59,17 @@
 
                     <div class="content-grid">
                         <div class="main-column">
+                            <section class="card">
+                                <h2>Port Arrivals (Monthly)</h2>
+                                <p>Select a port from the Strategic Nodes section to view its specific traffic trends.</p>
+
+                                <div style="width: 100%; aspect-ratio: 5 / 1; display: block;">
+                                    <div class="timeline-widget">
+                                        <svg id="timeline-svg" style="width: 100%; height: 150px; display: block;"></svg>
+                                    </div>
+                                </div>
+                            </section>
+
                             <section class="card">
                                 <h2>Geographic Context</h2>
                                 <p>The Panama Canal is one of the world's most strategically vital waterways, cutting
@@ -132,6 +144,12 @@
                 </div>
             </section>
         </main>
+        <footer class="site-footer">
+			<p>Data Sources:
+				Navigation vectors manually extracted;
+				Transit statistics: IMF PortWatch (Educational Use);
+				Historical & geographic context: The role of Panama Canal in global shipping - Maritime Business Review.</p>
+		</footer>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -191,6 +209,10 @@
                 [9.0165, -79.6123], [9.0030, -79.6005], [8.9965, -79.5915], [8.9865, -79.5815],
                 [8.9660, -79.5750], [8.9442, -79.5671], [8.9055, -79.5350],
             ];
+
+            const portData = { "Manzanillo": [{ "Month": "2019-01", "Total": 230 }, { "Month": "2019-02", "Total": 199 }, { "Month": "2019-03", "Total": 227 }, { "Month": "2019-04", "Total": 220 }, { "Month": "2019-05", "Total": 216 }, { "Month": "2019-06", "Total": 223 }, { "Month": "2019-07", "Total": 253 }, { "Month": "2019-08", "Total": 257 }, { "Month": "2019-09", "Total": 223 }, { "Month": "2019-10", "Total": 260 }, { "Month": "2019-11", "Total": 230 }, { "Month": "2019-12", "Total": 223 }, { "Month": "2020-01", "Total": 218 }, { "Month": "2020-02", "Total": 201 }, { "Month": "2020-03", "Total": 210 }, { "Month": "2020-04", "Total": 204 }, { "Month": "2020-05", "Total": 190 }, { "Month": "2020-06", "Total": 185 }, { "Month": "2020-07", "Total": 204 }, { "Month": "2020-08", "Total": 196 }, { "Month": "2020-09", "Total": 202 }, { "Month": "2020-10", "Total": 205 }, { "Month": "2020-11", "Total": 197 }, { "Month": "2020-12", "Total": 202 }, { "Month": "2021-01", "Total": 209 }, { "Month": "2021-02", "Total": 175 }, { "Month": "2021-03", "Total": 198 }, { "Month": "2021-04", "Total": 184 }, { "Month": "2021-05", "Total": 188 }, { "Month": "2021-06", "Total": 187 }, { "Month": "2021-07", "Total": 193 }, { "Month": "2021-08", "Total": 188 }, { "Month": "2021-09", "Total": 185 }, { "Month": "2021-10", "Total": 192 }, { "Month": "2021-11", "Total": 182 }, { "Month": "2021-12", "Total": 179 }, { "Month": "2022-01", "Total": 186 }, { "Month": "2022-02", "Total": 164 }, { "Month": "2022-03", "Total": 176 }, { "Month": "2022-04", "Total": 173 }, { "Month": "2022-05", "Total": 187 }, { "Month": "2022-06", "Total": 172 }, { "Month": "2022-07", "Total": 178 }, { "Month": "2022-08", "Total": 173 }, { "Month": "2022-09", "Total": 162 }, { "Month": "2022-10", "Total": 188 }, { "Month": "2022-11", "Total": 181 }, { "Month": "2022-12", "Total": 195 }, { "Month": "2023-01", "Total": 187 }, { "Month": "2023-02", "Total": 169 }, { "Month": "2023-03", "Total": 190 }, { "Month": "2023-04", "Total": 200 }, { "Month": "2023-05", "Total": 195 }, { "Month": "2023-06", "Total": 172 }, { "Month": "2023-07", "Total": 200 }, { "Month": "2023-08", "Total": 205 }, { "Month": "2023-09", "Total": 199 }, { "Month": "2023-10", "Total": 201 }, { "Month": "2023-11", "Total": 175 }, { "Month": "2023-12", "Total": 200 }, { "Month": "2024-01", "Total": 193 }, { "Month": "2024-02", "Total": 197 }, { "Month": "2024-03", "Total": 189 }, { "Month": "2024-04", "Total": 182 }, { "Month": "2024-05", "Total": 181 }, { "Month": "2024-06", "Total": 189 }, { "Month": "2024-07", "Total": 187 }, { "Month": "2024-08", "Total": 174 }, { "Month": "2024-09", "Total": 157 }, { "Month": "2024-10", "Total": 162 }, { "Month": "2024-11", "Total": 166 }, { "Month": "2024-12", "Total": 151 }, { "Month": "2025-01", "Total": 174 }, { "Month": "2025-02", "Total": 154 }, { "Month": "2025-03", "Total": 183 }, { "Month": "2025-04", "Total": 168 }, { "Month": "2025-05", "Total": 187 }, { "Month": "2025-06", "Total": 179 }, { "Month": "2025-07", "Total": 201 }, { "Month": "2025-08", "Total": 186 }, { "Month": "2025-09", "Total": 186 }, { "Month": "2025-10", "Total": 194 }, { "Month": "2025-11", "Total": 196 }, { "Month": "2025-12", "Total": 206 }, { "Month": "2026-01", "Total": 215 }, { "Month": "2026-02", "Total": 174 }, { "Month": "2026-03", "Total": 203 }, { "Month": "2026-04", "Total": 201 }, { "Month": "2026-05", "Total": 90 }], "Taboguilla": [{ "Month": "2019-01", "Total": 121 }, { "Month": "2019-02", "Total": 104 }, { "Month": "2019-03", "Total": 111 }, { "Month": "2019-04", "Total": 122 }, { "Month": "2019-05", "Total": 110 }, { "Month": "2019-06", "Total": 104 }, { "Month": "2019-07", "Total": 130 }, { "Month": "2019-08", "Total": 144 }, { "Month": "2019-09", "Total": 140 }, { "Month": "2019-10", "Total": 146 }, { "Month": "2019-11", "Total": 151 }, { "Month": "2019-12", "Total": 149 }, { "Month": "2020-01", "Total": 131 }, { "Month": "2020-02", "Total": 154 }, { "Month": "2020-03", "Total": 156 }, { "Month": "2020-04", "Total": 131 }, { "Month": "2020-05", "Total": 120 }, { "Month": "2020-06", "Total": 113 }, { "Month": "2020-07", "Total": 116 }, { "Month": "2020-08", "Total": 128 }, { "Month": "2020-09", "Total": 105 }, { "Month": "2020-10", "Total": 141 }, { "Month": "2020-11", "Total": 116 }, { "Month": "2020-12", "Total": 128 }, { "Month": "2021-01", "Total": 163 }, { "Month": "2021-02", "Total": 154 }, { "Month": "2021-03", "Total": 170 }, { "Month": "2021-04", "Total": 147 }, { "Month": "2021-05", "Total": 183 }, { "Month": "2021-06", "Total": 171 }, { "Month": "2021-07", "Total": 174 }, { "Month": "2021-08", "Total": 167 }, { "Month": "2021-09", "Total": 131 }, { "Month": "2021-10", "Total": 166 }, { "Month": "2021-11", "Total": 219 }, { "Month": "2021-12", "Total": 218 }, { "Month": "2022-01", "Total": 214 }, { "Month": "2022-02", "Total": 199 }, { "Month": "2022-03", "Total": 189 }, { "Month": "2022-04", "Total": 214 }, { "Month": "2022-05", "Total": 258 }, { "Month": "2022-06", "Total": 261 }, { "Month": "2022-07", "Total": 217 }, { "Month": "2022-08", "Total": 220 }, { "Month": "2022-09", "Total": 218 }, { "Month": "2022-10", "Total": 261 }, { "Month": "2022-11", "Total": 277 }, { "Month": "2022-12", "Total": 266 }, { "Month": "2023-01", "Total": 277 }, { "Month": "2023-02", "Total": 238 }, { "Month": "2023-03", "Total": 278 }, { "Month": "2023-04", "Total": 235 }, { "Month": "2023-05", "Total": 210 }, { "Month": "2023-06", "Total": 227 }, { "Month": "2023-07", "Total": 268 }, { "Month": "2023-08", "Total": 259 }, { "Month": "2023-09", "Total": 221 }, { "Month": "2023-10", "Total": 250 }, { "Month": "2023-11", "Total": 221 }, { "Month": "2023-12", "Total": 207 }, { "Month": "2024-01", "Total": 192 }, { "Month": "2024-02", "Total": 201 }, { "Month": "2024-03", "Total": 214 }, { "Month": "2024-04", "Total": 178 }, { "Month": "2024-05", "Total": 221 }, { "Month": "2024-06", "Total": 214 }, { "Month": "2024-07", "Total": 221 }, { "Month": "2024-08", "Total": 228 }, { "Month": "2024-09", "Total": 240 }, { "Month": "2024-10", "Total": 224 }, { "Month": "2024-11", "Total": 253 }, { "Month": "2024-12", "Total": 251 }, { "Month": "2025-01", "Total": 243 }, { "Month": "2025-02", "Total": 211 }, { "Month": "2025-03", "Total": 267 }, { "Month": "2025-04", "Total": 252 }, { "Month": "2025-05", "Total": 216 }, { "Month": "2025-06", "Total": 219 }, { "Month": "2025-07", "Total": 242 }, { "Month": "2025-08", "Total": 246 }, { "Month": "2025-09", "Total": 226 }, { "Month": "2025-10", "Total": 253 }, { "Month": "2025-11", "Total": 247 }, { "Month": "2025-12", "Total": 248 }, { "Month": "2026-01", "Total": 247 }, { "Month": "2026-02", "Total": 233 }, { "Month": "2026-03", "Total": 281 }, { "Month": "2026-04", "Total": 308 }, { "Month": "2026-05", "Total": 152 }], "Balboa": [{ "Month": "2019-01", "Total": 195 }, { "Month": "2019-02", "Total": 177 }, { "Month": "2019-03", "Total": 191 }, { "Month": "2019-04", "Total": 195 }, { "Month": "2019-05", "Total": 201 }, { "Month": "2019-06", "Total": 185 }, { "Month": "2019-07", "Total": 194 }, { "Month": "2019-08", "Total": 209 }, { "Month": "2019-09", "Total": 205 }, { "Month": "2019-10", "Total": 202 }, { "Month": "2019-11", "Total": 193 }, { "Month": "2019-12", "Total": 188 }, { "Month": "2020-01", "Total": 207 }, { "Month": "2020-02", "Total": 189 }, { "Month": "2020-03", "Total": 188 }, { "Month": "2020-04", "Total": 207 }, { "Month": "2020-05", "Total": 201 }, { "Month": "2020-06", "Total": 166 }, { "Month": "2020-07", "Total": 203 }, { "Month": "2020-08", "Total": 194 }, { "Month": "2020-09", "Total": 191 }, { "Month": "2020-10", "Total": 203 }, { "Month": "2020-11", "Total": 184 }, { "Month": "2020-12", "Total": 189 }, { "Month": "2021-01", "Total": 203 }, { "Month": "2021-02", "Total": 180 }, { "Month": "2021-03", "Total": 197 }, { "Month": "2021-04", "Total": 185 }, { "Month": "2021-05", "Total": 202 }, { "Month": "2021-06", "Total": 180 }, { "Month": "2021-07", "Total": 169 }, { "Month": "2021-08", "Total": 181 }, { "Month": "2021-09", "Total": 174 }, { "Month": "2021-10", "Total": 175 }, { "Month": "2021-11", "Total": 177 }, { "Month": "2021-12", "Total": 186 }, { "Month": "2022-01", "Total": 195 }, { "Month": "2022-02", "Total": 169 }, { "Month": "2022-03", "Total": 178 }, { "Month": "2022-04", "Total": 180 }, { "Month": "2022-05", "Total": 185 }, { "Month": "2022-06", "Total": 180 }, { "Month": "2022-07", "Total": 181 }, { "Month": "2022-08", "Total": 188 }, { "Month": "2022-09", "Total": 170 }, { "Month": "2022-10", "Total": 181 }, { "Month": "2022-11", "Total": 193 }, { "Month": "2022-12", "Total": 185 }, { "Month": "2023-01", "Total": 196 }, { "Month": "2023-02", "Total": 167 }, { "Month": "2023-03", "Total": 192 }, { "Month": "2023-04", "Total": 179 }, { "Month": "2023-05", "Total": 198 }, { "Month": "2023-06", "Total": 182 }, { "Month": "2023-07", "Total": 209 }, { "Month": "2023-08", "Total": 216 }, { "Month": "2023-09", "Total": 207 }, { "Month": "2023-10", "Total": 224 }, { "Month": "2023-11", "Total": 201 }, { "Month": "2023-12", "Total": 203 }, { "Month": "2024-01", "Total": 194 }, { "Month": "2024-02", "Total": 197 }, { "Month": "2024-03", "Total": 203 }, { "Month": "2024-04", "Total": 201 }, { "Month": "2024-05", "Total": 212 }, { "Month": "2024-06", "Total": 212 }, { "Month": "2024-07", "Total": 210 }, { "Month": "2024-08", "Total": 207 }, { "Month": "2024-09", "Total": 202 }, { "Month": "2024-10", "Total": 227 }, { "Month": "2024-11", "Total": 215 }, { "Month": "2024-12", "Total": 233 }, { "Month": "2025-01", "Total": 224 }, { "Month": "2025-02", "Total": 197 }, { "Month": "2025-03", "Total": 203 }, { "Month": "2025-04", "Total": 197 }, { "Month": "2025-05", "Total": 212 }, { "Month": "2025-06", "Total": 215 }, { "Month": "2025-07", "Total": 203 }, { "Month": "2025-08", "Total": 199 }, { "Month": "2025-09", "Total": 207 }, { "Month": "2025-10", "Total": 233 }, { "Month": "2025-11", "Total": 224 }, { "Month": "2025-12", "Total": 210 }, { "Month": "2026-01", "Total": 204 }, { "Month": "2026-02", "Total": 178 }, { "Month": "2026-03", "Total": 198 }, { "Month": "2026-04", "Total": 196 }, { "Month": "2026-05", "Total": 110 }], "Colon": [{ "Month": "2019-01", "Total": 91 }, { "Month": "2019-02", "Total": 75 }, { "Month": "2019-03", "Total": 86 }, { "Month": "2019-04", "Total": 85 }, { "Month": "2019-05", "Total": 88 }, { "Month": "2019-06", "Total": 80 }, { "Month": "2019-07", "Total": 89 }, { "Month": "2019-08", "Total": 85 }, { "Month": "2019-09", "Total": 86 }, { "Month": "2019-10", "Total": 93 }, { "Month": "2019-11", "Total": 83 }, { "Month": "2019-12", "Total": 86 }, { "Month": "2020-01", "Total": 87 }, { "Month": "2020-02", "Total": 86 }, { "Month": "2020-03", "Total": 82 }, { "Month": "2020-04", "Total": 71 }, { "Month": "2020-05", "Total": 72 }, { "Month": "2020-06", "Total": 72 }, { "Month": "2020-07", "Total": 77 }, { "Month": "2020-08", "Total": 65 }, { "Month": "2020-09", "Total": 74 }, { "Month": "2020-10", "Total": 68 }, { "Month": "2020-11", "Total": 64 }, { "Month": "2020-12", "Total": 71 }, { "Month": "2021-01", "Total": 70 }, { "Month": "2021-02", "Total": 65 }, { "Month": "2021-03", "Total": 72 }, { "Month": "2021-04", "Total": 81 }, { "Month": "2021-05", "Total": 77 }, { "Month": "2021-06", "Total": 79 }, { "Month": "2021-07", "Total": 76 }, { "Month": "2021-08", "Total": 79 }, { "Month": "2021-09", "Total": 89 }, { "Month": "2021-10", "Total": 96 }, { "Month": "2021-11", "Total": 81 }, { "Month": "2021-12", "Total": 95 }, { "Month": "2022-01", "Total": 90 }, { "Month": "2022-02", "Total": 76 }, { "Month": "2022-03", "Total": 76 }, { "Month": "2022-04", "Total": 88 }, { "Month": "2022-05", "Total": 90 }, { "Month": "2022-06", "Total": 88 }, { "Month": "2022-07", "Total": 84 }, { "Month": "2022-08", "Total": 92 }, { "Month": "2022-09", "Total": 86 }, { "Month": "2022-10", "Total": 95 }, { "Month": "2022-11", "Total": 91 }, { "Month": "2022-12", "Total": 102 }, { "Month": "2023-01", "Total": 103 }, { "Month": "2023-02", "Total": 89 }, { "Month": "2023-03", "Total": 90 }, { "Month": "2023-04", "Total": 87 }, { "Month": "2023-05", "Total": 98 }, { "Month": "2023-06", "Total": 94 }, { "Month": "2023-07", "Total": 103 }, { "Month": "2023-08", "Total": 92 }, { "Month": "2023-09", "Total": 101 }, { "Month": "2023-10", "Total": 96 }, { "Month": "2023-11", "Total": 98 }, { "Month": "2023-12", "Total": 97 }, { "Month": "2024-01", "Total": 100 }, { "Month": "2024-02", "Total": 81 }, { "Month": "2024-03", "Total": 99 }, { "Month": "2024-04", "Total": 89 }, { "Month": "2024-05", "Total": 85 }, { "Month": "2024-06", "Total": 88 }, { "Month": "2024-07", "Total": 90 }, { "Month": "2024-08", "Total": 94 }, { "Month": "2024-09", "Total": 85 }, { "Month": "2024-10", "Total": 92 }, { "Month": "2024-11", "Total": 87 }, { "Month": "2024-12", "Total": 87 }, { "Month": "2025-01", "Total": 92 }, { "Month": "2025-02", "Total": 85 }, { "Month": "2025-03", "Total": 81 }, { "Month": "2025-04", "Total": 91 }, { "Month": "2025-05", "Total": 101 }, { "Month": "2025-06", "Total": 97 }, { "Month": "2025-07", "Total": 92 }, { "Month": "2025-08", "Total": 92 }, { "Month": "2025-09", "Total": 88 }, { "Month": "2025-10", "Total": 100 }, { "Month": "2025-11", "Total": 90 }, { "Month": "2025-12", "Total": 98 }, { "Month": "2026-01", "Total": 106 }, { "Month": "2026-02", "Total": 92 }, { "Month": "2026-03", "Total": 109 }, { "Month": "2026-04", "Total": 103 }, { "Month": "2026-05", "Total": 51 }], "Cristobal": [{ "Month": "2019-01", "Total": 106 }, { "Month": "2019-02", "Total": 102 }, { "Month": "2019-03", "Total": 103 }, { "Month": "2019-04", "Total": 110 }, { "Month": "2019-05", "Total": 104 }, { "Month": "2019-06", "Total": 106 }, { "Month": "2019-07", "Total": 98 }, { "Month": "2019-08", "Total": 116 }, { "Month": "2019-09", "Total": 102 }, { "Month": "2019-10", "Total": 105 }, { "Month": "2019-11", "Total": 94 }, { "Month": "2019-12", "Total": 102 }, { "Month": "2020-01", "Total": 102 }, { "Month": "2020-02", "Total": 94 }, { "Month": "2020-03", "Total": 108 }, { "Month": "2020-04", "Total": 96 }, { "Month": "2020-05", "Total": 88 }, { "Month": "2020-06", "Total": 83 }, { "Month": "2020-07", "Total": 94 }, { "Month": "2020-08", "Total": 85 }, { "Month": "2020-09", "Total": 81 }, { "Month": "2020-10", "Total": 83 }, { "Month": "2020-11", "Total": 84 }, { "Month": "2020-12", "Total": 85 }, { "Month": "2021-01", "Total": 92 }, { "Month": "2021-02", "Total": 81 }, { "Month": "2021-03", "Total": 87 }, { "Month": "2021-04", "Total": 84 }, { "Month": "2021-05", "Total": 76 }, { "Month": "2021-06", "Total": 80 }, { "Month": "2021-07", "Total": 72 }, { "Month": "2021-08", "Total": 79 }, { "Month": "2021-09", "Total": 84 }, { "Month": "2021-10", "Total": 89 }, { "Month": "2021-11", "Total": 81 }, { "Month": "2021-12", "Total": 76 }, { "Month": "2022-01", "Total": 85 }, { "Month": "2022-02", "Total": 64 }, { "Month": "2022-03", "Total": 76 }, { "Month": "2022-04", "Total": 67 }, { "Month": "2022-05", "Total": 85 }, { "Month": "2022-06", "Total": 81 }, { "Month": "2022-07", "Total": 75 }, { "Month": "2022-08", "Total": 75 }, { "Month": "2022-09", "Total": 80 }, { "Month": "2022-10", "Total": 87 }, { "Month": "2022-11", "Total": 83 }, { "Month": "2022-12", "Total": 71 }, { "Month": "2023-01", "Total": 72 }, { "Month": "2023-02", "Total": 61 }, { "Month": "2023-03", "Total": 85 }, { "Month": "2023-04", "Total": 81 }, { "Month": "2023-05", "Total": 90 }, { "Month": "2023-06", "Total": 83 }, { "Month": "2023-07", "Total": 93 }, { "Month": "2023-08", "Total": 87 }, { "Month": "2023-09", "Total": 77 }, { "Month": "2023-10", "Total": 74 }, { "Month": "2023-11", "Total": 85 }, { "Month": "2023-12", "Total": 76 }, { "Month": "2024-01", "Total": 87 }, { "Month": "2024-02", "Total": 69 }, { "Month": "2024-03", "Total": 80 }, { "Month": "2024-04", "Total": 94 }, { "Month": "2024-05", "Total": 76 }, { "Month": "2024-06", "Total": 76 }, { "Month": "2024-07", "Total": 65 }, { "Month": "2024-08", "Total": 72 }, { "Month": "2024-09", "Total": 65 }, { "Month": "2024-10", "Total": 67 }, { "Month": "2024-11", "Total": 77 }, { "Month": "2024-12", "Total": 78 }, { "Month": "2025-01", "Total": 79 }, { "Month": "2025-02", "Total": 66 }, { "Month": "2025-03", "Total": 75 }, { "Month": "2025-04", "Total": 66 }, { "Month": "2025-05", "Total": 75 }, { "Month": "2025-06", "Total": 70 }, { "Month": "2025-07", "Total": 79 }, { "Month": "2025-08", "Total": 78 }, { "Month": "2025-09", "Total": 73 }, { "Month": "2025-10", "Total": 66 }, { "Month": "2025-11", "Total": 78 }, { "Month": "2025-12", "Total": 74 }, { "Month": "2026-01", "Total": 68 }, { "Month": "2026-02", "Total": 55 }, { "Month": "2026-03", "Total": 57 }, { "Month": "2026-04", "Total": 80 }, { "Month": "2026-05", "Total": 42 }] };
+
+            const portKeys = ['Taboguilla', 'Balboa', 'Cristobal', 'Manzanillo', 'Colon'];
 
             const map = L.map('map', { center: [9.10, -79.73], zoom: 10, zoomControl: true });
 
@@ -259,22 +281,106 @@
                 document.getElementById('port-list').appendChild(item);
             });
 
+            const renderGraph = (data) => {
+                if (!data || data.length === 0) return;
+
+                const svgEl = document.getElementById('timeline-svg');
+                if (!svgEl) return;
+
+                const rect = svgEl.getBoundingClientRect();
+                const width = rect.width > 0 ? rect.width : 500;
+                const height = rect.height > 0 ? rect.height : 150;
+
+                svgEl.setAttribute('viewBox', `0 0 ${width} ${height}`);
+                svgEl.removeAttribute('preserveAspectRatio');
+
+                const totals = data.map(d => d.Total);
+                const maxVal = Math.max(...totals);
+                const minVal = Math.min(...totals);
+
+                const padding = { top: 20, right: 30, bottom: 30, left: 40 };
+                const usableWidth = width - padding.left - padding.right;
+                const usableHeight = height - padding.top - padding.bottom;
+
+                let svgContent = `
+        <line x1="${padding.left}" y1="${height - padding.bottom}" x2="${width - padding.right}" y2="${height - padding.bottom}" stroke="#888" stroke-width="1" />
+        <line x1="${padding.left}" y1="${padding.top}" x2="${padding.left}" y2="${height - padding.bottom}" stroke="#888" stroke-width="1" />
+    `;
+
+                svgContent += `
+        <text x="${padding.left - 8}" y="${padding.top + 4}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="end">${maxVal}</text>
+        <text x="${padding.left - 8}" y="${height - padding.bottom + 4}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="end">${minVal}</text>
+    `;
+
+                const startMonth = data[0].Month;
+                const midMonth = data[Math.floor(data.length / 2)].Month;
+                const endMonth = data[data.length - 1].Month;
+
+                svgContent += `
+        <text x="${padding.left}" y="${height - padding.bottom + 18}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="middle">${startMonth}</text>
+        <text x="${padding.left + usableWidth / 2}" y="${height - padding.bottom + 18}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="middle">${midMonth}</text>
+        <text x="${padding.left + usableWidth}" y="${height - padding.bottom + 18}" fill="#aaa" font-size="11" font-family="sans-serif" text-anchor="middle">${endMonth}</text>
+    `;
+
+                let pathDataStr = "";
+                data.forEach((d, index) => {
+                    const x = padding.left + (index / (data.length - 1)) * usableWidth;
+                    const normalizedY = ((d.Total - minVal) / (maxVal - minVal || 1));
+                    const y = height - padding.bottom - (normalizedY * usableHeight);
+
+                    if (index === 0) {
+                        pathDataStr += `M ${x.toFixed(2)} ${y.toFixed(2)} `;
+                    } else {
+                        pathDataStr += `L ${x.toFixed(2)} ${y.toFixed(2)} `;
+                    }
+                });
+
+                svgContent += `<path d="${pathDataStr.trim()}" fill="none" stroke="#ffffff" stroke-width="2" />`;
+
+                const lastIndex = data.length - 1;
+                const lastX = padding.left + usableWidth;
+                const lastNormalizedY = ((data[lastIndex].Total - minVal) / (maxVal - minVal || 1));
+                const lastY = height - padding.bottom - (lastNormalizedY * usableHeight);
+
+                svgContent += `<circle cx="${lastX.toFixed(2)}" cy="${lastY.toFixed(2)}" r="4" fill="#ff4d4d" />`;
+
+                svgEl.innerHTML = svgContent;
+            };
+
             function focusNode(i) {
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
                 map.flyTo([nodes[i].lat, nodes[i].lng], 13, { duration: 1.2 });
                 setTimeout(() => markers[i].openPopup(), 1300);
+
+                if (portData[portKeys[i]]) {
+                    renderGraph(portData[portKeys[i]]);
+                }
             }
 
             map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
 
-            window.addEventListener('resize', function() {
+            const mapContainer = document.getElementById('map');
+            const resizeObserver = new ResizeObserver(() => {
                 map.invalidateSize();
+
+                const activeItem = document.querySelector('.port-item.active');
+                if (activeItem) {
+                    const idx = Array.from(document.querySelectorAll('.port-item')).indexOf(activeItem);
+                    if (portData[portKeys[idx]]) {
+                        renderGraph(portData[portKeys[idx]]);
+                    }
+                }
             });
+
+            resizeObserver.observe(mapContainer);
             
             setTimeout(function() { 
                 map.invalidateSize(); 
             }, 250);
+
+            // Initialize the default graph by focusing a node like in the original file
+            focusNode(1);
         });
     </script>
 </body>
