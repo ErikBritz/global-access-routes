@@ -17,8 +17,7 @@
 </head>
 
 <body>
-    <div class="strait-bg" style="background-image: url('svg/bosphorus.svg');
-            filter: brightness(2) opacity(0.05);"></div>
+    <div class="strait-bg" style="background-image: url('svg/bosphorus.svg');"></div>
     <div class="page">
         <header class="site-header">
             <div class="site-heading">
@@ -57,8 +56,6 @@
                             <div class="port-list-wrap" id="port-list"></div>
                         </div>
                     </div>
-
-                
 
                     <div class="content-grid">
                         <div class="main-column">
@@ -143,8 +140,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-
-            const landmarks = [
+            
+            const nodes = [
                 {
                     name: "Poyrazköy Entry",
                     short: "Poyrazköy (North Entry)",
@@ -193,55 +190,43 @@
             ];
 
             const routePoints = [
-                [41.34, 29.13],
-                [41.22, 29.12],
-                [41.20, 29.11],
-                [41.17, 29.07],
-                [41.16, 29.06],
-                [41.13, 29.07],
-                [41.12, 29.08],
-                [41.10, 29.06],
-                [41.085, 29.06],
-                [41.04, 29.03],
-                [41.03, 29.00],
-                [41.01, 29.00],
-                [40.80, 28.80]
+                [41.34, 29.13], [41.22, 29.12], [41.20, 29.11], [41.17, 29.07], [41.16, 29.06],
+                [41.13, 29.07], [41.12, 29.08], [41.10, 29.06], [41.085, 29.06], [41.04, 29.03],
+                [41.03, 29.00], [41.01, 29.00], [40.80, 28.80]
             ];
 
-            // Init map focused on the wider region
             const map = L.map('map', {
                 center: [41.10, 29.05],
                 zoom: 11,
                 zoomControl: true,
             });
 
-            // --- Pane setup styling and preparation for each layer in basemap and route---
-			map.createPane('esriBase');
-			map.createPane('esriSatellite');
-			map.createPane('esriDetail');
-			map.createPane('route');
-			map.createPane('esriLabels');
+            map.createPane('esriBase');
+            map.createPane('esriSatellite');
+            map.createPane('esriDetail');
+            map.createPane('route');
+            map.createPane('esriLabels');
 
-			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
-				pane: 'esriBase',
-				attribution: 'Cooper Thomas',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+                pane: 'esriBase',
+                attribution: 'Cooper Thomas',
+            }).addTo(map);
 
-			L.esri.tiledMapLayer({
-				url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
-				pane: 'esriSatellite',
-				attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
-			}).addTo(map);
+            L.esri.tiledMapLayer({
+                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+                pane: 'esriSatellite',
+                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
-				pane: 'esriDetail',
-				attribution: 'John Nelson',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+                pane: 'esriDetail',
+                attribution: 'John Nelson',
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
-				pane: 'esriLabels',
-				attribution: '&copy; Esri',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+                pane: 'esriLabels',
+                attribution: '&copy; Esri',
+            }).addTo(map);
 
             const routeLine = L.polyline(routePoints, { color: '#fbbf24', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
                 .bindPopup('<div class="route-popup-content"><strong>Bosphorus Strait</strong><br><span class="route-popup-subtext">Black Sea ↔ Sea of Marmara</span></div>')
@@ -264,20 +249,19 @@
 
             const markers = [];
 
-            landmarks.forEach(function (landmark, i) {
-                // Pass the iconName instead of the color
-                const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.iconName) }).addTo(map);
+            nodes.forEach(function (node, i) {
+                const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.iconName) }).addTo(map);
 
                 marker.bindPopup(
                     `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
-                <p class="popup-name">${landmark.name}</p>
+                <p class="popup-name">${node.name}</p>
                 <div class="popup-coord">
-                  <span>Lat: <strong>${landmark.lat.toFixed(4)}° N</strong></span>
-                  <span>Lng: <strong>${Math.abs(landmark.lng).toFixed(4)}° E</strong></span>
+                  <span>Lat: <strong>${node.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(node.lng).toFixed(4)}° E</strong></span>
                 </div>
               </div>
-              <div class="popup-footer">${landmark.desc}</div>`,
+              <div class="popup-footer">${node.desc}</div>`,
                     { maxWidth: 280 }
                 );
                 markers.push(marker);
@@ -285,40 +269,33 @@
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <img src="${landmark.iconName}" class="port-list-icon" alt="${landmark.short} icon">
+              <img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
               <div class="port-info">
-                <div class="port-name">${landmark.short}</div>
-                <div class="port-coords">${landmark.lat.toFixed(4)}° N · ${Math.abs(landmark.lng).toFixed(4)}° E</div>
+                <div class="port-name">${node.short}</div>
+                <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
               </div>`;
-                item.addEventListener('click', function () { focusLandmark(i); });
+              
+                item.addEventListener('click', function () { focusNode(i); });
                 document.getElementById('port-list').appendChild(item);
             });
 
-            function focusLandmark(i) {
+            function focusNode(i) {
                 const targetZoom = i === 1 || i === 2 || i === 4 ? 14 : 13;
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
-                map.flyTo([landmarks[i].lat, landmarks[i].lng], targetZoom, { duration: 1.2 });
-                setTimeout(() => markers[i].openPopup(), 1300);
+                
+                map.flyTo([nodes[i].lat, nodes[i].lng], targetZoom, { duration: 1.2 });
+                setTimeout(function() { markers[i].openPopup(); }, 1300);
             }
 
-            window.flyToLocation = function (coords, zoom) {
-                map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
-            };
-
-            // Map bounds layout adjustments
             map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
 
-            // Resize observer connection tracking container metrics updates
-            const mapContainer = document.getElementById('map');
-            const resizeObserver = new ResizeObserver(() => {
+            window.addEventListener('resize', function() {
                 map.invalidateSize();
             });
-            resizeObserver.observe(mapContainer);
-
-            // Fallback rendering call configuration
-            setTimeout(() => {
-                map.invalidateSize();
+        
+            setTimeout(function() { 
+                map.invalidateSize(); 
             }, 250);
         });
     </script>

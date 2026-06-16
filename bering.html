@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="strait-bg" style="background-image: url('svg/bering.svg'); filter: brightness(2) opacity(0.05);"></div>
+   <div class="strait-bg" style="background-image: url('svg/bering.svg');"></div>
     <div class="page">
         <header class="site-header">
             <div class="site-heading">
@@ -48,12 +48,9 @@
                         <div class="map-sidebar">
                             <h3>Strategic Nodes</h3>
                             <div class="sidebar-legend">
-                                <span class="legend-label"><img src="iconpack/important.svg" class="legend-icon"
-                                        alt="Landmark"> Landmark</span>
-                                <span class="legend-label"><img src="iconpack/military.svg" class="legend-icon"
-                                        alt="Military"> Military Base</span>
+                                <span class="legend-label"><img src="iconpack/important.svg" class="legend-icon" alt="Landmark"> Landmark</span>
+                                <span class="legend-label"><img src="iconpack/military.svg" class="legend-icon" alt="Military"> Military Base</span>
                             </div>
-
                             <div class="port-list-wrap" id="port-list"></div>
                         </div>
                     </div>
@@ -103,36 +100,22 @@
                                     of maritime traffic, climbing from just 242 vessels in 2010 to a peak of 681 in
                                     2023, reflecting the increasing physical accessibility of the Arctic corridor.</p>
 
-                                <div style="width: 100%; aspect-ratio: 2 / 1; display: block;">
-                                    <svg viewBox="0 0 600 300" width="100%" height="100%"
-                                        xmlns="http://www.w3.org/2000/svg">
+                                <div class="svg-chart-wrapper">
+                                    <svg viewBox="0 0 600 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                                        <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
+                                        <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
 
-                                        <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)"
-                                            stroke-width="1" />
-                                        <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)"
-                                            stroke-width="1" stroke-dasharray="4 4" />
-                                        <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)"
-                                            stroke-width="1" stroke-dasharray="4 4" />
+                                        <text x="30" y="254" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">0</text>
+                                        <text x="30" y="154" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">400</text>
+                                        <text x="30" y="54" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">800</text>
 
-                                        <text x="30" y="254" fill="#aab1c0" font-size="11" text-anchor="end"
-                                            font-family="'IBM Plex Mono', monospace">0</text>
-                                        <text x="30" y="154" fill="#aab1c0" font-size="11" text-anchor="end"
-                                            font-family="'IBM Plex Mono', monospace">400</text>
-                                        <text x="30" y="54" fill="#aab1c0" font-size="11" text-anchor="end"
-                                            font-family="'IBM Plex Mono', monospace">800</text>
+                                        <text x="40" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2010</text>
+                                        <text x="233" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2015</text>
+                                        <text x="426" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2020</text>
+                                        <text x="580" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">2024</text>
 
-                                        <text x="40" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
-                                            font-family="'IBM Plex Mono', monospace">2010</text>
-                                        <text x="233" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
-                                            font-family="'IBM Plex Mono', monospace">2015</text>
-                                        <text x="426" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
-                                            font-family="'IBM Plex Mono', monospace">2020</text>
-                                        <text x="580" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
-                                            font-family="'IBM Plex Mono', monospace">2024</text>
-
-                                        <polyline
-                                            points="40,189.5 78.6,190.25 117.1,171 155.7,164 194.3,186.25 233,137 271.4,165 310,160 348.6,160.5 387.1,130.75 426,110.75 464.3,111.25 502.9,122.75 541.4,79.75 580,83.75"
-                                            fill="none" stroke="#fbbf24" stroke-width="3" stroke-linejoin="round" />
+                                        <polyline points="40,189.5 78.6,190.25 117.1,171 155.7,164 194.3,186.25 233,137 271.4,165 310,160 348.6,160.5 387.1,130.75 426,110.75 464.3,111.25 502.9,122.75 541.4,79.75 580,83.75" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linejoin="round" />
 
                                         <circle cx="40" cy="189.5" r="4" fill="#fbbf24" />
                                         <circle cx="233" cy="137" r="4" fill="#fbbf24" />
@@ -141,8 +124,7 @@
                                         <circle cx="580" cy="83.75" r="4" fill="#fbbf24" />
 
                                         <rect x="40" y="10" width="12" height="4" fill="#fbbf24" rx="2" />
-                                        <text x="60" y="17" fill="#e5e8ee" font-size="11"
-                                            font-family="'IBM Plex Mono', monospace">Total Annual Transits</text>
+                                        <text x="60" y="17" fill="#e5e8ee" font-size="11" font-family="'IBM Plex Mono', monospace">Total Annual Transits</text>
                                     </svg>
                                 </div>
                             </section>
@@ -185,7 +167,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const landmarks = [
+            const nodes = [
                 { name: "Cape Prince of Wales", short: "Cape Prince of Wales (USA)", lat: 65.6136, lng: -168.0875, iconName: "iconpack/important.svg", desc: "The westernmost point of mainland North America." },
                 { name: "Little Diomede Island", short: "Little Diomede Island (USA)", lat: 65.7522, lng: -168.9247, iconName: "iconpack/important.svg", desc: "US island located exactly in the middle of the strait." },
                 { name: "Big Diomede Island", short: "Big Diomede Island (Russia)", lat: 65.7800, lng: -169.0666, iconName: "iconpack/military.svg", desc: "Russian military base situated just 3.8 kilometers from US territory." },
@@ -193,47 +175,39 @@
             ];
 
             const routePoints = [
-                [63.0000, -168.2000],
-                [64.2000, -168.5000],
-                [65.0000, -168.8000],
-                [65.5500, -168.9300],
-                [65.7560, -168.9710],
-                [65.9500, -169.0200],
-                [66.6000, -169.2000],
-                [68.0000, -169.5000]
+                [63.0000, -168.2000], [64.2000, -168.5000], [65.0000, -168.8000], [65.5500, -168.9300],
+                [65.7560, -168.9710], [65.9500, -169.0200], [66.6000, -169.2000], [68.0000, -169.5000]
             ];
 
             const map = L.map('map', { center: [65.76, -168.99], zoom: 7, zoomControl: true });
 
-            // --- Pane setup styling and preparation for each layer in basemap and route---
-			map.createPane('esriBase');
-			map.createPane('esriSatellite');
-			map.createPane('esriDetail');
-			map.createPane('route');
-			map.createPane('esriLabels');
+            map.createPane('esriBase');
+            map.createPane('esriSatellite');
+            map.createPane('esriDetail');
+            map.createPane('route');
+            map.createPane('esriLabels');
 
-			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
-				pane: 'esriBase',
-				attribution: 'Cooper Thomas',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+                pane: 'esriBase',
+                attribution: 'Cooper Thomas'
+            }).addTo(map);
 
-			L.esri.tiledMapLayer({
-				url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
-				pane: 'esriSatellite',
-				attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
-			}).addTo(map);
+            L.esri.tiledMapLayer({
+                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+                pane: 'esriSatellite',
+                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
-				pane: 'esriDetail',
-				attribution: 'John Nelson',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+                pane: 'esriDetail',
+                attribution: 'John Nelson'
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
-				pane: 'esriLabels',
-				attribution: '&copy; Esri',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+                pane: 'esriLabels',
+                attribution: '&copy; Esri'
+            }).addTo(map);
 
-            // Changed bindTooltip to bindPopup so it triggers on click
             const routeLine = L.polyline(routePoints, { color: '#fbbf24', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
                 .bindPopup('<div class="route-popup-content"><strong>Proposed Arctic Route</strong><br><span class="route-popup-subtext">Bering Sea ↔ Arctic Ocean</span></div>')
                 .addTo(map);
@@ -255,18 +229,19 @@
 
             const markers = [];
 
-            landmarks.forEach(function (landmark, i) {
-                const marker = L.marker([landmark.lat, landmark.lng], { icon: makeIcon(landmark.iconName) }).addTo(map);
+            nodes.forEach(function (node, i) {
+                const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.iconName) }).addTo(map);
+                
                 marker.bindPopup(
                     `<div class="popup-inner">
-                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
-                <p class="popup-name">${landmark.name}</p>
-                <div class="popup-coord">
-                  <span>Lat: <strong>${landmark.lat.toFixed(4)}° N</strong></span>
-                  <span>Lng: <strong>${Math.abs(landmark.lng).toFixed(4)}° W</strong></span>
-                </div>
-              </div>
-              <div class="popup-footer">${landmark.desc}</div>`,
+                        <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
+                        <p class="popup-name">${node.name}</p>
+                        <div class="popup-coord">
+                            <span>Lat: <strong>${node.lat.toFixed(4)}° N</strong></span>
+                            <span>Lng: <strong>${Math.abs(node.lng).toFixed(4)}° W</strong></span>
+                        </div>
+                    </div>
+                    <div class="popup-footer">${node.desc}</div>`,
                     { maxWidth: 280 }
                 );
                 markers.push(marker);
@@ -274,30 +249,34 @@
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <img src="${landmark.iconName}" class="port-list-icon" alt="${landmark.short} icon">
-              <div class="port-info">
-                <div class="port-name">${landmark.short}</div>
-                <div class="port-coords">${landmark.lat.toFixed(4)}° N · ${Math.abs(landmark.lng).toFixed(4)}° W</div>
-              </div>`;
-                item.addEventListener('click', function () { focusLandmark(i); });
+                    <img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
+                    <div class="port-info">
+                        <div class="port-name">${node.short}</div>
+                        <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° W</div>
+                    </div>`;
+                
+                // CHANGED: 'focusLandmark' is now 'focusNode'
+                item.addEventListener('click', function () { focusNode(i); });
                 document.getElementById('port-list').appendChild(item);
             });
 
-            function focusLandmark(i) {
-                // Now it only updates the sidebar active state, ignoring the deleted table
+            function focusNode(i) {
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
 
-                map.flyTo([landmarks[i].lat, landmarks[i].lng], 9, { duration: 1.2 });
-                setTimeout(() => markers[i].openPopup(), 1300);
+                map.flyTo([nodes[i].lat, nodes[i].lng], 9, { duration: 1.2 });
+                setTimeout(function() { markers[i].openPopup(); }, 1300);
             }
 
             map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
 
-            const mapContainer = document.getElementById('map');
-            const resizeObserver = new ResizeObserver(() => map.invalidateSize());
-            resizeObserver.observe(mapContainer);
-            setTimeout(() => map.invalidateSize(), 250);
+            window.addEventListener('resize', function() {
+                map.invalidateSize();
+            });
+            
+            setTimeout(function() { 
+                map.invalidateSize(); 
+            }, 250);
         });
     </script>
 </body>

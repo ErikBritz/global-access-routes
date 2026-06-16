@@ -30,6 +30,13 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    filter: brightness(2) opacity(0.05);
+}
+
+.svg-chart-wrapper {
+    width: 100%; 
+    aspect-ratio: 2 / 1; 
+    display: block;
 }
 
 /* ==========================================================================

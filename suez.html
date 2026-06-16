@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="strait-bg" style="background-image: url('svg/suez.svg'); filter: brightness(2) opacity(0.05);"></div>
+    <div class="strait-bg" style="background-image: url('svg/suez.svg');"></div>
     <div class="page">
         <header class="site-header">
             <div class="site-heading">
@@ -48,12 +48,9 @@
                         <div class="map-sidebar">
                             <h3>Strategic Nodes</h3>
                             <div class="sidebar-legend">
-                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon"
-                                        alt="Entry"> Entry/Exit</span>
-                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port">
-                                    Port</span>
-                                <span class="legend-label"><img src="iconpack/choke.svg" class="legend-icon"
-                                        alt="Chokepoint"> Chokepoint</span>
+                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon" alt="Entry"> Entry/Exit</span>
+                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port"> Port</span>
+                                <span class="legend-label"><img src="iconpack/choke.svg" class="legend-icon" alt="Chokepoint"> Chokepoint</span>
                             </div>
 
                             <div class="port-list-wrap" id="port-list"></div>
@@ -102,48 +99,31 @@
                                     relationship: as Red Sea transits decrease due to security threats, the cargo volume
                                     taking the lengthy Cape of Good Hope detour increases.</p>
 
-                                <div style="width: 100%; aspect-ratio: 2 / 1; display: block;">
-                                    <svg viewBox="0 0 600 300" width="100%" height="100%"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)"
-                                            stroke-width="1" />
-                                        <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)"
-                                            stroke-width="1" stroke-dasharray="4 4" />
-                                        <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)"
-                                            stroke-width="1" stroke-dasharray="4 4" />
+                                <div class="svg-chart-wrapper">
+                                    <svg viewBox="0 0 600 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="40" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                                        <line x1="40" y1="150" x2="580" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
+                                        <line x1="40" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" />
 
-                                        <text x="30" y="254" fill="#aab1c0" font-size="11" text-anchor="end"
-                                            font-family="'IBM Plex Mono', monospace">0</text>
-                                        <text x="30" y="154" fill="#aab1c0" font-size="11" text-anchor="end"
-                                            font-family="'IBM Plex Mono', monospace">4</text>
-                                        <text x="30" y="54" fill="#aab1c0" font-size="11" text-anchor="end"
-                                            font-family="'IBM Plex Mono', monospace">8</text>
+                                        <text x="30" y="254" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">0</text>
+                                        <text x="30" y="154" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">4</text>
+                                        <text x="30" y="54" fill="#aab1c0" font-size="11" text-anchor="end" font-family="'IBM Plex Mono', monospace">8</text>
 
-                                        <text x="40" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
-                                            font-family="'IBM Plex Mono', monospace">Jan '23</text>
-                                        <text x="310" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
-                                            font-family="'IBM Plex Mono', monospace">Dec '23</text>
-                                        <text x="580" y="275" fill="#aab1c0" font-size="11" text-anchor="middle"
-                                            font-family="'IBM Plex Mono', monospace">Mar '24</text>
+                                        <text x="40" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">Jan '23</text>
+                                        <text x="310" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">Dec '23</text>
+                                        <text x="580" y="275" fill="#aab1c0" font-size="11" text-anchor="middle" font-family="'IBM Plex Mono', monospace">Mar '24</text>
 
-                                        <polyline
-                                            points="40,137.5 117,125 194,120 271,125 348,130 425,187.5 502,197.5 580,205"
-                                            fill="none" stroke="#e74c3c" stroke-width="3" stroke-linejoin="round" />
-
-                                        <polyline
-                                            points="40,155 117,145 194,130 271,122.5 348,137.5 425,100 502,70 580,60"
-                                            fill="none" stroke="#3498db" stroke-width="3" stroke-linejoin="round" />
+                                        <polyline points="40,137.5 117,125 194,120 271,125 348,130 425,187.5 502,197.5 580,205" fill="none" stroke="#e74c3c" stroke-width="3" stroke-linejoin="round" />
+                                        <polyline points="40,155 117,145 194,130 271,122.5 348,137.5 425,100 502,70 580,60" fill="none" stroke="#3498db" stroke-width="3" stroke-linejoin="round" />
 
                                         <circle cx="580" cy="205" r="4" fill="#e74c3c" />
                                         <circle cx="580" cy="60" r="4" fill="#3498db" />
 
                                         <rect x="40" y="10" width="12" height="4" fill="#e74c3c" rx="2" />
-                                        <text x="60" y="17" fill="#e5e8ee" font-size="11"
-                                            font-family="'IBM Plex Mono', monospace">Suez Canal</text>
+                                        <text x="60" y="17" fill="#e5e8ee" font-size="11" font-family="'IBM Plex Mono', monospace">Suez Canal</text>
 
                                         <rect x="160" y="10" width="12" height="4" fill="#3498db" rx="2" />
-                                        <text x="180" y="17" fill="#e5e8ee" font-size="11"
-                                            font-family="'IBM Plex Mono', monospace">Cape of Good Hope</text>
+                                        <text x="180" y="17" fill="#e5e8ee" font-size="11" font-family="'IBM Plex Mono', monospace">Cape of Good Hope</text>
                                     </svg>
                                 </div>
                             </section>
@@ -194,61 +174,44 @@
             ];
 
             const routePoints = [
-                // [ Segment 1: Mediterranean Approach (Shifted East for a perfect center-channel entry) ]
                 [
-                    [31.6000, 32.4800],  // Outer Mediterranean (Pushed further East)
-                    [31.3500, 32.3800],  // Aligning with the outer buoys
-                    [31.2900, 32.3450],  // The exact center between Port Said and Port Fouad breakwaters
-                    [31.2750, 32.3280],  // Safely inside the harbor limits
-                    [31.2650, 32.3180]   // Terminates precisely at the Port Said Node
+                    [31.6000, 32.4800], [31.3500, 32.3800], [31.2900, 32.3450], [31.2750, 32.3280], [31.2650, 32.3180] 
                 ],
-
-                // [ Segment 2: Red Sea Exit & Extension (Through Bab-el-Mandeb, past Djibouti) ]
                 [
-                    [29.9300, 32.5550],  // Begins precisely at the Suez Port Node
-                    [29.0000, 32.8500],  // Mid-Gulf of Suez
-                    [28.2000, 33.3000],  // Approaching the Strait of Gubal
-                    [27.4000, 34.1500],  // Safely east of Shadwan Island
-                    [26.8000, 34.5000],  // Safely east of Jazā'ir Jiftūn
-                    [25.5000, 35.3000],  // Open Red Sea (Northern sector)
-                    [21.5000, 38.0000],  // Open Red Sea (Central sector, off Jeddah)
-                    [17.5000, 40.2000],  // Open Red Sea (Southern sector)
-                    [14.0000, 42.5000],  // Approaching the Bab-el-Mandeb bottleneck
-                    [12.6500, 43.3500],  // Threading the Bab-el-Mandeb Strait perfectly
-                    [11.8000, 44.2000],  // Clearing the Horn of Africa, passing Djibouti
-                    [11.5000, 45.5000]   // Exiting into the Gulf of Aden shipping lanes
+                    [29.9300, 32.5550], [29.0000, 32.8500], [28.2000, 33.3000], [27.4000, 34.1500], [26.8000, 34.5000], 
+                    [25.5000, 35.3000], [21.5000, 38.0000], [17.5000, 40.2000], [14.0000, 42.5000], [12.6500, 43.3500], 
+                    [11.8000, 44.2000], [11.5000, 45.5000] 
                 ]
             ];
 
             const map = L.map('map', { center: [21.5, 38.0], zoom: 4, zoomControl: true });
 
-            // --- Pane setup styling and preparation for each layer in basemap and route---
-			map.createPane('esriBase');
-			map.createPane('esriSatellite');
-			map.createPane('esriDetail');
-			map.createPane('route');
-			map.createPane('esriLabels');
+            map.createPane('esriBase');
+            map.createPane('esriSatellite');
+            map.createPane('esriDetail');
+            map.createPane('route');
+            map.createPane('esriLabels');
 
-			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
-				pane: 'esriBase',
-				attribution: 'Cooper Thomas',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+                pane: 'esriBase',
+                attribution: 'Cooper Thomas',
+            }).addTo(map);
 
-			L.esri.tiledMapLayer({
-				url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
-				pane: 'esriSatellite',
-				attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
-			}).addTo(map);
+            L.esri.tiledMapLayer({
+                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+                pane: 'esriSatellite',
+                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
-				pane: 'esriDetail',
-				attribution: 'John Nelson',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+                pane: 'esriDetail',
+                attribution: 'John Nelson',
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
-				pane: 'esriLabels',
-				attribution: '&copy; Esri',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+                pane: 'esriLabels',
+                attribution: '&copy; Esri',
+            }).addTo(map);
 
             const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
                 .bindPopup('<div class="route-popup-content"><strong>Red Sea Corridor</strong><br><span class="route-popup-subtext">Mediterranean ↔ Gulf of Aden</span></div>')
@@ -272,19 +235,18 @@
             const markers = [];
 
             nodes.forEach(function (node, i) {
-                // Initialize marker with the new iconName
                 const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.iconName) }).addTo(map);
 
                 marker.bindPopup(
                     `<div class="popup-inner">
-                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
-                <p class="popup-name">${node.name}</p>
-                <div class="popup-coord">
-                  <span>Lat: <strong>${node.lat.toFixed(4)}° N</strong></span>
-                  <span>Lng: <strong>${Math.abs(node.lng).toFixed(4)}° E</strong></span>
-                </div>
-              </div>
-              <div class="popup-footer">${node.desc}</div>`,
+                        <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
+                        <p class="popup-name">${node.name}</p>
+                        <div class="popup-coord">
+                            <span>Lat: <strong>${node.lat.toFixed(4)}° N</strong></span>
+                            <span>Lng: <strong>${Math.abs(node.lng).toFixed(4)}° E</strong></span>
+                        </div>
+                    </div>
+                    <div class="popup-footer">${node.desc}</div>`,
                     { maxWidth: 280 }
                 );
                 markers.push(marker);
@@ -292,11 +254,12 @@
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
-              <div class="port-info">
-                <div class="port-name">${node.short}</div>
-                <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
-              </div>`;
+                    <img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
+                    <div class="port-info">
+                        <div class="port-name">${node.short}</div>
+                        <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
+                    </div>`;
+                
                 item.addEventListener('click', function () { focusNode(i); });
                 document.getElementById('port-list').appendChild(item);
             });
@@ -305,18 +268,20 @@
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
 
-                // Table active state logic removed
 
                 map.flyTo([nodes[i].lat, nodes[i].lng], 8, { duration: 1.2 });
-                setTimeout(() => markers[i].openPopup(), 1300);
+                setTimeout(function() { markers[i].openPopup(); }, 1300);
             }
 
             map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
 
-            const mapContainer = document.getElementById('map');
-            const resizeObserver = new ResizeObserver(() => map.invalidateSize());
-            resizeObserver.observe(mapContainer);
-            setTimeout(() => map.invalidateSize(), 250);
+            window.addEventListener('resize', function() {
+                map.invalidateSize();
+            });
+            
+            setTimeout(function() { 
+                map.invalidateSize(); 
+            }, 250);
         });
     </script>
 </body>
