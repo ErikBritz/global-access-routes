@@ -34,6 +34,13 @@ async function initGlobe() {
 		useBrowserRecommendedResolution: false
 	});
 
+	// ── Limit the Zoom Range ──
+    // Minimum zoom distance from the surface (e.g., 500,000 meters / 500 km to prevent zooming too close)
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 500000;
+    
+    // Maximum zoom distance from the surface (e.g., 25,000,000 meters / 25,000 km to prevent zooming too far into outer space)
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 25000000;
+
 	// Dark basemap from Cesium Ion (asset 3812 = Bing Maps Dark)
 	viewer.imageryLayers.removeAll();
 	viewer.imageryLayers.addImageryProvider(
