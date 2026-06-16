@@ -246,7 +246,6 @@ body::before {
     margin-bottom: 4px;
 }
 
-/* Sidebar SVG Legend */
 .sidebar-legend {
     font-size: 12px;
     margin-bottom: 15px;
@@ -270,7 +269,6 @@ body::before {
     border-radius: 50%;
 }
 
-/* Interactive Sidebar List */
 .port-list-wrap {
     display: flex;
     flex-direction: column;
@@ -383,7 +381,6 @@ body::before {
 	font-size: 16px !important; 
 }
 
-/* Map Popups (Nodes) */
 .popup-inner { 
 	padding: 12px 14px; 
 }
@@ -420,7 +417,6 @@ body::before {
 	line-height: 1.55; 
 }
 
-/* Route Line Popups */
 .route-popup-content { text-align: center; padding: 5px; }
 .route-popup-subtext { font-size: 11px; opacity: 0.8; }
 
