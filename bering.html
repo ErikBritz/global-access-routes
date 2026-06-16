@@ -281,7 +281,6 @@
                         <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° W</div>
                     </div>`;
                 
-                // CHANGED: 'focusLandmark' is now 'focusNode'
                 item.addEventListener('click', function () { focusNode(i); });
                 document.getElementById('port-list').appendChild(item);
             });
