@@ -108,19 +108,62 @@
                             <div class="card">
                                 <h2>Scale of the strait</h2>
                                 <p>Real scale and the population around this strait.</p>
-                                <img id="deneme1" 
-                                    src="deneme1.png" 
-                                    alt="Scale of the strait" style="position: relative;
-                                                                    max-height: 60vh;
-                                                                    object-fit: contain;
-                                                                    display:block;
-                                                                    width:100%;
-                                                                    max-width: 900px;
-                                                                    margin: 20px auto;
-                                                                    align-items: center;
-                                                                    border-radius: 5px;
-                                                                    border-color: #ffffff;
-                                                                    z-index: 10;">
+                                <div class="image-overlay-container" style="position: relative; max-width: 900px; margin: 20px auto;">
+                                    
+                                    <img id="bosphorus_sat" 
+                                        src="14_06_26_bosphorus.jpg" 
+                                        alt="Scale of the strait" 
+                                        style="display: block;
+                                                width: 100%;
+                                                max-height: 60vh;
+                                                object-fit: contain;
+                                                border-radius: 5px;
+                                                border-color: #ffffff;
+                                                z-index: 10;">
+
+                                    <svg class="overlay-layer" viewBox="0 0 900 600" 
+                                        style="position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 100%;
+                                                z-index: 20;
+                                                pointer-events: none;">
+                                        
+                                        <g id="svg-scale" style="pointer-events: auto;">
+                                            <path d="M 350,550 L 550,550 M 350,540 L 350,550 M 450,545 L 450,550 M 550,540 L 550,550" 
+                                                stroke="#ffffff" stroke-width="3" fill="none" />
+                                            <text x="350" y="530" fill="#ffffff" font-family="sans-serif" font-size="14" text-anchor="middle">0</text>
+                                            <text x="450" y="530" fill="#ffffff" font-family="sans-serif" font-size="14" text-anchor="middle">1 km</text>
+                                            <text x="550" y="530" fill="#ffffff" font-family="sans-serif" font-size="14" text-anchor="middle">2 km</text>
+                                        </g>
+
+                                        <g id="marker-1" style="pointer-events: auto; cursor: pointer;">
+                                            <circle cx="270" cy="380" r="17.5" fill="#ff3333" opacity="0.8" stroke="#ffffff" stroke-width="2" />
+                                            <text x="270" y="415" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
+                                                style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
+                                                Fatih (Golden Horn)- 351.786
+                                            </text>
+                                        </g>
+
+                                        <g id="marker-2" style="pointer-events: auto; cursor: pointer;">
+                                            <circle cx="450" cy="135" r="36.3" fill="#ff3333" opacity="0.8" stroke="#ffffff" stroke-width="2" />
+                                            <text x="450" y="190" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
+                                                style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
+                                                Beyoğlu- Beşiktaş- Sarıyer - 726.769
+                                            </text>
+                                        </g>
+
+                                        <g id="marker-2" style="pointer-events: auto; cursor: pointer;">
+                                            <circle cx="600" cy="350" r="51.1" fill="#ff3333" opacity="0.8" stroke="#ffffff" stroke-width="2" />
+                                            <text x="600" y="420" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
+                                                style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
+                                                Kadıköy- Üsküdar- Beykoz - 1.219.700
+                                            </text>
+                                        </g>
+                                    </svg>
+
+                                </div>
                             </div>
                         </div>
 
