@@ -280,11 +280,10 @@
                 );
                 markers.push(marker);
 
-                // Sidebar landmark item updated to use the SVG image
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <img src="${landmark.iconName}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 12px;" alt="${landmark.short} icon">
+              <img src="${landmark.iconName}" class="port-list-icon" alt="${landmark.short} icon">
               <div class="port-info">
                 <div class="port-name">${landmark.short}</div>
                 <div class="port-coords">${landmark.lat.toFixed(4)}° N · ${Math.abs(landmark.lng).toFixed(4)}° E</div>

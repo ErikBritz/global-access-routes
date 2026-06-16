@@ -289,11 +289,10 @@
                 );
                 markers.push(marker);
 
-                // Build the sidebar item using the SVG image instead of a CSS dot
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <img src="${node.iconName}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 12px;" alt="${node.short} icon">
+              <img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
               <div class="port-info">
                 <div class="port-name">${node.short}</div>
                 <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
