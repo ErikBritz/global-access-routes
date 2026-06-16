@@ -235,7 +235,7 @@
 
             // Changed bindTooltip to bindPopup so it triggers on click
             const routeLine = L.polyline(routePoints, { color: '#fbbf24', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
-                .bindPopup('<div style="text-align:center; padding: 5px;"><strong>Proposed Arctic Route</strong><br><span style="font-size:11px; opacity:0.8;">Bering Sea ↔ Arctic Ocean</span></div>')
+                .bindPopup('<div class="route-popup-content"><strong>Proposed Arctic Route</strong><br><span class="route-popup-subtext">Bering Sea ↔ Arctic Ocean</span></div>')
                 .addTo(map);
 
             function makeIcon(iconName) {

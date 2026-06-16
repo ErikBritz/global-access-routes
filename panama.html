@@ -184,7 +184,9 @@
 				attribution: '&copy; Esri',
 			}).addTo(map);
 			
-			L.polyline(canalRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'}).addTo(map);
+			const routeLine = L.polyline(canalRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
+                .bindPopup('<div class="route-popup-content"><strong>Panama Canal Route</strong><br><span class="route-popup-subtext">Atlantic Ocean ↔ Pacific Ocean</span></div>')
+                .addTo(map);
 
 			function makeIcon(color) {
 				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">

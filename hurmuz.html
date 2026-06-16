@@ -241,8 +241,10 @@
 				attribution: '&copy; Esri',
 			}).addTo(map);
 
-			const routeLine = L.polyline(routeLinePoints, { color: '#38bdf8', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'}).addTo(map);
-
+			const routeLine = L.polyline(routeLinePoints, { color: '#38bdf8', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
+                .bindPopup('<div class="route-popup-content"><strong>Hormuz Shipping Channel</strong><br><span class="route-popup-subtext">Persian Gulf ↔ Gulf of Oman</span></div>')
+                .addTo(map);
+				
 			function makeIcon(iconName) {
 				return L.divIcon({
 					className: 'custom-composite-icon',

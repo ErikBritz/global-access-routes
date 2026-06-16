@@ -252,6 +252,17 @@ body::before {
     pointer-events: none;
 }
 
+/* Route Line Popups */
+.route-popup-content {
+    text-align: center;
+    padding: 5px;
+}
+
+.route-popup-subtext {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
 .map-sidebar {
 	flex: 1;
 	min-width: 180px;

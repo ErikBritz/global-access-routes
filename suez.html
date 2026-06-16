@@ -251,7 +251,7 @@
 			}).addTo(map);
 
             const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
-                .bindPopup('<div style="text-align:center; padding: 5px;"><strong>Red Sea Corridor</strong><br><span style="font-size:11px; opacity:0.8;">Mediterranean ↔ Gulf of Aden</span></div>')
+                .bindPopup('<div class="route-popup-content"><strong>Red Sea Corridor</strong><br><span class="route-popup-subtext">Mediterranean ↔ Gulf of Aden</span></div>')
                 .addTo(map);
 
             function makeIcon(iconName) {
