@@ -8,7 +8,7 @@ const BING_MAPS_KEY =
 		: "PASTE_BING_MAPS_KEY";
 
 const straits = [
-	{ id: "hurmuz", name: "Hurmuz", coords: [56.3, 26.6] },
+	{ id: "hurmuz", name: "Hormuz", coords: [56.3, 26.6] },
 	{ id: "bosphorus", name: "Bosphorus", coords: [29.0, 41.1] },
 	{ id: "bering", name: "Bering", coords: [-168.9, 65.8] },
 	{ id: "suez", name: "Suez", coords: [32.55, 30.4] },
