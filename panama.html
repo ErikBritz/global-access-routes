@@ -48,6 +48,11 @@
 						<div id="map"></div>
 						<div class="map-sidebar">
 							<h3>Strategic Nodes</h3>
+							<div class="sidebar-legend">
+                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon" alt="Entry"> Entry/Exit</span>
+                                <span class="legend-label"><img src="iconpack/important.svg" class="legend-icon" alt="Landmark"> Landmark</span>
+                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port"> Port</span>
+                            </div>
 							<div class="port-list-wrap" id="port-list"></div>
 						</div>
 					</div>
@@ -138,11 +143,11 @@
 		document.addEventListener('DOMContentLoaded', function () {
 
 			const ports = [
-				{ name: "Taboguilla (Panama)", short: "Taboguilla (Panama)", lat: 8.808837462, lng: -79.55760682, ocean: "Pacific", elev: "0 m", color: "#36b295", desc: "Anchorage area and navigation reference point near the Pacific entrance of the canal." },
-				{ name: "Balboa (Panama)", short: "Balboa (Panama)", lat: 8.95532195, lng: -79.56547193, ocean: "Pacific", elev: "0 m", color: "#c9a84c", desc: "The Pacific terminus of the canal and the country's principal commercial port." },
-				{ name: "Cristóbal (Panama)", short: "Cristóbal (Panama)", lat: 9.345538334, lng: -79.90654356, ocean: "Atlantic", elev: "~26 m", color: "#a40e7e", desc: "Historic port serving as the Atlantic entrance hub for the canal since its opening in 1914." },
-				{ name: "Manzanillo (Panama)", short: "Manzanillo (Panama)", lat: 9.367894427, lng: -79.88215481, ocean: "Atlantic", elev: "~26 m", color: "#2980b9", desc: "Major container terminal on the Atlantic side, one of the busiest ports in Latin America." },
-				{ name: "Colón Free Trade Zone (Panama)", short: "Colón (Panama)", lat: 9.373324629, lng: -79.87879174, ocean: "Atlantic", elev: "0 m", color: "#b85c38", desc: "The largest free trade zone in the Western Hemisphere and the Atlantic gateway to the canal." }
+				{ name: "Taboguilla (Panama)", short: "Taboguilla (Panama)", lat: 8.808837462, lng: -79.55760682, ocean: "Pacific", elev: "0 m", iconName: "iconpack/important.svg", desc: "Anchorage area and navigation reference point near the Pacific entrance of the canal." },
+				{ name: "Balboa (Panama)", short: "Balboa (Panama)", lat: 8.95532195, lng: -79.56547193, ocean: "Pacific", elev: "0 m", iconName: "iconpack/passage.svg", desc: "The Pacific terminus of the canal and the country's principal commercial port." },
+				{ name: "Cristóbal (Panama)", short: "Cristóbal (Panama)", lat: 9.345538334, lng: -79.90654356, ocean: "Atlantic", elev: "~26 m", iconName: "iconpack/passage.svg", desc: "Historic port serving as the Atlantic entrance hub for the canal since its opening in 1914." },
+				{ name: "Manzanillo (Panama)", short: "Manzanillo (Panama)", lat: 9.367894427, lng: -79.88215481, ocean: "Atlantic", elev: "~26 m", iconName: "iconpack/port1.svg", desc: "Major container terminal on the Atlantic side, one of the busiest ports in Latin America." },
+				{ name: "Colón Free Trade Zone (Panama)", short: "Colón (Panama)", lat: 9.373324629, lng: -79.87879174, ocean: "Atlantic", elev: "0 m", iconName: "iconpack/port1.svg", desc: "The largest free trade zone in the Western Hemisphere and the Atlantic gateway to the canal." }
 			];
 
 			const canalRoute = [
@@ -188,60 +193,54 @@
                 .bindPopup('<div class="route-popup-content"><strong>Panama Canal Route</strong><br><span class="route-popup-subtext">Atlantic Ocean ↔ Pacific Ocean</span></div>')
                 .addTo(map);
 
-			function makeIcon(color) {
-				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
-		      <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
-		      <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
-		    </svg>`;
-				return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
-			}
+			function makeIcon(iconName) {
+                return L.divIcon({
+                    className: 'custom-composite-icon',
+                    html: `
+                        <div style="position: relative; width: 40px; height: 40px;">
+                            <img src="iconpack/pin.svg" style="width: 100%; height: 100%;" alt="pin" />
+                            <img src="${iconName}" style="position: absolute; top: 1px; left: 4px; width: 32px; height: 32px; border-radius: 50%;" alt="label" />
+                        </div>
+                    `,
+                    iconSize: [30, 45],
+                    iconAnchor: [15, 45],
+                    popupAnchor: [0, -45]
+                });
+            }
 
 			const markers = [];
 
 			ports.forEach(function (port, i) {
-				const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.color) }).addTo(map);
-				marker.bindPopup(
-					`<div class="popup-inner">
-		        <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
-		        <p class="popup-name">${port.name}</p>
-		        <div class="popup-coord">
-		          <span>Lat: <strong>${port.lat.toFixed(4)}° N</strong></span>
-		          <span>Lng: <strong>${Math.abs(port.lng).toFixed(4)}° W</strong></span>
-		        </div>
-		      </div>
-		      <div class="popup-footer">${port.desc}</div>`,
-					{ maxWidth: 280 }
-				);
-				markers.push(marker);
+                // Pass the iconName instead of the color
+                const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.iconName) }).addTo(map);
 
-				// Sidebar port item
-				const item = document.createElement('div');
-				item.className = 'port-item';
-				item.innerHTML = `
-		      <span class="port-dot" style="background:${port.color};"></span>
-		      <div class="port-info">
-		        <div class="port-name">${port.short}</div>
-				<div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° W</div>
-		      </div>`;
-				item.addEventListener('click', function () { focusPort(i); });
-				document.getElementById('port-list').appendChild(item);
+                marker.bindPopup(
+                    `<div class="popup-inner">
+                <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
+                <p class="popup-name">${port.name}</p>
+                <div class="popup-coord">
+                  <span>Lat: <strong>${port.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(port.lng).toFixed(4)}° E</strong></span>
+                </div>
+              </div>
+              <div class="popup-footer">${port.desc}</div>`,
+                    { maxWidth: 280 }
+                );
+                markers.push(marker);
 
-				// Table row
-				const badgeHtml = port.ocean === 'Atlantic'
-					? '<span class="side-badge badge-atlantic">Atlantic</span>'
-					: '<span class="side-badge badge-pacific">Pacific</span>';
+                const item = document.createElement('div');
+                item.className = 'port-item';
+                item.innerHTML = `
+              <img src="${port.iconName}" class="port-list-icon" alt="${port.short} icon">
+              <div class="port-info">
+                <div class="port-name">${port.short}</div>
+                <div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° E</div>
+              </div>`;
+                item.addEventListener('click', function () { focusPort(i); });
+                document.getElementById('port-list').appendChild(item);
+            });
 
-				const row = document.createElement('tr');
-				row.innerHTML = `
-		      <td class="mono">${String(i + 1).padStart(2, '0')}</td>
-		      <td>${port.name}</td>
-		      <td>${badgeHtml}</td>
-		      <td class="mono">${port.lat.toFixed(4)}° N</td>
-		      <td class="mono">${Math.abs(port.lng).toFixed(4)}° W</td>
-		      <td class="mono">${port.elev}</td>`;
-				row.addEventListener('click', function () { focusPort(i); });
-			});
-
+		
 			function focusPort(i) {
 				document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
 				document.querySelectorAll('.port-item')[i].classList.add('active');
