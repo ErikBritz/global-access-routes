@@ -106,8 +106,8 @@
                             </section>
 
                             <div class="card">
-                                <h2>Scale of the strait</h2>
-                                <p>Real scale and the population around this strait.</p>
+                                <h2>Navigating a Crowded Strait</h2>
+                                <p>Bosphorus is a very narrow waterway and maritime operation is highly restricted, requiring large international shipping vessels to navigate tight turns alongside a high volume of local transportation ferries. Bordering this active shipping channel is a massive urban population spread across the adjacent districts. Due to the high density of millions of residents living directly on the waterfront, the coastlines are exceptionally valuable and physically limited, leaving very little space between significant maritime infrastructure and dense urban residential areas.</p>
                                 <div class="image-overlay-container" style="position: relative; max-width: 900px; margin: 20px auto;">
                                     
                                     <img id="bosphorus_sat" 
@@ -115,10 +115,11 @@
                                         alt="Scale of the strait" 
                                         style="display: block;
                                                 width: 100%;
-                                                max-height: 60vh;
+                                                height: 100%;
                                                 object-fit: contain;
                                                 border-radius: 5px;
                                                 border-color: #ffffff;
+                                                position:static;
                                                 z-index: 10;">
 
                                     <svg class="overlay-layer" viewBox="0 0 900 600" 
@@ -138,27 +139,38 @@
                                         </g>
 
                                         <g id="marker-1" style="pointer-events: auto; cursor: pointer;">
-                                            <circle cx="270" cy="380" r="17.5" fill="#ff3333" opacity="0.8" stroke="#ffffff" stroke-width="2" />
+                                            <circle cx="270" cy="380" r="17.5" fill="#B34D4D" opacity="0.8" stroke="#ffffff" stroke-width="2" />
                                             <text x="270" y="415" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
                                                 style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
-                                                Fatih (Golden Horn)
-                                                351.786
+                                                Fatih(Golden Horn)
+                                            </text>
+                                            <text x="270" y="435" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
+                                                style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
+                                                Population: 351.786
                                             </text>
                                         </g>
 
                                         <g id="marker-2" style="pointer-events: auto; cursor: pointer;">
-                                            <circle cx="450" cy="135" r="36.3" fill="#ff3333" opacity="0.8" stroke="#ffffff" stroke-width="2" />
+                                            <circle cx="450" cy="135" r="36.3" fill="#B34D4D" opacity="0.8" stroke="#ffffff" stroke-width="2" />
                                             <text x="450" y="190" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
                                                 style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
-                                                Beyoğlu- Beşiktaş- Sarıyer - 726.769
+                                                Beyoğlu- Beşiktaş- Sarıyer
+                                            </text>
+                                            <text x="450" y="210" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
+                                                style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
+                                                Population: 726.769
                                             </text>
                                         </g>
 
                                         <g id="marker-2" style="pointer-events: auto; cursor: pointer;">
-                                            <circle cx="600" cy="350" r="51.1" fill="#ff3333" opacity="0.8" stroke="#ffffff" stroke-width="2" />
+                                            <circle cx="600" cy="350" r="51.1" fill="#B34D4D" opacity="0.8" stroke="#ffffff" stroke-width="2" />
                                             <text x="600" y="420" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
                                                 style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
-                                                Kadıköy- Üsküdar- Beykoz - 1.219.700
+                                                Kadıköy- Üsküdar- Beykoz
+                                            </text>
+                                            <text x="600" y="440" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" 
+                                                style="paint-order: stroke; stroke: #000000; stroke-width: 3px; stroke-linejoin: round;">
+                                                Population: 1.219.700
                                             </text>
                                         </g>
                                     </svg>
@@ -193,8 +205,7 @@
             </section>
         </main>
         <footer class="site-footer">
-            <p>Data Sources: Map tiles provided by Esri and Cooper Thomas; Navigation vectors via OpenStreetMap (ODbL);
-                Transit stats & treaty parameters from the 1936 Montreux Convention & DergiPark Open Academic Database.
+            <p>Data Sources: Map tiles provided by Esri and Cooper Thomas, incorporating Bosphorus satellite imagery from Copernicus; navigation vectors via OpenStreetMap (ODbL); transit stats and treaty parameters from the 1936 Montreux Convention and the DergiPark Open Academic Database, supported by local demographic and administrative data from İstanbul Valiliği.
             </p>
         </footer>
     </div>
