@@ -2,51 +2,50 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Malacca | 6 Straits</title>
-	<link rel="stylesheet" href="style.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-	<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Malacca | 6 Straits</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
 
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-	<script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
 
-	<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
-	<script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
 </head>
 
 <body>
-	<div class="strait-bg" style="background-image: url('svg/malacca.svg');
-			 		filter: brightness(2) opacity(0.05);"></div>
-	<div class="page">
-		<header class="site-header">
-			<div class="site-heading">
-				<h1 class="site-title">Malacca</h1>
-				<p class="site-subtitle">Explore some of the worlds most important straits.</p>
-			</div>
-			<nav class="site-nav">
-				<a href="index.html">Home</a>
-				<a href="hurmuz.html">Hurmuz</a>
-				<a href="bosphorus.html">Bosphorus</a>
-				<a href="bering.html">Bering</a>
-				<a href="suez.html">Suez</a>
-				<a href="panama.html">Panama</a>
-				<a href="malacca.html" class="is-active">Malacca</a>
-			</nav>
-		</header>
+    <div class="strait-bg" style="background-image: url('svg/malacca.svg');"></div>
+    <div class="page">
+        <header class="site-header">
+            <div class="site-heading">
+                <h1 class="site-title">Malacca</h1>
+                <p class="site-subtitle">Explore some of the worlds most important straits.</p>
+            </div>
+            <nav class="site-nav">
+                <a href="index.html">Home</a>
+                <a href="hurmuz.html">Hurmuz</a>
+                <a href="bosphorus.html">Bosphorus</a>
+                <a href="bering.html">Bering</a>
+                <a href="suez.html">Suez</a>
+                <a href="panama.html">Panama</a>
+                <a href="malacca.html" class="is-active">Malacca</a>
+            </nav>
+        </header>
 
-		<main class="stage">
-			<section class="globe-wrap">
-				<div class="container">
+        <main class="stage">
+            <section class="globe-wrap">
+                <div class="container">
 
-					<div class="status-banner">
-						Transit Status: Operational — Indian ↔ Pacific Transit Route
-					</div>
+                    <div class="status-banner">
+                        Transit Status: Operational — Indian ↔ Pacific Transit Route
+                    </div>
 
-					<div class="map-section">
-						<div id="map"></div>
-						<div class="map-sidebar">
+                    <div class="map-section">
+                        <div id="map"></div>
+                        <div class="map-sidebar">
                             <h3>Strategic Nodes</h3>
                             <div class="sidebar-legend">
                                 <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon" alt="Entry"> Passage</span>
@@ -55,186 +54,266 @@
                             </div>
                             <div class="port-list-wrap" id="port-list"></div>
                         </div>
-					</div>
+                    </div>
 
-					<div class="content-grid">
-						<div class="main-column">
-							<section class="card">
-								<h2>Geographic Context</h2>
-								<p>The Strait of Malacca is one of the world's most strategically vital waterways,
-									running
-									between the <b>Malay Peninsula</b> and the Indonesian island of <b>Sumatra</b> to
-									connect the
-									<b>Indian Ocean</b> (via the Andaman Sea) with the <b>Pacific Ocean</b> (via the
-									South China Sea).
-									Stretching roughly <b>930 kilometres</b>, it provides the shortest
-									maritime route
-									between the Middle East and East Asian markets, eliminating the need for vessels to
-									take
-									lengthy detours through the wider Indonesian archipelago. Unlike a man-made canal,
-									it is a
-									<b>natural funnel-shaped corridor</b> that narrows significantly at its southern
-									end, forcing
-									massive cargo ships to carefully navigate the shallow and highly congested
-									<b>Phillips Channel</b>.
-								</p>
-							</section>
+                    <div class="content-grid">
+                        <div class="main-column">
+                            <section class="card">
+                                <h2>Geographic Context</h2>
+                                <p>The Strait of Malacca is one of the world's most strategically vital waterways,
+                                    running
+                                    between the <b>Malay Peninsula</b> and the Indonesian island of <b>Sumatra</b> to
+                                    connect the
+                                    <b>Indian Ocean</b> (via the Andaman Sea) with the <b>Pacific Ocean</b> (via the
+                                    South China Sea).
+                                    Stretching roughly <b>930 kilometres</b>, it provides the shortest
+                                    maritime route
+                                    between the Middle East and East Asian markets, eliminating the need for vessels to
+                                    take
+                                    lengthy detours through the wider Indonesian archipelago. Unlike a man-made canal,
+                                    it is a
+                                    <b>natural funnel-shaped corridor</b> that narrows significantly at its southern
+                                    end, forcing
+                                    massive cargo ships to carefully navigate the shallow and highly congested
+                                    <b>Phillips Channel</b>.
+                                </p>
+                            </section>
 
-							<section class="card">
-								<h2>Historic Timeline</h2>
-								<div class="timeline">
-									<div class="timeline-item">
-										<strong>15th Century:</strong> The <b>Malacca Sultanate</b> rises to power,
-										transforming
-										the region into an international hub for the lucrative spice trade and drawing
-										merchants
-										from across Asia and the Middle East.
-									</div>
-									<div class="timeline-item">
-										<strong>1511:</strong> The <b>Portuguese Empire</b> captures the city of
-										Malacca, marking
-										the beginning of centuries of European colonial struggle (later involving the
-										Dutch and British)
-										to dominate this critical maritime chokepoint.
-									</div>
-									<div class="timeline-item">
-										<strong>1824:</strong> The <b>Anglo-Dutch Treaty</b> is signed, officially
-										dividing the
-										region's spheres of influence. This established the modern geopolitical borders
-										between
-										Malaysia/Singapore (British) and Indonesia (Dutch) along the strait.
-									</div>
-									<div class="timeline-item">
-										<strong>2004:</strong> In response to surging regional piracy, littoral states
-										launch
-										the <b>MALSINDO</b> coordinated sea patrols (Malaysia, Singapore, Indonesia),
-										significantly
-										enhancing the security of modern commercial shipping routes.
-									</div>
-								</div>
-							</section>
+                            <section class="card">
+                                <h2>Historic Timeline</h2>
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <strong>15th Century:</strong> The <b>Malacca Sultanate</b> rises to power,
+                                        transforming
+                                        the region into an international hub for the lucrative spice trade and drawing
+                                        merchants
+                                        from across Asia and the Middle East.
+                                    </div>
+                                    <div class="timeline-item">
+                                        <strong>1511:</strong> The <b>Portuguese Empire</b> captures the city of
+                                        Malacca, marking
+                                        the beginning of centuries of European colonial struggle (later involving the
+                                        Dutch and British)
+                                        to dominate this critical maritime chokepoint.
+                                    </div>
+                                    <div class="timeline-item">
+                                        <strong>1824:</strong> The <b>Anglo-Dutch Treaty</b> is signed, officially
+                                        dividing the
+                                        region's spheres of influence. This established the modern geopolitical borders
+                                        between
+                                        Malaysia/Singapore (British) and Indonesia (Dutch) along the strait.
+                                    </div>
+                                    <div class="timeline-item">
+                                        <strong>2004:</strong> In response to surging regional piracy, littoral states
+                                        launch
+                                        the <b>MALSINDO</b> coordinated sea patrols (Malaysia, Singapore, Indonesia),
+                                        significantly
+                                        enhancing the security of modern commercial shipping routes.
+                                    </div>
+                                </div>
+                            </section>
 
-							<section class="card">
-								<h2>Impact on Global Trade</h2>
-								<p>The Strait of Malacca handles approximately <b>25% of all global trade</b> and over
-									<b>80,000 vessel transits annually</b>. It is the primary maritime route connecting
-									the Middle East and Europe to East Asian markets and is critical to the supply
-									chains of
-									<b>crude oil,
-										liquefied natural gas (LNG), and manufactured goods</b>. Any disruption,
-									whether from
-									ship collisions in its narrowest chokepoints, piracy, or geopolitical tensions, has
-									immediate
-									and measurable consequences for global energy security and manufacturing networks.
-								</p>
-							</section>
-						</div>
+                            <section class="card">
+                                <h2>Impact on Global Trade</h2>
+                                <p>The Strait of Malacca handles approximately <b>25% of all global trade</b> and over
+                                    <b>80,000 vessel transits annually</b>. It is the primary maritime route connecting
+                                    the Middle East and Europe to East Asian markets and is critical to the supply
+                                    chains of
+                                    <b>crude oil,
+                                        liquefied natural gas (LNG), and manufactured goods</b>. Any disruption,
+                                    whether from
+                                    ship collisions in its narrowest chokepoints, piracy, or geopolitical tensions, has
+                                    immediate
+                                    and measurable consequences for global energy security and manufacturing networks.
+                                </p>
+                            </section>
+                        </div>
 
-						<div class="sidebar-column">
-							<section class="card">
-								<h3>Technical Stats</h3>
-								<p>
-									<b>Length:</b> ~930 km<br>
-									<b>Narrowest Point:</b> ~2.8 km at Phillips Channel<br>
-									<b>Minimum Depth:</b> ~25 m (82 ft)<br>
-									<b>Daily Transits:</b> ~210–250 vessels<br>
-									<b>Annual Flow:</b> ~80,000–94,000 vessels/yr
-								</p>
-							</section>
+                        <div class="sidebar-column">
+                            <section class="card">
+                                <h3>Technical Stats</h3>
+                                <p>
+                                    <b>Length:</b> ~930 km<br>
+                                    <b>Narrowest Point:</b> ~2.8 km at Phillips Channel<br>
+                                    <b>Minimum Depth:</b> ~25 m (82 ft)<br>
+                                    <b>Daily Transits:</b> ~210–250 vessels<br>
+                                    <b>Annual Flow:</b> ~80,000–94,000 vessels/yr
+                                </p>
+                            </section>
 
-							<section class="card">
-								<h3>Strategic Importance</h3>
-								<p>The Strait of Malacca serves as the <b>vital maritime artery</b> of the Indo-Pacific.
-									Its geographical position dictates Middle Eastern energy exports, intra-Asian
-									manufacturing networks, and global commercial shipping routes. Nations like
-									<b>China,
-										Japan, and South Korea</b> rely heavily on this passage for the vast majority of
-									their energy imports, making the strait's security and navigational freedom a
-									profound
-									geopolitical imperative.
-								</p>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>
-		</main>
-	</div>
+                            <section class="card">
+                                <h3>Strategic Importance</h3>
+                                <p>The Strait of Malacca serves as the <b>vital maritime artery</b> of the Indo-Pacific.
+                                    Its geographical position dictates Middle Eastern energy exports, intra-Asian
+                                    manufacturing networks, and global commercial shipping routes. Nations like
+                                    <b>China,
+                                        Japan, and South Korea</b> rely heavily on this passage for the vast majority of
+                                    their energy imports, making the strait's security and navigational freedom a
+                                    profound
+                                    geopolitical imperative.
+                                </p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
 
-			const ports = [
-                { name: "Uleelheue (Indonesia)", short: "Uleelheue (Indonesia)", lat: 5.59637662, lng: 95.52598222, iconName: "iconpack/passage.svg", desc: "Located at the northwestern tip of Sumatra, Indonesia, bordering the gateway to the Strait." },
-                { name: "Blanglancang (Indonesia)", short: "Blanglancang (Indonesia)", lat: 5.230939806, lng: 97.06571881, iconName: "iconpack/oil.svg", desc: "Sumatran port mainly serving energy sectors, liquid bulk tankers, and mineral operations." },
-                { name: "Belawan (Indonesia)", short: "Belawan (Indonesia)", lat: 3.78854271, lng: 98.70736598, iconName: "iconpack/port1.svg", desc: "Indonesia's busiest port outside of Java, acting as a crucial link for agricultural exports." },
-                { name: "Kuala Tanjung (Indonesia)", short: "Kuala Tanjung (Indonesia)", lat: 3.372062986, lng: 99.45586143, iconName: "iconpack/port1.svg", desc: "Developing industrial deep-sea port on the Sumatran coast of the Malacca Strait." },
-                { name: "Penang (Malaysia)", short: "Penang (Malaysia)", lat: 5.379749741, lng: 100.3899815, iconName: "iconpack/port1.svg", desc: "Major northern port handling high volumes of machinery and electrical equipment." },
-                { name: "Lumut (Malaysia)", short: "Lumut (Malaysia)", lat: 4.227365727, lng: 100.6433762, iconName: "iconpack/port1.svg", desc: "Handles substantial dry bulk commodities along the west coast of Peninsular Malaysia." },
-                { name: "Klang (Malaysia)", short: "Klang (Malaysia)", lat: 2.972594826, lng: 101.3403063, iconName: "iconpack/port1.svg", desc: "Malaysia's primary commercial gateway. Top industries: Mineral and Vegetable Products." },
-                { name: "Dumai (Indonesia)", short: "Dumai (Indonesia)", lat: 1.717388504, lng: 101.4188235, iconName: "iconpack/oil.svg", desc: "Major Indonesian export node for mineral products, chemicals, and palm oil assets." },
-                { name: "Dickson (Malaysia)", short: "Dickson (Malaysia)", lat: 2.549916819, lng: 101.7895789, iconName: "iconpack/oil.svg", desc: "Key Malaysian maritime hub focusing heavily on tanker traffic and mineral products." },
-                { name: "Pelabuhan Sungai Udang (Malaysia)", short: "Sg. Udang (Malaysia)", lat: 2.263627014, lng: 102.1357975, iconName: "iconpack/oil.svg", desc: "Specialized industrial port handling mineral and chemical products exclusively via tankers." },
-                { name: "Sungai Pakning (Indonesia)", short: "Sg. Pakning (Indonesia)", lat: 1.348263696, lng: 102.1578799, iconName: "iconpack/oil.svg", desc: "Indonesian anchorage port managing regional oil and gas maritime transit traffic." },
-                { name: "Singapore Main Port", short: "Singapore Main Port", lat: 1.271989257, lng: 103.7074816, iconName: "iconpack/port1.svg", desc: "Global mega-hub accounting for over 95% of Singapore's maritime trade. Massive container and tanker traffic." },
-                { name: "Serangoon (Singapore)", short: "Serangoon (Singapore)", lat: 1.358261773, lng: 104.0345309, iconName: "iconpack/port1.svg", desc: "Singaporean harbor handling significant localized vessel traffic, dominated by mineral and chemical transport." }
+            const nodes = [
+                {
+					name: "Uleelheue (Indonesia)", 
+					short: "Uleelheue (Indonesia)", 
+					lat: 5.59637662, 
+					lng: 95.52598222, 
+					iconName: "iconpack/passage.svg", 
+					desc: "Located at the northwestern tip of Sumatra, Indonesia, bordering the gateway to the Strait." 
+				},
+                { 
+					name: "Blanglancang (Indonesia)", 
+					short: "Blanglancang (Indonesia)", 
+					lat: 5.230939806, 
+					lng: 97.06571881, 
+					iconName: "iconpack/oil.svg", 
+					desc: "Sumatran port mainly serving energy sectors, liquid bulk tankers, and mineral operations." 
+				},
+                { 
+					name: "Belawan (Indonesia)", 
+					short: "Belawan (Indonesia)", 
+					lat: 3.78854271, 
+					lng: 98.70736598, 
+					iconName: "iconpack/port1.svg", 
+					desc: "Indonesia's busiest port outside of Java, acting as a crucial link for agricultural exports." 
+				},
+                { 
+					name: "Kuala Tanjung (Indonesia)", 
+					short: "Kuala Tanjung (Indonesia)", 
+					lat: 3.372062986, 
+					lng: 99.45586143, 
+					iconName: "iconpack/port1.svg", 
+					desc: "Developing industrial deep-sea port on the Sumatran coast of the Malacca Strait." 
+				},
+                { 
+					name: "Penang (Malaysia)", 
+					short: "Penang (Malaysia)", 
+					lat: 5.379749741, 
+					lng: 100.3899815, 
+					iconName: "iconpack/port1.svg", 
+					desc: "Major northern port handling high volumes of machinery and electrical equipment." 
+				},
+                { 
+					name: "Lumut (Malaysia)", 
+					short: "Lumut (Malaysia)", 
+					lat: 4.227365727, 
+					lng: 100.6433762, 
+					iconName: "iconpack/port1.svg", 
+					desc: "Handles substantial dry bulk commodities along the west coast of Peninsular Malaysia." 
+				},
+                { 
+					name: "Klang (Malaysia)", 
+					short: "Klang (Malaysia)", 
+					lat: 2.972594826, lng: 101.3403063, 
+					iconName: "iconpack/port1.svg", 
+					desc: "Malaysia's primary commercial gateway. Top industries: Mineral and Vegetable Products."
+
+				},
+                { 
+					name: "Dumai (Indonesia)", 
+					short: "Dumai (Indonesia)", 
+					lat: 1.717388504, 
+					lng: 101.4188235, 
+					iconName: "iconpack/oil.svg", 
+					desc: "Major Indonesian export node for mineral products, chemicals, and palm oil assets." 
+				},
+                { 
+					name: "Dickson (Malaysia)", 
+					short: "Dickson (Malaysia)", 
+					lat: 2.549916819, 
+					lng: 101.7895789, 
+					iconName: "iconpack/oil.svg", 
+					desc: "Key Malaysian maritime hub focusing heavily on tanker traffic and mineral products." 
+				},
+                { 
+					name: "Pelabuhan Sungai Udang (Malaysia)", 
+					short: "Sg. Udang (Malaysia)", 
+					lat: 2.263627014, 
+					lng: 102.1357975, 
+					iconName: "iconpack/oil.svg", 
+					desc: "Specialized industrial port handling mineral and chemical products exclusively via tankers." 
+				},
+                { 
+					name: "Sungai Pakning (Indonesia)", 
+					short: "Sg. Pakning (Indonesia)", 
+					lat: 1.348263696, 
+					lng: 102.1578799, 
+					iconName: "iconpack/oil.svg", 
+					desc: "Indonesian anchorage port managing regional oil and gas maritime transit traffic." 
+				},
+                { 
+					name: "Singapore Main Port", 
+					short: "Singapore Main Port", 
+					lat: 1.271989257, 
+					lng: 103.7074816, 
+					iconName: "iconpack/port1.svg", 
+					desc: "Global mega-hub accounting for over 95% of Singapore's maritime trade. Massive container and tanker traffic." 
+				},
+                { 
+					name: "Serangoon (Singapore)", 
+					short: "Serangoon (Singapore)", 
+					lat: 1.358261773, 
+					lng: 104.0345309, 
+					iconName: "iconpack/port1.svg", 
+					desc: "Singaporean harbor handling significant localized vessel traffic, dominated by mineral and chemical transport."
+				}
             ];
 
-			// 1. Updated coordinate array representing the Malacca Strait shipping route
-			const straitRoute = [
-				[5.9000, 95.5000],  // Andaman Sea Entrance
-				[5.4000, 98.5000],
-				[4.5000, 99.8000],
-				[3.8000, 100.5000],
-				[2.9000, 101.1000], // Passing Port Klang
-				[2.3000, 101.6000],
-				[1.8000, 102.3000], // Passing Dumai
-				[1.3000, 103.2000],
-				[1.1500, 103.6000], // Phillips Channel (narrowest point)
-				[1.2000, 103.8500], // Singapore Strait
-				[1.3000, 104.3000]  // South China Sea Exit
-			];
+            const routePoints = [
+                [5.9000, 95.5000], [5.4000, 98.5000], [4.5000, 99.8000], [3.8000, 100.5000],
+                [2.9000, 101.1000], [2.3000, 101.6000], [1.8000, 102.3000], [1.3000, 103.2000],
+                [1.1500, 103.6000], [1.2000, 103.8500], [1.3000, 104.3000]
+            ];
 
-			// Init map focused on the wider region
-			const map = L.map('map', {
-				center: [3.5, 100.0],
-				zoom: 5,
-				zoomControl: true,
-			});
+            const map = L.map('map', {
+                center: [3.5, 100.0],
+                zoom: 5,
+                zoomControl: true,
+            });
 
-			// --- Pane setup styling and preparation for each layer in basemap and route---
-			map.createPane('esriBase');
-			map.createPane('esriSatellite');
-			map.createPane('esriDetail');
-			map.createPane('route');
-			map.createPane('esriLabels');
+            map.createPane('esriBase');
+            map.createPane('esriSatellite');
+            map.createPane('esriDetail');
+            map.createPane('route');
+            map.createPane('esriLabels');
 
-			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
-				pane: 'esriBase',
-				attribution: 'Cooper Thomas',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+                pane: 'esriBase',
+                attribution: 'Cooper Thomas',
+            }).addTo(map);
 
-			L.esri.tiledMapLayer({
-				url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
-				pane: 'esriSatellite',
-				attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
-			}).addTo(map);
+            L.esri.tiledMapLayer({
+                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+                pane: 'esriSatellite',
+                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
-				pane: 'esriDetail',
-				attribution: 'John Nelson',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+                pane: 'esriDetail',
+                attribution: 'John Nelson',
+            }).addTo(map);
 
-			L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
-				pane: 'esriLabels',
-				attribution: '&copy; Esri',
-			}).addTo(map);
+            L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+                pane: 'esriLabels',
+                attribution: '&copy; Esri',
+            }).addTo(map);
 
-			const routeLine = L.polyline(straitRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
+            const routeLine = L.polyline(routePoints, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'})
                 .bindPopup('<div class="route-popup-content"><strong>Strait of Malacca</strong><br><span class="route-popup-subtext">Indian Ocean ↔ South China Sea</span></div>')
                 .addTo(map);
 
-			function makeIcon(iconName) {
+            function makeIcon(iconName) {
                 return L.divIcon({
                     className: 'custom-composite-icon',
                     html: `
@@ -249,68 +328,57 @@
                 });
             }
 
-			const markers = [];
+            const markers = [];
 
-            ports.forEach(function (port, i) {
-                const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.iconName) }).addTo(map);
+            nodes.forEach(function (node, i) {
+                const marker = L.marker([node.lat, node.lng], { icon: makeIcon(node.iconName) }).addTo(map);
                 marker.bindPopup(
                     `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
-                <p class="popup-name">${port.name}</p>
+                <p class="popup-name">${node.name}</p>
                 <div class="popup-coord">
-                  <span>Lat: <strong>${port.lat.toFixed(4)}° N</strong></span>
-                  <span>Lng: <strong>${Math.abs(port.lng).toFixed(4)}° E</strong></span>
+                  <span>Lat: <strong>${node.lat.toFixed(4)}° N</strong></span>
+                  <span>Lng: <strong>${Math.abs(node.lng).toFixed(4)}° E</strong></span>
                 </div>
               </div>
-              <div class="popup-footer">${port.desc}</div>`,
+              <div class="popup-footer">${node.desc}</div>`,
                     { maxWidth: 280 }
                 );
                 markers.push(marker);
 
-                // Sidebar port item updated to use the clean CSS class
-                // Sidebar port item
                 const item = document.createElement('div');
                 item.className = 'port-item';
                 item.innerHTML = `
-              <img src="${port.iconName}" class="port-list-icon" alt="${port.short} icon">
+              <img src="${node.iconName}" class="port-list-icon" alt="${node.short} icon">
               <div class="port-info">
-                <div class="port-name">${port.short}</div>
-                <div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° E</div>
+                <div class="port-name">${node.short}</div>
+                <div class="port-coords">${node.lat.toFixed(4)}° N · ${Math.abs(node.lng).toFixed(4)}° E</div>
               </div>`;
-                item.addEventListener('click', function () { focusPort(i); });
+              
+                item.addEventListener('click', function () { focusNode(i); });
                 document.getElementById('port-list').appendChild(item);
 
             });
 
-            // This function is REQUIRED to make your sidebar interactive
-            function focusPort(i) {
+            function focusNode(i) {
                 document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
                 document.querySelectorAll('.port-item')[i].classList.add('active');
-                map.flyTo([ports[i].lat, ports[i].lng], 10, { duration: 1.2 });
+                map.flyTo([nodes[i].lat, nodes[i].lng], 10, { duration: 1.2 });
                 setTimeout(() => markers[i].openPopup(), 1300);
             }
 
-            // Standard map helper
-            window.flyToLocation = function (coords, zoom) {
-                map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
-            };
+            
+            map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
 
-			// 2. Map container constraints & sizing fixes
-			map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
+            window.addEventListener('resize', function() {
+                map.invalidateSize();
+            });
 
-			// Robust observer to catch any flex/grid container resizing and load missing grey tiles
-			const mapContainer = document.getElementById('map');
-			const resizeObserver = new ResizeObserver(() => {
-				map.invalidateSize();
-			});
-			resizeObserver.observe(mapContainer);
-
-			// Fallback invalidation on initial load
-			setTimeout(() => {
-				map.invalidateSize();
-			}, 250);
-		});
-	</script>
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 250);
+        });
+    </script>
 </body>
 
 </html>
