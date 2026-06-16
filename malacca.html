@@ -47,9 +47,14 @@
 					<div class="map-section">
 						<div id="map"></div>
 						<div class="map-sidebar">
-							<h3>Strategic Nodes</h3>
-							<div class="port-list-wrap" id="port-list"></div>
-						</div>
+                            <h3>Strategic Nodes</h3>
+                            <div class="sidebar-legend">
+                                <span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon" alt="Entry"> Passage</span>
+                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port"> Port</span>
+                                <span class="legend-label"><img src="iconpack/oil.svg" class="legend-icon" alt="Energy"> Oil Terminal</span>
+                            </div>
+                            <div class="port-list-wrap" id="port-list"></div>
+                        </div>
 					</div>
 
 					<div class="content-grid">
@@ -166,124 +171,20 @@
 		document.addEventListener('DOMContentLoaded', function () {
 
 			const ports = [
-				{
-					name: "Uleelheue (Indonesia)",
-					short: "Uleelheue (Indonesia)",
-					lat: 5.59637662,
-					lng: 95.52598222,
-					ocean: "Pacific",
-					color: "#16a085",
-					desc: "Located at the northwestern tip of Sumatra, Indonesia, bordering the gateway to the Strait.",
-				},
-				{
-					name: "Blanglancang (Indonesia)",
-					short: "Blanglancang (Indonesia)",
-					lat: 5.230939806,
-					lng: 97.06571881,
-					ocean: "Pacific",
-					color: "#8e44ad",
-					desc: "Sumatran port mainly serving energy sectors, liquid bulk tankers, and mineral operations.",
-				},
-				{
-					name: "Belawan (Indonesia)",
-					short: "Belawan (Indonesia)",
-					lat: 3.78854271,
-					lng: 98.70736598,
-					ocean: "Pacific",
-					color: "#f39c12",
-					desc: "Indonesia's busiest port outside of Java, acting as a crucial link for agricultural exports.",
-				},
-				{
-					name: "Kuala Tanjung (Indonesia)",
-					short: "Kuala Tanjung (Indonesia)",
-					lat: 3.372062986,
-					lng: 99.45586143,
-					ocean: "Pacific",
-					color: "#2c3e50",
-					desc: "Developing industrial deep-sea port on the Sumatran coast of the Malacca Strait.",
-				},
-				{
-					name: "Penang (Malaysia)",
-					short: "Penang (Malaysia)",
-					lat: 5.379749741,
-					lng: 100.3899815,
-					ocean: "Pacific",
-					color: "#b85c38",
-					desc: "Major northern port handling high volumes of machinery and electrical equipment.",
-				},
-				{
-					name: "Lumut (Malaysia)",
-					short: "Lumut (Malaysia)",
-					lat: 4.227365727,
-					lng: 100.6433762,
-					ocean: "Pacific",
-					color: "#a40e7e",
-					desc: "Handles substantial dry bulk commodities along the west coast of Peninsular Malaysia.",
-				},
-				{
-					name: "Klang (Malaysia)",
-					short: "Klang (Malaysia)",
-					lat: 2.972594826,
-					lng: 101.3403063,
-					ocean: "Pacific",
-					color: "#36b295",
-					desc: "Malaysia's primary commercial gateway. Top industries: Mineral and Vegetable Products.",
-				},
-				{
-					name: "Dumai (Indonesia)",
-					short: "Dumai (Indonesia)",
-					lat: 1.717388504,
-					lng: 101.4188235,
-					ocean: "Pacific",
-					color: "#d35400",
-					desc: "Major Indonesian export node for mineral products, chemicals, and palm oil assets.",
-				},
-				{
-					name: "Dickson (Malaysia)",
-					short: "Dickson (Malaysia)",
-					lat: 2.549916819,
-					lng: 101.7895789,
-					ocean: "Pacific",
-					color: "#c9a84c",
-					desc: "Key Malaysian maritime hub focusing heavily on tanker traffic and mineral products.",
-				},
-				{
-					name: "Pelabuhan Sungai Udang (Malaysia)",
-					short: "Sg. Udang (Malaysia)",
-					lat: 2.263627014,
-					lng: 102.1357975,
-					ocean: "Pacific",
-					color: "#2980b9",
-					desc: "Specialized industrial port handling mineral and chemical products exclusively via tankers.",
-				},
-				{
-					name: "Sungai Pakning (Indonesia)",
-					short: "Sg. Pakning (Indonesia)",
-					lat: 1.348263696,
-					lng: 102.1578799,
-					ocean: "Pacific",
-					color: "#27ae60",
-					desc: "Indonesian anchorage port managing regional oil and gas maritime transit traffic.",
-				},
-				{
-					name: "Singapore Main Port",
-					short: "Singapore Main Port",
-					lat: 1.271989257,
-					lng: 103.7074816,
-					ocean: "Pacific",
-					color: "#e74c3c",
-					desc: "Global mega-hub accounting for over 95% of Singapore's maritime trade. Massive container and tanker traffic.",
-				},
-				{
-					name: "Serangoon (Singapore)",
-					short: "Serangoon (Singapore",
-					lat: 1.358261773,
-					lng: 104.0345309,
-					ocean: "Pacific",
-					color: "#7f8c8d",
-					desc: "Singaporean harbor handling significant localized vessel traffic, dominated by mineral and chemical transport.",
-				}
-			];
+                { name: "Uleelheue (Indonesia)", short: "Uleelheue (Indonesia)", lat: 5.59637662, lng: 95.52598222, iconName: "iconpack/passage.svg", desc: "Located at the northwestern tip of Sumatra, Indonesia, bordering the gateway to the Strait." },
+                { name: "Blanglancang (Indonesia)", short: "Blanglancang (Indonesia)", lat: 5.230939806, lng: 97.06571881, iconName: "iconpack/oil.svg", desc: "Sumatran port mainly serving energy sectors, liquid bulk tankers, and mineral operations." },
+                { name: "Belawan (Indonesia)", short: "Belawan (Indonesia)", lat: 3.78854271, lng: 98.70736598, iconName: "iconpack/port1.svg", desc: "Indonesia's busiest port outside of Java, acting as a crucial link for agricultural exports." },
+                { name: "Kuala Tanjung (Indonesia)", short: "Kuala Tanjung (Indonesia)", lat: 3.372062986, lng: 99.45586143, iconName: "iconpack/port1.svg", desc: "Developing industrial deep-sea port on the Sumatran coast of the Malacca Strait." },
+                { name: "Penang (Malaysia)", short: "Penang (Malaysia)", lat: 5.379749741, lng: 100.3899815, iconName: "iconpack/port1.svg", desc: "Major northern port handling high volumes of machinery and electrical equipment." },
+                { name: "Lumut (Malaysia)", short: "Lumut (Malaysia)", lat: 4.227365727, lng: 100.6433762, iconName: "iconpack/port1.svg", desc: "Handles substantial dry bulk commodities along the west coast of Peninsular Malaysia." },
+                { name: "Klang (Malaysia)", short: "Klang (Malaysia)", lat: 2.972594826, lng: 101.3403063, iconName: "iconpack/port1.svg", desc: "Malaysia's primary commercial gateway. Top industries: Mineral and Vegetable Products." },
+                { name: "Dumai (Indonesia)", short: "Dumai (Indonesia)", lat: 1.717388504, lng: 101.4188235, iconName: "iconpack/oil.svg", desc: "Major Indonesian export node for mineral products, chemicals, and palm oil assets." },
+                { name: "Dickson (Malaysia)", short: "Dickson (Malaysia)", lat: 2.549916819, lng: 101.7895789, iconName: "iconpack/oil.svg", desc: "Key Malaysian maritime hub focusing heavily on tanker traffic and mineral products." },
+                { name: "Pelabuhan Sungai Udang (Malaysia)", short: "Sg. Udang (Malaysia)", lat: 2.263627014, lng: 102.1357975, iconName: "iconpack/oil.svg", desc: "Specialized industrial port handling mineral and chemical products exclusively via tankers." },
+                { name: "Sungai Pakning (Indonesia)", short: "Sg. Pakning (Indonesia)", lat: 1.348263696, lng: 102.1578799, iconName: "iconpack/oil.svg", desc: "Indonesian anchorage port managing regional oil and gas maritime transit traffic." },
+                { name: "Singapore Main Port", short: "Singapore Main Port", lat: 1.271989257, lng: 103.7074816, iconName: "iconpack/port1.svg", desc: "Global mega-hub accounting for over 95% of Singapore's maritime trade. Massive container and tanker traffic." },
+                { name: "Serangoon (Singapore)", short: "Serangoon (Singapore)", lat: 1.358261773, lng: 104.0345309, iconName: "iconpack/port1.svg", desc: "Singaporean harbor handling significant localized vessel traffic, dominated by mineral and chemical transport." }
+            ];
 
 			// 1. Updated coordinate array representing the Malacca Strait shipping route
 			const straitRoute = [
@@ -339,20 +240,27 @@
                 .bindPopup('<div class="route-popup-content"><strong>Strait of Malacca</strong><br><span class="route-popup-subtext">Indian Ocean ↔ South China Sea</span></div>')
                 .addTo(map);
 
-			function makeIcon(color) {
-				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">
-              <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" opacity=".95"/>
-              <circle cx="14" cy="14" r="6" fill="white" opacity=".9"/>
-            </svg>`;
-				return L.divIcon({ html: svg, className: '', iconSize: [16, 32], iconAnchor: [0, 28], popupAnchor: [8, -28] });
-			}
+			function makeIcon(iconName) {
+                return L.divIcon({
+                    className: 'custom-composite-icon',
+                    html: `
+                        <div style="position: relative; width: 40px; height: 40px;">
+                            <img src="iconpack/pin.svg" style="width: 100%; height: 100%;" alt="pin" />
+                            <img src="${iconName}" style="position: absolute; top: 1px; left: 4px; width: 32px; height: 32px; border-radius: 50%;" alt="label" />
+                        </div>
+                    `,
+                    iconSize: [30, 45],
+                    iconAnchor: [15, 45],
+                    popupAnchor: [0, -45]
+                });
+            }
 
 			const markers = [];
 
-			ports.forEach(function (port, i) {
-				const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.color) }).addTo(map);
-				marker.bindPopup(
-					`<div class="popup-inner">
+            ports.forEach(function (port, i) {
+                const marker = L.marker([port.lat, port.lng], { icon: makeIcon(port.iconName) }).addTo(map);
+                marker.bindPopup(
+                    `<div class="popup-inner">
                 <p class="popup-tag">Node ${String(i + 1).padStart(2, '0')}</p>
                 <p class="popup-name">${port.name}</p>
                 <div class="popup-coord">
@@ -361,48 +269,37 @@
                 </div>
               </div>
               <div class="popup-footer">${port.desc}</div>`,
-					{ maxWidth: 280 }
-				);
-				markers.push(marker);
+                    { maxWidth: 280 }
+                );
+                markers.push(marker);
 
-				// Sidebar port item
-				const item = document.createElement('div');
-				item.className = 'port-item';
-				item.innerHTML = `
-              <span class="port-dot" style="background:${port.color};"></span>
+                // Sidebar port item updated to use the clean CSS class
+                // Sidebar port item
+                const item = document.createElement('div');
+                item.className = 'port-item';
+                item.innerHTML = `
+              <img src="${port.iconName}" class="port-list-icon" alt="${port.short} icon">
               <div class="port-info">
                 <div class="port-name">${port.short}</div>
-				<div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° W</div>
+                <div class="port-coords">${port.lat.toFixed(4)}° N · ${Math.abs(port.lng).toFixed(4)}° E</div>
               </div>`;
-				item.addEventListener('click', function () { focusPort(i); });
-				document.getElementById('port-list').appendChild(item);
+                item.addEventListener('click', function () { focusPort(i); });
+                document.getElementById('port-list').appendChild(item);
 
-				// Table row
-				const badgeHtml = port.ocean === 'Atlantic'
-					? '<span class="side-badge badge-atlantic">Atlantic</span>'
-					: '<span class="side-badge badge-pacific">Pacific</span>';
+            });
 
-				const row = document.createElement('tr');
-				row.innerHTML = `
-              <td class="mono">${String(i + 1).padStart(2, '0')}</td>
-              <td>${port.name}</td>
-              <td>${badgeHtml}</td>
-              <td class="mono">${port.lat.toFixed(4)}° N</td>
-              <td class="mono">${Math.abs(port.lng).toFixed(4)}° E</td>
-              <td class="mono">-</td>`; // Removed undefined 'elev' variable 
-				row.addEventListener('click', function () { focusPort(i); });
-			});
+            // This function is REQUIRED to make your sidebar interactive
+            function focusPort(i) {
+                document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.port-item')[i].classList.add('active');
+                map.flyTo([ports[i].lat, ports[i].lng], 10, { duration: 1.2 });
+                setTimeout(() => markers[i].openPopup(), 1300);
+            }
 
-			function focusPort(i) {
-				document.querySelectorAll('.port-item').forEach(el => el.classList.remove('active'));
-				document.querySelectorAll('.port-item')[i].classList.add('active');
-				map.flyTo([ports[i].lat, ports[i].lng], 10, { duration: 1.2 });
-				setTimeout(() => markers[i].openPopup(), 1300);
-			}
-
-			window.flyToLocation = function (coords, zoom) {
-				map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
-			};
+            // Standard map helper
+            window.flyToLocation = function (coords, zoom) {
+                map.flyTo(coords, zoom, { animate: true, duration: 1.8 });
+            };
 
 			// 2. Map container constraints & sizing fixes
 			map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
