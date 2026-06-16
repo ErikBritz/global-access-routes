@@ -283,25 +283,12 @@
             });
 
             map.createPane('esriBase');
-            map.createPane('esriSatellite');
-            map.createPane('esriDetail');
             map.createPane('route');
             map.createPane('esriLabels');
 
             L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
                 pane: 'esriBase',
                 attribution: 'Cooper Thomas',
-            }).addTo(map);
-
-            L.esri.tiledMapLayer({
-                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
-                pane: 'esriSatellite',
-                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
-            }).addTo(map);
-
-            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
-                pane: 'esriDetail',
-                attribution: 'John Nelson',
             }).addTo(map);
 
             L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
