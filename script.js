@@ -34,20 +34,17 @@ async function initGlobe() {
 		useBrowserRecommendedResolution: false
 	});
 
-	// ── Limit the Zoom Range ──
-    // Minimum zoom distance from the surface (e.g., 500,000 meters / 500 km to prevent zooming too close)
+
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 500000;
     
-    // Maximum zoom distance from the surface (e.g., 25,000,000 meters / 25,000 km to prevent zooming too far into outer space)
+
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 25000000;
 
-	// Dark basemap from Cesium Ion (asset 3812 = Bing Maps Dark)
 	viewer.imageryLayers.removeAll();
 	viewer.imageryLayers.addImageryProvider(
 		await Cesium.IonImageryProvider.fromAssetId(3812)
 	);
 
-	// Loading overlay — lives inside the Cesium container so it covers only the globe
 	const loadingEl = document.createElement("div");
 	loadingEl.className = "globe-loading";
 	loadingEl.innerHTML = '<div class="globe-loading-spinner"></div>';
@@ -61,7 +58,6 @@ async function initGlobe() {
 	viewer.scene.sun.show = false;
 	viewer.scene.moon.show = false;
 
-	// ── Strait point entities (NO Cesium labels — we use HTML overlays instead) ──
 	const scratchNorm = new Cesium.Cartesian3();
 	const scratchCam = new Cesium.Cartesian3();
 	const overlays = [];
@@ -69,7 +65,6 @@ async function initGlobe() {
 	straits.forEach((strait, i) => {
 		const worldPos = Cesium.Cartesian3.fromDegrees(strait.coords[0], strait.coords[1], 5000);
 
-		// WebGL point — depth-test disabled so it always shows above terrain
 		viewer.entities.add({
 			id: strait.id,
 			position: worldPos,
@@ -83,7 +78,6 @@ async function initGlobe() {
 			}
 		});
 
-		// Pulse ring — pure HTML, positioned over the point each frame
 		const pulseWrap = document.createElement("div");
 		pulseWrap.className = "globe-pulse-wrap";
 		const pulseRing = document.createElement("div");
@@ -92,7 +86,6 @@ async function initGlobe() {
 		pulseWrap.appendChild(pulseRing);
 		viewer.container.appendChild(pulseWrap);
 
-		// Label — pure HTML <a> tag; crisp on every display, zero WebGL artifacts
 		const labelWrap = document.createElement("div");
 		labelWrap.className = "globe-label-wrap";
 		const labelLink = document.createElement("a");
@@ -105,12 +98,10 @@ async function initGlobe() {
 		overlays.push({ worldPos, pulseWrap, labelWrap });
 	});
 
-	// ── Reposition HTML overlays every frame ──
 	viewer.scene.postRender.addEventListener(() => {
 		Cesium.Cartesian3.normalize(viewer.scene.camera.positionWC, scratchCam);
 
 		overlays.forEach(({ worldPos, pulseWrap, labelWrap }) => {
-			// Dot-product visibility: is this surface point facing the camera?
 			Cesium.Cartesian3.normalize(worldPos, scratchNorm);
 			const facing = Cesium.Cartesian3.dot(scratchNorm, scratchCam);
 			const visible = facing > 0.08;
@@ -124,12 +115,10 @@ async function initGlobe() {
 				return;
 			}
 
-			// Pulse centred on the point
 			pulseWrap.style.left = canvasPos.x + "px";
 			pulseWrap.style.top = canvasPos.y + "px";
 			pulseWrap.style.opacity = "1";
 
-			// Label floated 18 px above the point
 			labelWrap.style.left = canvasPos.x + "px";
 			labelWrap.style.top = (canvasPos.y - 18) + "px";
 			labelWrap.style.opacity = "1";
@@ -137,7 +126,6 @@ async function initGlobe() {
 		});
 	});
 
-	// ── Auto-rotate: slow eastward spin, resumes after user releases the globe ──
 	let autoRotate = true;
 	let dragTimeout;
 	viewer.scene.preRender.addEventListener(() => {
@@ -160,7 +148,6 @@ async function initGlobe() {
 		dragTimeout = setTimeout(() => { autoRotate = true; }, 2000);
 	});
 
-	// ── Dismiss loading overlay once all tiles are loaded ──
 	let dismissed = false;
 	function dismissLoader() {
 		if (dismissed || !viewer.scene.globe.tilesLoaded) return;
