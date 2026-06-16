@@ -48,18 +48,23 @@
                         <div id="map"></div>
                         <div class="map-sidebar">
                             <h3>Strategic Nodes</h3>
-                            <div class="sidebar-legend">
-								<span class="legend-label"><img src="iconpack/passage.svg" class="legend-icon"
-                                        alt="Entry"> Entry/Exit</span>
-                                <span class="legend-label"><img src="iconpack/choke.svg" class="legend-icon"
-                                        alt="Chokepoint"> Chokepoint</span>
-                                <span class="legend-label"><img src="iconpack/important.svg" class="legend-icon"
-                                        alt="Landmark"> Landmark</span>
-								<span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon" alt="Port">
-                                    Ports</span>
-                            </div>
                             <div class="port-list-wrap" id="port-list"></div>
                         </div>
+                    </div>
+
+                    <div class="legend">
+                        <span class="legend-item"><span class="legend-line"
+                                style="background:transparent; border-top: 2px dashed #fbbf24;"></span> Shipping
+                            Channel</span>
+                        <span class="legend-item"><span class="dot"
+                                style="background:#3b82f6; border:2px solid white; box-shadow:0 0 0 2px #3b82f6;"></span>
+                            European Shore</span>
+                        <span class="legend-item"><span class="dot"
+                                style="background:#ef4444; border:2px solid white; box-shadow:0 0 0 2px #ef4444;"></span>
+                            Asian Shore</span>
+                        <span class="legend-item"><span class="dot"
+                                style="background:#ffffff; border:2px solid white; box-shadow:0 0 0 2px #2c3e50;"></span>
+                            VTS Station</span>
                     </div>
 
                     <div class="content-grid">
@@ -217,47 +222,35 @@
                 zoomControl: true,
             });
 
-            // --- Pane setup styling and preparation for each layer in basemap---
-            map.createPane('esriBase');
-            map.getPane('esriBase').style.zIndex = '200';
-            map.getPane('esriBase').style.opacity = '1';
+            // --- Pane setup styling and preparation for each layer in basemap and route---
+			map.createPane('esriBase');
+			map.createPane('esriSatellite');
+			map.createPane('esriDetail');
+			map.createPane('route');
+			map.createPane('esriLabels');
 
-            map.createPane('esriSatellite');
-            map.getPane('esriSatellite').style.zIndex = '300';
-            map.getPane('esriSatellite').style.opacity = '0.55';
-            map.getPane('esriSatellite').style.pointerEvents = 'none';
+			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
+				pane: 'esriBase',
+				attribution: 'Cooper Thomas',
+			}).addTo(map);
 
-            map.createPane('esriDetail');
-            map.getPane('esriDetail').style.zIndex = '350';
-            map.getPane('esriDetail').style.opacity = '0.15';
-            map.getPane('esriDetail').style.pointerEvents = 'none';
+			L.esri.tiledMapLayer({
+				url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
+				pane: 'esriSatellite',
+				attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
+			}).addTo(map);
 
-            map.createPane('esriLabels');
-            map.getPane('esriLabels').style.zIndex = '450';
-            map.getPane('esriLabels').style.pointerEvents = 'none';
+			L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
+				pane: 'esriDetail',
+				attribution: 'John Nelson',
+			}).addTo(map);
 
-            const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
-                pane: 'esriBase',
-                attribution: 'Cooper Thomas',
-            }).addTo(map);
+			L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
+				pane: 'esriLabels',
+				attribution: '&copy; Esri',
+			}).addTo(map);
 
-            L.esri.tiledMapLayer({
-                url: 'https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer',
-                pane: 'esriSatellite',
-                attribution: 'Firefly Imagery, DigitalGlobe, ES Geographics'
-            }).addTo(map);
-
-            L.esri.Vector.vectorTileLayer('1ddbb25aa29c4811aaadd94de469856a', {
-                pane: 'esriDetail',
-                attribution: 'John Nelson',
-            }).addTo(map);
-
-            L.esri.Vector.vectorTileLayer('4a3922d6d15f405d8c2b7a448a7fbad2', {
-                pane: 'esriLabels',
-                attribution: '&copy; Esri',
-            }).addTo(map);
-
-            const routeLine = L.polyline(routePoints, { color: '#fbbf24', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+            const routeLine = L.polyline(routePoints, { color: '#fbbf24', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'}).addTo(map);
 
             function makeIcon(iconName) {
                 return L.divIcon({

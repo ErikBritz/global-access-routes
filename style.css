@@ -219,17 +219,37 @@ body::before {
 	background: #000000;
 }
 
-/* Basemap layers styling */
+/* Basemap layers and route panes styling */
 .leaflet-esriBase-pane {
     filter: brightness(1.4) contrast(1.2);
+    z-index: 200;
+    opacity: 1;
 }
 
 .leaflet-esriSatellite-pane {
     filter: brightness(0.5) contrast(3) saturate(0);
+    z-index: 300;
+    opacity: 0.55;
+    pointer-events: none;
 }
 
 .leaflet-esriDetail-pane {
     filter: brightness(0.1) contrast(2);
+    z-index: 350;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/*Route pane styling to ensure visibility*/
+.leaflet-route-pane {
+    z-index: 400;
+    pointer-events: none;
+}
+
+.leaflet-esriLabels-pane {
+    filter: brightness(0.1) contrast(2);
+    z-index: 450;
+    pointer-events: none;
 }
 
 .map-sidebar {

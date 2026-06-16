@@ -307,24 +307,12 @@
 				zoomControl: true,
 			});
 
-			// --- Pane setup styling and preparation for each layer in basemap---
+			// --- Pane setup styling and preparation for each layer in basemap and route---
 			map.createPane('esriBase');
-			map.getPane('esriBase').style.zIndex = '200';
-			map.getPane('esriBase').style.opacity = '1';
-
 			map.createPane('esriSatellite');
-			map.getPane('esriSatellite').style.zIndex = '300';
-			map.getPane('esriSatellite').style.opacity = '0.55';
-			map.getPane('esriSatellite').style.pointerEvents = 'none';
-
 			map.createPane('esriDetail');
-			map.getPane('esriDetail').style.zIndex = '350';
-			map.getPane('esriDetail').style.opacity = '0.15';
-			map.getPane('esriDetail').style.pointerEvents = 'none';
-
+			map.createPane('route');
 			map.createPane('esriLabels');
-			map.getPane('esriLabels').style.zIndex = '450';
-			map.getPane('esriLabels').style.pointerEvents = 'none';
 
 			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
 				pane: 'esriBase',
@@ -347,7 +335,7 @@
 				attribution: '&copy; Esri',
 			}).addTo(map);
 
-			const routeLine = L.polyline(straitRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+			const routeLine = L.polyline(straitRoute, { color: '#e74c3c', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'}).addTo(map);
 
 			function makeIcon(color) {
 				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 28 36">

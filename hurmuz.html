@@ -48,18 +48,20 @@
 						<div id="map"></div>
 						<div class="map-sidebar">
 							<h3>Strategic Nodes</h3>
-							<div class="sidebar-legend">
-								<span class="legend-label"><img src="iconpack/choke.svg" class="legend-icon"
-                                        alt="Chokepoint"> Chokepoint</span>
-                                <span class="legend-label"><img src="iconpack/port1.svg" class="legend-icon"
-                                        alt="Port"> Ports</span>
-                                <span class="legend-label"><img src="iconpack/military.svg" class="legend-icon"
-                                        alt="Military"> Military Base</span>
-								<span class="legend-label"><img src="iconpack/oil.svg" class="legend-icon"
-										alt="Energy"> Energy Hub</span>
-                            </div>
 							<div class="port-list-wrap" id="port-list"></div>
 						</div>
+					</div>
+
+					<div class="legend">
+						<span class="legend-item"><span class="legend-line"
+								style="background:transparent; border-top: 2px dashed #38bdf8;"></span> Shipping
+							Lanes</span>
+						<span class="legend-item"><span class="dot"
+								style="background:#10b981; border:2px solid white; box-shadow:0 0 0 2px #10b981;"></span>
+							GCC Littoral State</span>
+						<span class="legend-item"><span class="dot"
+								style="background:#f97316; border:2px solid white; box-shadow:0 0 0 2px #f97316;"></span>
+							Islamic Republic of Iran</span>
 					</div>
 
 					<div class="content-grid">
@@ -217,24 +219,12 @@
 				zoomControl: true,
 			});
 
-			// --- Pane setup styling and preparation for each layer in basemap---
+			// --- Pane setup styling and preparation for each layer in basemap and route---
 			map.createPane('esriBase');
-			map.getPane('esriBase').style.zIndex = '200';
-			map.getPane('esriBase').style.opacity = '1';
-
 			map.createPane('esriSatellite');
-			map.getPane('esriSatellite').style.zIndex = '300';
-			map.getPane('esriSatellite').style.opacity = '0.55';
-			map.getPane('esriSatellite').style.pointerEvents = 'none';
-
 			map.createPane('esriDetail');
-			map.getPane('esriDetail').style.zIndex = '350';
-			map.getPane('esriDetail').style.opacity = '0.15';
-			map.getPane('esriDetail').style.pointerEvents = 'none';
-
+			map.createPane('route');
 			map.createPane('esriLabels');
-			map.getPane('esriLabels').style.zIndex = '450';
-			map.getPane('esriLabels').style.pointerEvents = 'none';
 
 			const esriBaseLayer = L.esri.Vector.vectorTileLayer('a22abeb43aff44639f98e4ba916f37bd', {
 				pane: 'esriBase',
@@ -257,7 +247,7 @@
 				attribution: '&copy; Esri',
 			}).addTo(map);
 
-			const routeLine = L.polyline(routeLinePoints, { color: '#38bdf8', weight: 3, opacity: 0.8, dashArray: '8 5' }).addTo(map);
+			const routeLine = L.polyline(routeLinePoints, { color: '#38bdf8', weight: 3, opacity: 0.8, dashArray: '8 5', pane: 'route'}).addTo(map);
 
 			function makeIcon(iconName) {
 				return L.divIcon({
