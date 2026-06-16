@@ -4,15 +4,6 @@
 @import url("https://fonts.cdnfonts.com/css/cintel");
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap");
 
-:root {
-    --ink: #e5e8ee;
-    --ink-soft: #aab1c0;
-    --bg: #06080c;
-    --bg-deep: #020305;
-    --accent: #8fd3ff;
-    --stroke: rgba(255, 255, 255, 0.12);
-}
-
 /* ==========================================================================
    BASE & RESETS
    ========================================================================== */
@@ -24,17 +15,9 @@
 
 body {
     font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-    color: var(--ink);
-    background: radial-gradient(circle at top, #121825 0%, var(--bg) 55%, var(--bg-deep) 100%);
+    color: #e5e8ee;
+    background: #06080c;
     min-height: 100vh;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(120deg, rgba(143, 211, 255, 0.08), transparent 45%);
-    pointer-events: none;
 }
 
 .strait-bg {
@@ -47,7 +30,6 @@ body::before {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-attachment: fixed;
 }
 
 /* ==========================================================================
@@ -110,8 +92,8 @@ body::before {
 }
 
 .site-subtitle {
-    font-size: 14px;
-    color: var(--ink-soft);
+    font-size: clamp(14px, 1.4vw, 16px);
+    color: #aab1c0;
     letter-spacing: 0.2px;
     max-width: 360px;
 }
@@ -119,13 +101,13 @@ body::before {
 .site-nav {
     display: flex;
     gap: 18px;
-    font-size: 12px;
+    font-size: clamp(12px, 1.2vw, 14px);
     text-transform: uppercase;
     letter-spacing: 1.4px;
 }
 
 .site-nav a {
-    color: var(--ink-soft);
+    color: #aab1c0;
     text-decoration: none;
     position: relative;
     padding-bottom: 4px;
@@ -133,7 +115,7 @@ body::before {
 
 .site-nav a.is-active,
 .site-nav a:hover {
-    color: var(--ink);
+    color: #e5e8ee;
 }
 
 .site-nav a.is-active::after,
@@ -144,7 +126,7 @@ body::before {
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--accent);
+    background: #8fd3ff;
 }
 
 /* ==========================================================================
@@ -155,10 +137,10 @@ body::before {
     border: 1px solid rgba(143, 211, 255, 0.18);
     border-radius: 6px;
     padding: 8px 16px;
-    font-size: 11px;
+    font-size: clamp(11px, 1.1vw, 12px);
     letter-spacing: 1.6px;
     text-transform: uppercase;
-    color: var(--accent);
+    color: #8fd3ff;
     margin-bottom: 18px;
 }
 
@@ -171,26 +153,26 @@ body::before {
 
 .card h2 {
     font-family: "Cinzel", serif;
-    font-size: 14px;
+    font-size: clamp(14px, 1.5vw, 16px);
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--accent);
+    color: #8fd3ff;
     margin-bottom: 12px;
 }
 
 .card h3 {
     font-family: "Cinzel", serif;
-    font-size: 12px;
+    font-size: clamp(12px, 1.2vw, 14px);
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--accent);
+    color: #8fd3ff;
     margin-bottom: 10px;
 }
 
 .card p {
-    font-size: 13.5px;
+    font-size: clamp(13.5px, 1.35vw, 15px);
     line-height: 1.75;
-    color: var(--ink-soft);
+    color: #aab1c0;
 }
 
 .timeline {
@@ -200,15 +182,15 @@ body::before {
 }
 
 .timeline-item {
-    font-size: 13px;
+    font-size: clamp(13px, 1.3vw, 15px);
     line-height: 1.65;
-    color: var(--ink-soft);
+    color: #aab1c0;
     padding-left: 14px;
     border-left: 2px solid rgba(143,211,255,0.25);
 }
 
 .timeline-item strong {
-    color: var(--ink);
+    color: #e5e8ee;
 }
 
 /* ==========================================================================
@@ -239,15 +221,15 @@ body::before {
 
 .map-sidebar h3 {
     font-family: "Cinzel", serif;
-    font-size: 11px;
+    font-size: clamp(11px, 1.1vw, 12px);
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: #aab1c0;
     margin-bottom: 4px;
 }
 
 .sidebar-legend {
-    font-size: 12px;
+    font-size: clamp(12px, 1.2vw, 14px);
     margin-bottom: 15px;
     display: flex;
     gap: 12px;
@@ -311,17 +293,17 @@ body::before {
 }
 
 .port-name {
-    font-size: 12px;
+    font-size: clamp(12px, 1.2vw, 14px);
     font-weight: 500;
-    color: var(--ink);
+    color: #e5e8ee;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .port-coords {
-    font-size: 10px;
-    color: var(--ink-soft);
+    font-size: clamp(10px, 1vw, 12px);
+    color: #aab1c0;
     letter-spacing: 0.4px;
     margin-top: 2px;
 }
@@ -362,7 +344,7 @@ body::before {
     border: 1px solid rgba(143, 211, 255, 0.25) !important;
     border-radius: 8px !important;
     box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important;
-    color: var(--ink) !important;
+    color: #e5e8ee !important;
     padding: 0 !important;
     overflow: hidden !important;
 }
@@ -377,8 +359,8 @@ body::before {
 }
 
 .leaflet-popup-close-button { 
-	color: var(--ink-soft) !important; 
-	font-size: 16px !important; 
+	color: #aab1c0 !important; 
+	font-size: clamp(16px, 1.6vw, 18px) !important; 
 }
 
 .popup-inner { 
@@ -386,23 +368,23 @@ body::before {
 }
 
 .popup-tag { 
-	font-size: 9.5px; 
+	font-size: clamp(9.5px, 0.95vw, 11px); 
 	letter-spacing: 1.5px; 
 	text-transform: uppercase; 
-	color: var(--accent); 
+	color: #8fd3ff; 
 	margin-bottom: 4px; 
 }
 
 .popup-name { 
 	font-family: "Cinzel", serif; 
-	font-size: 13px; 
-	color: var(--ink); 
+	font-size: clamp(13px, 1.3vw, 15px); 
+	color: #e5e8ee; 
 	margin-bottom: 6px; 
 }
 
 .popup-coord { 
-	font-size: 10.5px; 
-	color: var(--ink-soft); 
+	font-size: clamp(10.5px, 1.05vw, 12px); 
+	color: #aab1c0; 
 	display: flex; 
 	flex-direction: column; 
 	gap: 2px; 
@@ -412,13 +394,13 @@ body::before {
 	background: rgba(143, 211, 255, 0.06); 
 	border-top: 1px solid rgba(143, 211, 255, 0.12); 
 	padding: 8px 14px; 
-	font-size: 11.5px; 
-	color: var(--ink-soft); 
+	font-size: clamp(11.5px, 1.15vw, 13px); 
+	color: #aab1c0; 
 	line-height: 1.55; 
 }
 
 .route-popup-content { text-align: center; padding: 5px; }
-.route-popup-subtext { font-size: 11px; opacity: 0.8; }
+.route-popup-subtext { font-size: clamp(11px, 1.1vw, 12px); opacity: 0.8; }
 
 
 /* ==========================================================================
@@ -430,7 +412,7 @@ body::before {
     min-height: 420px;
     border-radius: 22px;
     overflow: hidden;
-    border: 1px solid var(--stroke);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 35px 80px rgba(0, 0, 0, 0.6);
     position: relative;
     z-index: 1;
@@ -442,7 +424,7 @@ body::before {
     right: 16px;
     bottom: 16px;
     z-index: 2;
-    border: 1px solid var(--stroke);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 16px;
     padding: 12px 14px;
     background: transparent;
@@ -454,10 +436,10 @@ body::before {
 }
 
 .panel-title {
-    font-size: 12px;
+    font-size: clamp(12px, 1.2vw, 14px);
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: #aab1c0;
     text-align: center;
     width: 100%;
 }
@@ -472,11 +454,11 @@ body::before {
 .strait-link {
     background: transparent;
     border: 1px solid transparent;
-    color: var(--ink);
+    color: #e5e8ee;
     text-align: right;
     padding: 6px 10px;
     border-radius: 10px;
-    font-size: 13px;
+    font-size: clamp(13px, 1.3vw, 15px);
     letter-spacing: 0.2px;
     cursor: pointer;
     text-decoration: none;
@@ -519,9 +501,9 @@ body::before {
 	position: absolute; 
 	pointer-events: none; 
 	z-index: 99; 
-	opacity: 0; transition: 
-	opacity 0.3s; transform: 
-	translate(-50%, -50%); 
+	opacity: 0; 
+	transition: opacity 0.3s; 
+	transform: 	translate(-50%, -50%); 
 }
 
 .globe-pulse { 
@@ -553,7 +535,7 @@ body::before {
 .globe-label {
     display: block;
     color: #fff;
-    font-size: 12px;
+    font-size: clamp(12px, 1.2vw, 14px);
     font-weight: 600;
     letter-spacing: 0.55px;
     text-decoration: none;
@@ -592,9 +574,9 @@ body::before {
 .site-footer p {
     max-width: 1200px;
     margin: 0 auto;
-    font-size: 12px;
+    font-size: clamp(12px, 1.2vw, 14px);
     text-align: right;
-    color: var(--ink-soft);
+    color: #aab1c0;
     letter-spacing: 0.5px;
     font-family: "IBM Plex Mono", monospace;
 }
