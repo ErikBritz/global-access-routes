@@ -393,7 +393,8 @@
                 map.invalidateSize();
             }, 250);
 
-            focusPort(11);
+            document.querySelectorAll('.port-item')[11].classList.add('active');
+            renderGraph(malaccaPortsData['singapore']);
         });
     </script>
 </body>

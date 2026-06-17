@@ -17,8 +17,7 @@
 </head>
 
 <body>
-    <div class="strait-bg" style="background-image: url('svg/panama.svg');
-            filter: brightness(2) opacity(0.05);"></div>
+    <div class="strait-bg" style="background-image: url('svg/panama.svg');"></div>
     <div class="page">
         <header class="site-header">
             <div class="site-heading">
@@ -380,7 +379,10 @@
                 map.invalidateSize(); 
             }, 250);
 
-            focusNode(1);
+            document.querySelectorAll('.port-item')[1].classList.add('active');
+            if (portData[portKeys[1]]) {
+                renderGraph(portData[portKeys[1]]);
+            }
         });
     </script>
 </body>
