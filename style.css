@@ -314,6 +314,32 @@ body {
     letter-spacing: 0.4px;
     margin-top: 2px;
 }
+/* ==========================================================================
+   IMAGE & SVG OVERLAY
+   ========================================================================== */
+
+#bosphorus_sat{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+    border-color: #ffffff;
+    position:static;
+    z-index: 10;
+}
+
+.overlay-layer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+
 
 /* ==========================================================================
    LEAFLET MAP & POPUPS
